@@ -6,7 +6,7 @@
     <title>Espace Applications</title>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap');
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght=400;700&display=swap');
 
         /* --- VARIABLES DE BASE (FUTURISTE) --- */
         :root {
@@ -52,6 +52,9 @@
         body.school-mode .btn:hover { background: #0056b3; }
         body.school-mode h1, body.school-mode h2 { color: #2c3e50; text-shadow: none; }
         body.school-mode #clock { color: #7f8c8d; font-family: 'Inter', sans-serif; }
+        body.school-mode .help-section { background: #f8f9fa; border: 1px solid #e0e0e0; color: #333; }
+        body.school-mode .help-section h3 { color: #0056b3; }
+        body.school-mode .command-tag { background: #e0e0e0; color: #333; }
 
         body {
             font-family: var(--font-main);
@@ -160,13 +163,32 @@
         input:checked + .slider { background-color: var(--primary-color); }
         input:checked + .slider:before { transform: translateX(20px); background-color: var(--bg-color); }
 
+        /* Style des sections d'aide */
+        .help-section {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px dashed rgba(255,255,255,0.2);
+            padding: 15px;
+            border-radius: 10px;
+            margin-bottom: 15px;
+        }
+        .help-section h3 { margin-top: 0; color: var(--primary-color); font-size: 1.1rem; text-transform: uppercase; }
+        .help-section ul { padding-left: 15px; list-style-type: square; }
+        .help-section li { margin-bottom: 8px; color: var(--text-color); font-size: 0.95rem; }
+        .command-tag {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-weight: bold;
+            color: var(--primary-color);
+        }
+
         /* CRT Overlay */
         .crt-overlay { display: none; position: fixed; inset: 0; background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%), linear-gradient(90deg, rgba(255, 0, 0, 0.06), rgba(0, 255, 0, 0.02), rgba(0, 0, 255, 0.06)); background-size: 100% 4px, 6px 100%; z-index: 999; pointer-events: none; }
         body.crt-active .crt-overlay { display: block; }
 
         /* --- MODE CAMOUFLAGE GOOGLE --- */
         #googleModeContainer {
-            display: none; /* Caché par défaut */
+            display: none;
             flex-direction: column;
             align-items: center;
             justify-content: center;
@@ -176,7 +198,7 @@
             position: fixed;
             top: 0;
             left: 0;
-            z-index: 20000; /* Toujours au-dessus de tout */
+            z-index: 20000;
             font-family: Arial, sans-serif;
             color: #202124;
         }
@@ -309,9 +331,42 @@
 <div id="helpModal" class="modal">
     <div class="modal-content">
         <span class="close-btn" onclick="closeModal('helpModal')">&times;</span>
-        <h2>> Aide</h2>
-        <p><strong>Comment aller sur les applications ?</strong></p>
-        <p>cliquez sur Accéder pour ouvir une application.</p>
+        <h2>> Terminal d'Aide & Documentation</h2>
+        
+        <div class="help-section">
+            <h3>1. Navigation de base</h3>
+            <ul>
+                <li>Clique sur le bouton <strong>"Accéder"</strong> d'une carte pour ouvrir l'application ciblée dans un nouvel onglet.</li>
+                <li>Utilise le volet déroulant <strong>"Anciennes Versions"</strong> sous Genesis Omega pour retrouver les builds V1 et V2 historiques de ton projet.</li>
+            </ul>
+        </div>
+
+        <div class="help-section">
+            <h3>2. Mode Camouflage Google (Secret)</h3>
+            <ul>
+                <li>Active-le depuis les paramètres pour masquer l'interface derrière une réplique exacte de Google.</li>
+                <li><strong>Mots-clés directs :</strong> Entre directement <span class="command-tag">genesis</span>, <span class="command-tag">ava</span>, <span class="command-tag">edu school</span> ou <span class="command-tag">justiss</span> dans la barre pour court-circuiter le moteur et ouvrir tes applications secrètement.</li>
+                <li>Toute autre saisie lancera une vraie recherche Web transparente.</li>
+                <li>Pour sortir du mode discrétion, clique sur le bouton bleu <strong>"Connexion"</strong> en haut à droite.</li>
+            </ul>
+        </div>
+
+        <div class="help-section">
+            <h3>3. Raccourcis Clavier</h3>
+            <ul>
+                <li><span class="command-tag">Échap</span> : Ferme instantanément le bot d'accueil système.</li>
+                <li><span class="command-tag">Entrée</span> : Valide et exécute tes recherches depuis le champ de saisie du mode Camouflage.</li>
+            </ul>
+        </div>
+
+        <div class="help-section">
+            <h3>4. Personnalisation & Performance</h3>
+            <ul>
+                <li>Active le <strong>"Mode École"</strong> si tu es en classe pour basculer instantanément sur une police Inter épurée, sans lumières ni grilles.</li>
+                <li>Utilise le <strong>"Filtre CRT"</strong> pour simuler le rendu visuel d'un vieux moniteur des années 80.</li>
+                <li>Le <strong>"Mode Performance"</strong> supprime les transitions pour les machines plus lentes.</li>
+            </ul>
+        </div>
     </div>
 </div>
 
@@ -444,16 +499,15 @@
     function toggleGoogleMode(isActive) {
         if (isActive) {
             document.body.classList.add('google-active');
-            document.getElementById('googleSearchInput').value = ''; // Vide la barre
+            document.getElementById('googleSearchInput').value = '';
             document.getElementById('googleSearchInput').focus();
-            closeModal('settingsModal'); // Ferme le menu des paramètres automatiquement
+            closeModal('settingsModal');
         } else {
             document.body.classList.remove('google-active');
             document.getElementById('googleToggleCheckbox').checked = false;
         }
     }
 
-    // Permet d'appuyer sur "Entrée" pour chercher
     function handleGoogleSearch(event) {
         if (event.key === 'Enter') {
             executeGoogleSearch();
@@ -464,7 +518,6 @@
         const input = document.getElementById('googleSearchInput').value.trim().toLowerCase();
         if (input === "") return;
 
-        // Le dictionnaire secret de tes applications
         const appsSecretes = {
             "genesis omega": "https://genesis-omega.base44.app/",
             "genesis": "https://genesis-omega.base44.app/",
@@ -479,16 +532,13 @@
             "justiss": "https://justiss-ia.base44.app/"
         };
 
-        // Si le texte tapé correspond à une de tes IA
         if (appsSecretes[input]) {
-            window.open(appsSecretes[input], '_blank'); // Ouvre ton appli dans un nouvel onglet
+            window.open(appsSecretes[input], '_blank');
         } else {
-            // Sinon, fait une vraie recherche Google
             const vraieRechercheUrl = "https://www.google.com/search?q=" + encodeURIComponent(input);
             window.open(vraieRechercheUrl, '_blank');
         }
         
-        // Optionnel : vider la barre après la recherche
         document.getElementById('googleSearchInput').value = "";
     }
 </script>
