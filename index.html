@@ -4,81 +4,214 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" type="image/png" href="image1.png">
-    <title>Espace Applications - Système OS</title>
+    <title>Espace Applications</title>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap');
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght=400;700&display=swap');
 
-        /* --- VARIABLES DE BASE --- */
+        /* --- VARIABLES DE BASE (FUTURISTE) --- */
         :root {
             --bg-color: #050505;
             --grid-color: rgba(255, 255, 255, 0.05);
-            --primary-color: #00ffcc; /* Couleur par défaut modifiable */
-            --primary-glow: 0 0 15px var(--primary-color);
+            --primary-color: #ffffff;
+            --primary-glow: 0 0 15px rgba(255, 255, 255, 0.4);
             --card-bg: rgba(15, 15, 15, 0.8);
-            --border-color: var(--primary-color);
+            --border-color: #ffffff;
             --text-color: #f0f0f0;
             --modal-bg: rgba(0, 0, 0, 0.95);
             --radius: 20px;
             --font-main: 'Share Tech Mono', monospace;
         }
 
-        /* --- THEMES --- */
+        /* PARAMÈTRE 1 : THÈME BLANC (NORMAL) */
         body.theme-white {
-            --bg-color: #f5f5f5; --grid-color: rgba(0, 0, 0, 0.05);
-            --primary-color: #000000; --primary-glow: 0 0 15px rgba(0, 0, 0, 0.2);
-            --card-bg: rgba(255, 255, 255, 0.9); --border-color: #cccccc; --text-color: #111111;
+            --bg-color: #f5f5f5;
+            --grid-color: rgba(0, 0, 0, 0.05);
+            --primary-color: #000000;
+            --primary-glow: 0 0 15px rgba(0, 0, 0, 0.2);
+            --card-bg: rgba(255, 255, 255, 0.9);
+            --border-color: #cccccc;
+            --text-color: #111111;
         }
+
+        /* PARAMÈTRE : MODE ÉCOLE */
         body.school-mode {
-            --bg-color: #eef2f5; --grid-color: transparent; --primary-color: #0056b3;
-            --primary-glow: none; --card-bg: #ffffff; --border-color: transparent;
-            --text-color: #333333; --font-main: 'Inter', sans-serif;
-            background-image: none !important;
+            --bg-color: #eef2f5;
+            --grid-color: transparent;
+            --primary-color: #0056b3;
+            --primary-glow: none;
+            --card-bg: #ffffff;
+            --border-color: transparent;
+            --text-color: #333333;
+            --font-main: 'Inter', sans-serif;
         }
+        body.school-mode { background-image: none !important; box-shadow: none; }
         body.school-mode .card { box-shadow: 0 4px 15px rgba(0,0,0,0.05); border: 1px solid #e0e0e0; }
+        body.school-mode .card:hover { transform: translateY(-3px); box-shadow: 0 8px 25px rgba(0,0,0,0.1); }
+        body.school-mode .card::before { display: none; }
+        body.school-mode .btn { background: #007bff; color: white; border: none; }
+        body.school-mode .btn:hover { background: #0056b3; }
+        body.school-mode h1, body.school-mode h2 { color: #2c3e50; text-shadow: none; }
+        body.school-mode #clock { color: #7f8c8d; font-family: 'Inter', sans-serif; }
+        body.school-mode .help-section { background: #f8f9fa; border: 1px solid #e0e0e0; color: #333; }
+        body.school-mode .help-section h3 { color: #0056b3; }
+        body.school-mode .command-tag { background: #e0e0e0; color: #333; }
 
         body {
-            font-family: var(--font-main); background-color: var(--bg-color);
-            background-image: linear-gradient(var(--grid-color) 1px, transparent 1px), linear-gradient(90deg, var(--grid-color) 1px, transparent 1px);
-            background-size: 30px 30px; color: var(--text-color); margin: 0; padding: 20px;
-            overflow-x: hidden; transition: all 0.3s ease; user-select: none;
+            font-family: var(--font-main);
+            background-color: var(--bg-color);
+            background-image: 
+                linear-gradient(var(--grid-color) 1px, transparent 1px),
+                linear-gradient(90deg, var(--grid-color) 1px, transparent 1px);
+            background-size: 30px 30px;
+            color: var(--text-color);
+            margin: 0;
+            padding: 20px;
+            overflow-x: hidden;
+            transition: all 0.3s ease;
         }
 
-        /* --- EFFET MATRIX --- */
-        #matrixCanvas {
-            position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
-            z-index: -1; display: none; opacity: 0.3;
+        /* --- NOUVEAU BOT D'ACCUEIL --- */
+        #botOverlay {
+            position: fixed; inset: 0;
+            background: var(--modal-bg);
+            z-index: 10000;
+            display: flex; flex-direction: column; align-items: center; justify-content: center;
+            backdrop-filter: blur(10px);
+            transition: opacity 0.5s;
         }
-        body.matrix-active #matrixCanvas { display: block; }
-
-        /* --- EN-TÊTE & MONITORING --- */
-        header { text-align: center; margin-bottom: 20px; text-transform: uppercase; position: relative; z-index: 10; }
-        h1 { font-size: 2.5rem; text-shadow: var(--primary-glow); margin-bottom: 5px; color: var(--primary-color); }
         
-        .sys-monitor {
-            display: flex; justify-content: center; gap: 20px; font-size: 0.9rem;
-            color: var(--primary-color); margin-bottom: 20px; border: 1px solid var(--primary-color);
-            padding: 5px 15px; border-radius: 5px; display: inline-flex; background: rgba(0,0,0,0.5);
+        .bot-container {
+            display: flex;
+            align-items: flex-start;
+            background: var(--card-bg);
+            border: 2px solid var(--primary-color);
+            border-radius: var(--radius);
+            padding: 30px;
+            max-width: 750px;
+            width: 90%;
+            box-shadow: var(--primary-glow);
+            gap: 30px;
         }
-        .header-buttons { display: flex; justify-content: center; gap: 15px; margin-bottom: 30px; }
+
+        /* Le Mini-Robot */
+        .robot-avatar {
+            width: 120px;
+            height: 120px;
+            flex-shrink: 0;
+            animation: float 3s ease-in-out infinite;
+        }
+        .bot-svg .bot-stroke { stroke: var(--primary-color); fill: none; stroke-width: 4; }
+        .bot-svg .bot-fill { fill: var(--primary-color); }
+        .bot-svg .eye { animation: blink 4s infinite; transform-origin: center; }
+        .bot-svg .mouth.speaking { animation: speak 0.2s infinite alternate; }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+        @keyframes blink {
+            0%, 96%, 98%, 100% { transform: scaleY(1); }
+            97%, 99% { transform: scaleY(0.1); }
+        }
+        @keyframes speak {
+            0% { transform: scaleY(1); }
+            100% { transform: scaleY(3); }
+        }
+
+        /* Terminal du Bot */
+        .bot-terminal {
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            color: var(--text-color);
+            text-align: left;
+        }
+        
+        #botSpeech {
+            font-size: 1.2rem;
+            min-height: 3rem;
+            color: var(--primary-color);
+            text-shadow: var(--primary-glow);
+        }
+        .cursor {
+            display: inline-block;
+            width: 10px; height: 1.2rem;
+            background: var(--primary-color);
+            animation: pulseCursor 0.8s infinite;
+            vertical-align: bottom;
+        }
+        @keyframes pulseCursor { 0%, 100% { opacity: 1; } 50% { opacity: 0; } }
+
+        #bootLog {
+            font-size: 0.85rem;
+            color: #888;
+            height: 80px;
+            overflow: hidden;
+            border-left: 2px solid #333;
+            padding-left: 10px;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+        }
+
+        /* Barre de progression */
+        .progress-container {
+            width: 100%;
+            height: 10px;
+            background: rgba(255,255,255,0.1);
+            border: 1px solid var(--border-color);
+            border-radius: 5px;
+            overflow: hidden;
+            display: none; /* Révélé via JS */
+        }
+        .progress-bar {
+            height: 100%;
+            width: 0%;
+            background: var(--primary-color);
+            box-shadow: var(--primary-glow);
+            transition: width 0.1s linear;
+        }
+
+        #bootReady {
+            display: none;
+            background: rgba(255,255,255,0.1);
+            border: 1px solid var(--primary-color);
+            padding: 10px;
+            text-align: center;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+            color: var(--primary-color);
+            transition: 0.3s;
+            animation: pulseBox 2s infinite;
+        }
+        #bootReady:hover {
+            background: var(--primary-color);
+            color: var(--bg-color);
+        }
+        @keyframes pulseBox {
+            0%, 100% { box-shadow: 0 0 5px rgba(255,255,255,0.1); }
+            50% { box-shadow: var(--primary-glow); }
+        }
+        
+        .skip-hint { position: absolute; bottom: 20px; font-size: 0.8rem; color: #555; }
+
+        /* --- HEADER --- */
+        header { text-align: center; margin-bottom: 40px; text-transform: uppercase; }
+        h1 { font-size: 2.5rem; text-shadow: var(--primary-glow); margin-bottom: 5px; color: var(--primary-color); }
+        #clock { font-size: 1.2rem; letter-spacing: 2px; margin-bottom: 20px; color: var(--text-color); }
+
+        .header-buttons { display: flex; justify-content: center; gap: 20px; }
         .action-btn {
-            background: transparent; color: var(--primary-color); border: 1px solid var(--primary-color);
-            padding: 8px 15px; border-radius: 10px; cursor: pointer; font-family: var(--font-main);
-            font-size: 0.9rem; font-weight: bold; text-transform: uppercase; transition: 0.3s;
+            background: transparent; color: var(--primary-color); border: 1px solid var(--border-color);
+            padding: 10px 20px; border-radius: 10px; cursor: pointer; font-family: var(--font-main);
+            font-size: 1rem; font-weight: bold; text-transform: uppercase; transition: 0.3s;
         }
         .action-btn:hover { background: var(--primary-color); color: var(--bg-color); box-shadow: var(--primary-glow); }
 
-        /* --- BARRE DE RECHERCHE LOCALE --- */
-        .local-search-container { text-align: center; margin-bottom: 30px; position: relative; z-index: 10; }
-        .local-search {
-            width: 80%; max-width: 500px; padding: 12px 20px; font-family: var(--font-main);
-            background: var(--card-bg); border: 1px solid var(--primary-color);
-            color: var(--text-color); border-radius: var(--radius); font-size: 1rem;
-            box-shadow: 0 0 10px rgba(0,0,0,0.5); outline: none; transition: 0.3s;
-        }
-        .local-search:focus { box-shadow: var(--primary-glow); }
-
-        /* --- GRILLE D'APPS --- */
+        /* --- GRILLE & CARTES --- */
         .grid {
             display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 25px;
             max-width: 1300px; margin: auto; position: relative; z-index: 2;
@@ -86,96 +219,43 @@
         .card {
             background: var(--card-bg); border: 1px solid var(--border-color); padding: 25px;
             border-radius: var(--radius); text-align: center; box-shadow: 0 0 15px rgba(0,0,0,0.5);
-            backdrop-filter: blur(5px); position: relative; transition: 0.3s; overflow: hidden;
+            backdrop-filter: blur(5px); position: relative; overflow: hidden; transition: 0.3s;
         }
-        .card::before { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 3px; background: var(--primary-color); box-shadow: var(--primary-glow); }
+        .card::before {
+            content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 3px;
+            background: var(--primary-color); box-shadow: var(--primary-glow);
+        }
         .card:hover { transform: translateY(-5px); box-shadow: var(--primary-glow); }
-        .app-img { width: 100px; height: 100px; border-radius: var(--radius); object-fit: cover; margin-bottom: 15px; border: 2px solid var(--border-color); }
-        h2 { margin-top: 0; color: var(--primary-color); }
+
+        .app-img {
+            width: 100px; height: 100px; border-radius: var(--radius); object-fit: cover;
+            margin-bottom: 15px; background-color: #333; border: 2px solid var(--border-color);
+        }
+        body.school-mode .app-img { border: none; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
+        body.hide-images .app-img { display: none; }
+
+        .app-img:after {
+            content: "📁"; display: block; text-align: center; line-height: 100px; color: #555;
+        }
+
+        h2 { margin-top: 0; letter-spacing: 1px; color: var(--primary-color); }
         .btn {
             display: inline-block; padding: 12px 25px; margin-top: 15px; border-radius: 10px;
             background: rgba(255, 255, 255, 0.05); border: 1px solid var(--border-color);
-            color: var(--primary-color); text-decoration: none; font-weight: bold; text-transform: uppercase; transition: 0.3s; width: 85%;
+            color: var(--primary-color); text-decoration: none; font-weight: bold; text-transform: uppercase;
+            transition: 0.3s; width: 85%; box-sizing: border-box;
         }
         .btn:hover { background: var(--primary-color); color: var(--bg-color); box-shadow: var(--primary-glow); }
+
         details { margin-top: 15px; text-align: left; background: rgba(0,0,0,0.3); padding: 10px; border-radius: 10px; border: 1px solid var(--border-color); }
         summary { cursor: pointer; color: var(--primary-color); font-weight: bold; }
         ul { list-style: none; padding-left: 0; margin-top: 10px; }
-        li a { color: var(--text-color); text-decoration: none; display: block; padding: 8px; border-radius: 5px; }
+        li a { color: var(--text-color); text-decoration: none; display: block; padding: 8px; border-radius: 5px; transition: 0.2s; }
         li a:hover { background: var(--primary-color); color: var(--bg-color); }
 
-        /* --- BOT D'ACCUEIL --- */
-        #botOverlay {
-            position: fixed; inset: 0; background: var(--modal-bg); z-index: 10000;
-            display: flex; flex-direction: column; align-items: center; justify-content: center;
-            backdrop-filter: blur(10px); transition: opacity 0.5s;
-        }
-        .bot-container {
-            display: flex; align-items: flex-start; background: var(--card-bg);
-            border: 2px solid var(--primary-color); border-radius: var(--radius);
-            padding: 30px; max-width: 800px; width: 90%; box-shadow: var(--primary-glow); gap: 30px;
-        }
-        .robot-avatar { width: 120px; height: 120px; flex-shrink: 0; animation: float 3s ease-in-out infinite; }
-        .bot-svg .bot-stroke { stroke: var(--primary-color); fill: none; stroke-width: 4; }
-        .bot-svg .bot-fill { fill: var(--primary-color); }
-        .bot-svg .eye { animation: blink 4s infinite; transform-origin: center; }
-        .bot-svg .mouth.speaking { animation: speak 0.2s infinite alternate; }
-
-        @keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
-        @keyframes blink { 0%, 96%, 98%, 100% { transform: scaleY(1); } 97%, 99% { transform: scaleY(0.1); } }
-        @keyframes speak { 0% { transform: scaleY(1); } 100% { transform: scaleY(3); } }
-
-        .bot-terminal { flex-grow: 1; display: flex; flex-direction: column; gap: 15px; text-align: left; }
-        #botSpeech { font-size: 1.1rem; min-height: 5rem; color: var(--primary-color); line-height: 1.4; }
-        .cursor { display: inline-block; width: 10px; height: 1.2rem; background: var(--primary-color); animation: pulseCursor 0.8s infinite; vertical-align: bottom; }
-        @keyframes pulseCursor { 0%, 100% { opacity: 1; } 50% { opacity: 0; } }
-        
-        #bootLog { font-size: 0.85rem; color: #888; height: 60px; overflow: hidden; border-left: 2px solid #333; padding-left: 10px; display: flex; flex-direction: column; justify-content: flex-end; }
-        .progress-container { width: 100%; height: 10px; background: rgba(255,255,255,0.1); border: 1px solid var(--border-color); border-radius: 5px; display: none; }
-        .progress-bar { height: 100%; width: 0%; background: var(--primary-color); box-shadow: var(--primary-glow); transition: width 0.1s linear; }
-
-        #bootReady {
-            display: none; background: rgba(255,255,255,0.1); border: 1px solid var(--primary-color);
-            padding: 10px; text-align: center; border-radius: 5px; cursor: pointer;
-            font-weight: bold; color: var(--primary-color); animation: pulseBox 2s infinite;
-        }
-        #bootReady:hover { background: var(--primary-color); color: var(--bg-color); }
-        @keyframes pulseBox { 0%, 100% { box-shadow: 0 0 5px rgba(255,255,255,0.1); } 50% { box-shadow: var(--primary-glow); } }
-        .skip-hint { position: absolute; bottom: 20px; font-size: 0.8rem; color: #555; }
-
-        /* --- WIDGET ROBOT PERSISTANT --- */
-        #robotWidget {
-            position: fixed; bottom: 20px; right: 20px; width: 60px; height: 60px;
-            z-index: 9000; cursor: pointer; display: none; transition: 0.3s;
-        }
-        #robotWidget:hover { transform: scale(1.1) rotate(-5deg); filter: drop-shadow(0 0 10px var(--primary-color)); }
-
-        /* --- MENU CONTEXTUEL PERSONNALISÉ --- */
-        #contextMenu {
-            position: fixed; background: var(--card-bg); border: 1px solid var(--primary-color);
-            border-radius: 5px; padding: 5px 0; min-width: 150px; z-index: 20000; display: none;
-            box-shadow: var(--primary-glow); font-family: var(--font-main);
-        }
-        .context-item { padding: 8px 15px; color: var(--text-color); cursor: pointer; font-size: 0.9rem; }
-        .context-item:hover { background: var(--primary-color); color: var(--bg-color); }
-
-        /* --- PANNEAU DE NOTES RAPIDES --- */
-        #notesSidebar {
-            position: fixed; top: 0; right: -350px; width: 300px; height: 100vh;
-            background: var(--card-bg); border-left: 2px solid var(--primary-color);
-            z-index: 9500; transition: right 0.3s ease; padding: 20px; box-sizing: border-box;
-            box-shadow: -5px 0 15px rgba(0,0,0,0.8); backdrop-filter: blur(10px);
-        }
-        #notesSidebar.open { right: 0; }
-        #notesArea {
-            width: 100%; height: calc(100% - 80px); background: transparent; color: var(--text-color);
-            border: 1px dashed var(--primary-color); padding: 10px; font-family: var(--font-main);
-            resize: none; outline: none; box-sizing: border-box; border-radius: 5px; margin-top: 10px;
-        }
-
-        /* --- MODALES & SETTINGS --- */
+        /* --- MODALES --- */
         .modal { display: none; position: fixed; inset: 0; background: var(--modal-bg); z-index: 1000; align-items: center; justify-content: center; backdrop-filter: blur(5px); }
-        .modal-content { background: var(--bg-color); border: 2px solid var(--primary-color); border-radius: var(--radius); padding: 30px; width: 90%; max-width: 550px; position: relative; max-height: 80vh; overflow-y: auto; }
+        .modal-content { background: var(--bg-color); border: 2px solid var(--border-color); border-radius: var(--radius); padding: 30px; width: 90%; max-width: 550px; position: relative; max-height: 80vh; overflow-y: auto; }
         .close-btn { position: absolute; top: 15px; right: 20px; font-size: 24px; cursor: pointer; color: var(--primary-color); }
         
         .setting-item { display: flex; justify-content: space-between; align-items: center; padding: 12px 0; border-bottom: 1px dashed rgba(128,128,128,0.3); }
@@ -186,18 +266,102 @@
         input:checked + .slider { background-color: var(--primary-color); }
         input:checked + .slider:before { transform: translateX(20px); background-color: var(--bg-color); }
 
-        input[type="color"] { border: none; width: 30px; height: 30px; cursor: pointer; background: transparent; }
+        .help-section {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px dashed rgba(255,255,255,0.2);
+            padding: 15px;
+            border-radius: 10px;
+            margin-bottom: 15px;
+        }
+        .help-section h3 { margin-top: 0; color: var(--primary-color); font-size: 1.1rem; text-transform: uppercase; }
+        .help-section ul { padding-left: 15px; list-style-type: square; }
+        .help-section li { margin-bottom: 8px; color: var(--text-color); font-size: 0.95rem; }
+        .command-tag {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-weight: bold;
+            color: var(--primary-color);
+        }
+
+        /* CRT Overlay */
+        .crt-overlay { display: none; position: fixed; inset: 0; background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%), linear-gradient(90deg, rgba(255, 0, 0, 0.06), rgba(0, 255, 0, 0.02), rgba(0, 0, 255, 0.06)); background-size: 100% 4px, 6px 100%; z-index: 999; pointer-events: none; }
+        body.crt-active .crt-overlay { display: block; }
+
+        /* --- MODE CAMOUFLAGE GOOGLE --- */
+        #googleModeContainer {
+            display: none;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            width: 100vw;
+            background-color: #ffffff;
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: 20000;
+            font-family: Arial, sans-serif;
+            color: #202124;
+        }
+        body.google-active { overflow: hidden; }
+        body.google-active #googleModeContainer { display: flex; }
+        
+        .google-logo { width: 272px; margin-bottom: 30px; }
+        
+        .search-box {
+            display: flex; align-items: center;
+            width: 90%; max-width: 584px;
+            border: 1px solid #dfe1e5; border-radius: 24px;
+            padding: 10px 20px; box-sizing: border-box;
+        }
+        .search-box:hover, .search-box:focus-within {
+            box-shadow: 0 1px 6px rgba(32,33,36,.28); border-color: rgba(223,225,229,0); outline: none;
+        }
+        .search-box svg { width: 20px; height: 20px; fill: #9aa0a6; margin-right: 15px; }
+        .search-box input {
+            flex: 1; border: none; outline: none; font-size: 16px; background: transparent;
+        }
+        
+        .google-buttons { margin-top: 30px; display: flex; gap: 12px; }
+        .google-buttons button {
+            background-color: #f8f9fa; border: 1px solid #f8f9fa; border-radius: 4px;
+            color: #3c4043; font-size: 14px; padding: 0 16px; line-height: 27px; height: 36px; cursor: pointer;
+        }
+        .google-buttons button:hover { border: 1px solid #dadce0; color: #202124; box-shadow: 0 1px 1px rgba(0,0,0,.1); }
+
+        .google-top-right { position: absolute; top: 20px; right: 20px; }
+        .google-top-right button {
+            background: #1a73e8; color: white; border: none; padding: 8px 24px;
+            border-radius: 4px; cursor: pointer; font-weight: bold; font-size: 14px;
+        }
+        .google-top-right button:hover { background: #1557b0; box-shadow: 0 1px 2px rgba(60,64,67,0.3); }
 
     </style>
 </head>
 <body>
 
-<canvas id="matrixCanvas"></canvas>
+<div id="googleModeContainer">
+    <div class="google-top-right">
+        <button onclick="toggleGoogleMode(false)">Connexion</button> 
+    </div>
+    <img src="https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png" alt="Google" class="google-logo">
+    
+    <div class="search-box">
+        <svg focusable="false" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M15.5 14h-.79l-.28-.27A6.471 6.471 0 0 0 16 9.5 6.5 6.5 0 1 0 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 14z"></path></svg>
+        <input type="text" id="googleSearchInput" title="Rechercher" onkeypress="handleGoogleSearch(event)">
+    </div>
+    
+    <div class="google-buttons">
+        <button onclick="executeGoogleSearch()">Recherche Google</button>
+        <button onclick="executeGoogleSearch()">J'ai de la chance</button>
+    </div>
+</div>
 
 <div id="botOverlay">
     <div class="bot-container">
         <div class="robot-avatar">
-            <svg viewBox="0 0 100 100" class="bot-svg" id="mainRobotSVG">
+            <svg viewBox="0 0 100 100" class="bot-svg">
                 <rect x="15" y="20" width="70" height="60" rx="15" class="bot-stroke" />
                 <line x1="50" y1="20" x2="50" y2="5" class="bot-stroke" />
                 <circle cx="50" cy="5" r="4" class="bot-fill" />
@@ -206,52 +370,40 @@
                 <rect x="40" y="55" width="20" height="3" rx="1" class="bot-fill mouth" id="botMouth" />
             </svg>
         </div>
+
         <div class="bot-terminal">
-            <div id="botSpeechContainer"><span id="botSpeech"></span><span class="cursor"></span></div>
+            <div id="botSpeechContainer">
+                <span id="botSpeech"></span><span class="cursor"></span>
+            </div>
+            
             <div id="bootLog"></div>
-            <div class="progress-container" id="progressContainer"><div class="progress-bar" id="progressBar"></div></div>
-            <div class="boot-ready" id="bootReady" onclick="closeBot()">[ INITIALISATION TERMINÉE - ENTRER ]</div>
+            
+            <div class="progress-container" id="progressContainer">
+                <div class="progress-bar" id="progressBar"></div>
+            </div>
+            
+            <div class="boot-ready" id="bootReady" onclick="closeBot()">
+                [ INITIALISATION TERMINÉE - ENTRER ]
+            </div>
         </div>
     </div>
     <div class="skip-hint">Appuyez sur [ ÉCHAP ] pour ignorer</div>
 </div>
 
-<div id="robotWidget" onclick="openModal('helpModal')" title="Besoin d'aide ?"></div>
-
-<div id="contextMenu">
-    <div class="context-item" onclick="openModal('settingsModal')">⚙️ Paramètres OS</div>
-    <div class="context-item" onclick="toggleNotes()">📝 Notes Rapides</div>
-    <div class="context-item" onclick="location.reload()">🔄 Redémarrer Système</div>
-</div>
-
-<div id="notesSidebar">
-    <span class="close-btn" onclick="toggleNotes()">&times;</span>
-    <h3 style="color: var(--primary-color); margin-top:0;">> BLOC-NOTES</h3>
-    <textarea id="notesArea" placeholder="Écris tes mémos ici. Sauvegarde automatique..."></textarea>
-</div>
+<div class="crt-overlay"></div>
 
 <header>
     <h1>Espace Applications</h1>
-    <div class="sys-monitor">
-        <span id="clockDisplay">00:00:00</span> | 
-        <span id="uptimeDisplay">UP: 00m 00s</span> | 
-        <span id="ramDisplay">RAM: 42%</span> |
-        <span id="batteryDisplay">PWR: --%</span>
-    </div>
+    <div id="clock">Chargement...</div>
     <div class="header-buttons">
         <button class="action-btn" onclick="openModal('helpModal')">Aide</button>
         <button class="action-btn" onclick="openModal('settingsModal')">Paramètres</button>
-        <button class="action-btn" onclick="toggleNotes()">Notes</button>
     </div>
 </header>
 
-<div class="local-search-container">
-    <input type="text" id="appSearch" class="local-search" placeholder="Rechercher une application..." onkeyup="filterApps()">
-</div>
-
-<div class="grid" id="appGrid">
-    <div class="card app-item" data-name="genesis omega">
-        <img class="app-img" src="https://www.google.com/s2/favicons?domain=genesis-omega.base44.app&sz=128" alt="Genesis Omega">
+<div class="grid">
+    <div class="card">
+        <img class="app-img" data-src="https://genesis-omega.base44.app/" src="https://www.google.com/s2/favicons?domain=genesis-omega.base44.app&sz=128" alt="Genesis Omega">
         <h2>Genesis Omega</h2>
         <a href="https://genesis-omega.base44.app/" target="_blank" class="btn">Accéder</a>
         <details>
@@ -263,294 +415,332 @@
         </details>
     </div>
 
-    <div class="card app-item" data-name="my google">
+    <div class="card">
         <img class="app-img" src="https://www.google.com/s2/favicons?domain=my-google.base44.app&sz=128" alt="My Google">
         <h2>My Google</h2>
         <a href="https://my-google.base44.app/" target="_blank" class="btn">Accéder</a>
     </div>
 
-    <div class="card app-item" data-name="rechercher des gens">
-        <img class="app-img" src="https://www.google.com/s2/favicons?domain=rechercher.base44.app&sz=128" alt="Recherché">
+    <div class="card">
+        <img class="app-img" src="https://www.google.com/s2/favicons?domain=rechercher.base44.app&sz=128" alt="Recherché des gens">
         <h2>Rechercher</h2>
         <a href="https://rechercher.base44.app/" target="_blank" class="btn">Accéder</a>
     </div>
 
-    <div class="card app-item" data-name="ava ia">
+    <div class="card">
         <img class="app-img" src="https://www.google.com/s2/favicons?domain=ava-ia.base44.app&sz=128" alt="Ava IA">
         <h2>Ava IA</h2>
         <a href="https://ava-ia.base44.app/" target="_blank" class="btn">Accéder</a>
     </div>
 
-    <div class="card app-item" data-name="edu school fr">
+    <div class="card">
         <img class="app-img" src="https://www.google.com/s2/favicons?domain=edu-school-fr.base44.app&sz=128" alt="Edu School">
         <h2>Edu School FR</h2>
         <a href="https://edu-school-fr.base44.app/" target="_blank" class="btn">Accéder</a>
     </div>
 
-    <div class="card app-item" data-name="gg earth google">
-        <img class="app-img" src="https://www.google.com/s2/favicons?domain=gg-earth.base44.app&sz=128" alt="GG Earth">
+    <div class="card">
+        <img class="app-img" src="https://www.google.com/s2/favicons?domain=gg-earth.base44.app&sz=128" alt="Google Earth">
         <h2>GG Earth</h2>
         <a href="https://gg-earth.base44.app/" target="_blank" class="btn">Accéder</a>
     </div>
 
-    <div class="card app-item" data-name="justiss ia">
+    <div class="card">
         <img class="app-img" src="https://www.google.com/s2/favicons?domain=justiss-ia.base44.app&sz=128" alt="Justice IA">
         <h2>Justiss IA</h2>
         <a href="https://justiss-ia.base44.app/" target="_blank" class="btn">Accéder</a>
     </div>
 </div>
 
-<div id="settingsModal" class="modal">
+<div id="helpModal" class="modal">
     <div class="modal-content">
-        <span class="close-btn" onclick="closeModal('settingsModal')">&times;</span>
-        <h2>> Paramètres Système</h2>
+        <span class="close-btn" onclick="closeModal('helpModal')">&times;</span>
+        <h2>> Terminal d'Aide & Documentation</h2>
         
-        <div class="setting-item">
-            <span><strong>Couleur Principale (Néons)</strong></span>
-            <input type="color" id="colorPicker" value="#00ffcc" onchange="changeColor(this.value)">
+        <div class="help-section">
+            <h3>1. Navigation de base</h3>
+            <ul>
+                <li>Clique sur le bouton <strong>"Accéder"</strong> d'une carte pour ouvrir l'application ciblée dans un nouvel onglet.</li>
+                <li>Utilise le volet déroulant <strong>"Anciennes Versions"</strong> sous Genesis Omega pour retrouver les builds V1 et V2 historiques de ton projet.</li>
+            </ul>
         </div>
-        <div class="setting-item">
-            <span><strong>Pluie Matrix (Fond animé)</strong></span>
-            <label class="switch"><input type="checkbox" id="setMatrix" onchange="toggleSetting('matrix-active', this.checked)"><span class="slider"></span></label>
+
+        <div class="help-section">
+            <h3>2. Mode Camouflage Google (Secret)</h3>
+            <ul>
+                <li>Active-le depuis les paramètres pour masquer l'interface derrière une réplique exacte de Google.</li>
+                <li><strong>Mots-clés directs :</strong> Entre directement <span class="command-tag">genesis</span>, <span class="command-tag">ava</span>, <span class="command-tag">edu school</span> ou <span class="command-tag">justiss</span> dans la barre pour court-circuiter le moteur et ouvrir tes applications secrètement.</li>
+                <li>Toute autre saisie lancera une vraie recherche Web transparente.</li>
+                <li>Pour sortir du mode discrétion, clique sur le bouton bleu <strong>"Connexion"</strong> en haut à droite.</li>
+            </ul>
         </div>
-        <div class="setting-item">
-            <span>Thème blanc (normal)</span>
-            <label class="switch"><input type="checkbox" id="setWhite" onchange="toggleSetting('theme-white', this.checked)"><span class="slider"></span></label>
+
+        <div class="help-section">
+            <h3>3. Raccourcis Clavier</h3>
+            <ul>
+                <li><span class="command-tag">Échap</span> : Ferme instantanément le bot d'accueil système ou quitte les modales.</li>
+                <li><span class="command-tag">Entrée</span> : Valide et exécute tes recherches depuis le champ de saisie du mode Camouflage.</li>
+            </ul>
         </div>
-        <div class="setting-item">
-            <span>Mode École (Discret)</span>
-            <label class="switch"><input type="checkbox" id="setSchool" onchange="toggleSetting('school-mode', this.checked)"><span class="slider"></span></label>
-        </div>
-        <div class="setting-item">
-            <span>Masquer les images</span>
-            <label class="switch"><input type="checkbox" id="setImg" onchange="toggleStyleTag('.app-img { display: none !important; }', this.checked, 'imgStyle')"><span class="slider"></span></label>
+
+        <div class="help-section">
+            <h3>4. Personnalisation & Performance</h3>
+            <ul>
+                <li>Active le <strong>"Mode École"</strong> si tu es en classe pour basculer instantanément sur une police Inter épurée, sans lumières ni grilles.</li>
+                <li>Utilise le <strong>"Filtre CRT"</strong> pour simuler le rendu visuel d'un vieux moniteur des années 80.</li>
+                <li>Le <strong>"Mode Performance"</strong> supprime les transitions pour les machines plus lentes.</li>
+            </ul>
         </div>
     </div>
 </div>
 
-<div id="helpModal" class="modal">
+<div id="settingsModal" class="modal">
     <div class="modal-content">
-        <span class="close-btn" onclick="closeModal('helpModal')">&times;</span>
-        <h2>> Terminal d'Aide</h2>
-        <p style="color: var(--primary-color);"><strong>Nouveautés Systèmes :</strong></p>
-        <ul style="color: var(--text-color); font-size: 0.9rem;">
-            <li><strong>[ ÉCHAP ]</strong> : Ferme absolument tout (Bot, Paramètres, Notes).</li>
-            <li><strong>Clic Droit</strong> : Ouvre le menu contextuel hacker.</li>
-            <li><strong>Notes</strong> : Tes textes sont sauvegardés automatiquement.</li>
-            <li><strong>Recherche</strong> : Tape le nom d'une app pour filtrer la grille.</li>
-        </ul>
+        <span class="close-btn" onclick="closeModal('settingsModal')">&times;</span>
+        <h2>> Paramètres</h2>
+        
+        <div class="setting-item" style="border-bottom: 2px solid var(--primary-color);">
+            <span><strong>0. Mode Camouflage Google</strong></span>
+            <label class="switch"><input type="checkbox" id="googleToggleCheckbox" onchange="toggleGoogleMode(this.checked)"><span class="slider"></span></label>
+        </div>
+
+        <div class="setting-item">
+            <span><strong>1. Thème blanc (normal)</strong></span>
+            <label class="switch"><input type="checkbox" onchange="toggleBodyClass('theme-white', this.checked)"><span class="slider"></span></label>
+        </div>
+        <div class="setting-item">
+            <span><strong>2. MODE ÉCOLE</strong> (Interface classique)</span>
+            <label class="switch"><input type="checkbox" onchange="toggleBodyClass('school-mode', this.checked)"><span class="slider"></span></label>
+        </div>
+        <div class="setting-item">
+            <span>3. Masquer les images des applis</span>
+            <label class="switch"><input type="checkbox" onchange="toggleBodyClass('hide-images', this.checked)"><span class="slider"></span></label>
+        </div>
+        <div class="setting-item">
+            <span>4. Désactiver les néons</span>
+            <label class="switch"><input type="checkbox" onchange="toggleStyle('--primary-glow', 'none', '0 0 15px rgba(255, 255, 255, 0.4)', this.checked)"><span class="slider"></span></label>
+        </div>
+        <div class="setting-item">
+            <span>5. Activer le filtre écran CRT</span>
+            <label class="switch"><input type="checkbox" onchange="toggleBodyClass('crt-active', this.checked)"><span class="slider"></span></label>
+        </div>
+        <div class="setting-item">
+            <span>6. Police plus grande</span>
+            <label class="switch"><input type="checkbox" onchange="toggleStyle('fontSize', '110%', '100%', this.checked)"><span class="slider"></span></label>
+        </div>
+        <div class="setting-item">
+            <span>7. Masquer l'horloge</span>
+            <label class="switch"><input type="checkbox" onchange="document.getElementById('clock').style.display = this.checked ? 'none' : 'block'"><span class="slider"></span></label>
+        </div>
+        <div class="setting-item">
+            <span>8. Retirer la grille de fond</span>
+            <label class="switch"><input type="checkbox" onchange="toggleStyle('backgroundImage', 'none', '', this.checked)"><span class="slider"></span></label>
+        </div>
+        <div class="setting-item">
+            <span>9. Mode Plein Écran</span>
+            <label class="switch"><input type="checkbox" onchange="toggleFullScreen(this.checked)"><span class="slider"></span></label>
+        </div>
+        <div class="setting-item">
+            <span>10. Bords carrés (désactiver arrondis)</span>
+            <label class="switch"><input type="checkbox" onchange="toggleStyle('--radius', '0px', '20px', this.checked)"><span class="slider"></span></label>
+        </div>
+        <div class="setting-item">
+            <span>11. Boutons en rouge</span>
+            <label class="switch"><input type="checkbox" onchange="toggleStyle('--primary-color', '#ff003c', '', this.checked)"><span class="slider"></span></label>
+        </div>
+        <div class="setting-item">
+            <span>12. Centrer les textes des cartes</span>
+            <label class="switch"><input type="checkbox" checked disabled><span class="slider"></span></label>
+        </div>
+        <div class="setting-item">
+            <span>13. Mode Performance (Sans animations)</span>
+            <label class="switch"><input type="checkbox" onchange="toggleStyle('transition', 'none', 'all 0.3s ease', this.checked)"><span class="slider"></span></label>
+        </div>
+        <div class="setting-item">
+            <span>14. Inverser l'ordre des cartes</span>
+            <label class="switch"><input type="checkbox" onchange="toggleStyle('direction', 'rtl', 'ltr', this.checked)"><span class="slider"></span></label>
+        </div>
+        <div class="setting-item">
+            <span>15. Activer le son (Simulation)</span>
+            <label class="switch"><input type="checkbox"><span class="slider"></span></label>
+        </div>
     </div>
 </div>
 
 <script>
-    /* =========================================
-       1. SEQUENCE DE DEMARRAGE & TEXTE EXACT
-       ========================================= */
-    const botTextRaw = "Je suis votre assistant d'interface.<br><br>Bienvenue dans ton <strong>Espace Applications</strong>.<br><br>Toutes tes créations sont connectées et prêtes à être utilisées. Tu peux modifier l'apparence dans les réglages.";
-    
+    // --- NOUVELLE LOGIQUE DU BOT D'ACCUEIL ---
+    const botText = "Bonjour Manoé. Initialisation du noyau de ton Espace Applications...";
+    const terminalLogs = [
+        "Connexion sécurisée établie...",
+        "Montage des volumes Genesis Omega [OK]",
+        "Vérification des protocoles Ava IA [OK]",
+        "Chargement du module Edu School FR...",
+        "Synchronisation globale terminée."
+    ];
+
+    let systemReady = false;
+
     function runBootSequence() {
-        // Copie le SVG du robot principal dans le widget
-        document.getElementById('robotWidget').innerHTML = document.getElementById('mainRobotSVG').outerHTML;
-        
         const speechEl = document.getElementById('botSpeech');
         const mouthEl = document.getElementById('botMouth');
         const logEl = document.getElementById('bootLog');
-        
+        const progContainer = document.getElementById('progressContainer');
+        const progBar = document.getElementById('progressBar');
+        const readyBtn = document.getElementById('bootReady');
+
+        // 1. Animation Machine à écrire
         let i = 0;
-        mouthEl.classList.add('speaking');
+        mouthEl.classList.add('speaking'); // Le robot commence à parler
         
         function typeWriter() {
-            if (i < botTextRaw.length) {
-                // Gestion des balises HTML pendant l'écriture
-                if (botTextRaw.charAt(i) === '<') {
-                    let tag = "";
-                    while (botTextRaw.charAt(i) !== '>' && i < botTextRaw.length) {
-                        tag += botTextRaw.charAt(i);
-                        i++;
-                    }
-                    tag += '>';
-                    speechEl.innerHTML += tag;
-                } else {
-                    speechEl.innerHTML += botTextRaw.charAt(i);
-                    i++;
-                }
-                setTimeout(typeWriter, 25);
+            if (i < botText.length) {
+                speechEl.innerHTML += botText.charAt(i);
+                i++;
+                setTimeout(typeWriter, 40); // Vitesse de frappe
             } else {
-                mouthEl.classList.remove('speaking');
+                mouthEl.classList.remove('speaking'); // Le robot s'arrête
                 startTerminal();
             }
         }
 
-        const terminalLogs = ["Montage des volumes Genesis Omega [OK]", "Vérification des accès Administrateur... [OK]", "Chargement système d'applications..."];
+        // 2. Lancement des faux logs
         function startTerminal() {
             let logIndex = 0;
             const logInterval = setInterval(() => {
                 if(logIndex < terminalLogs.length) {
-                    logEl.innerHTML += `> ${terminalLogs[logIndex]}<br>`;
+                    const newLine = document.createElement('div');
+                    newLine.textContent = "> " + terminalLogs[logIndex];
+                    logEl.appendChild(newLine);
                     logIndex++;
                 } else {
                     clearInterval(logInterval);
-                    document.getElementById('progressContainer').style.display = 'block';
-                    let w = 0;
-                    const progInterval = setInterval(() => {
-                        w += Math.floor(Math.random() * 20) + 10;
-                        if(w > 100) w = 100;
-                        document.getElementById('progressBar').style.width = w + '%';
-                        if(w === 100) {
-                            clearInterval(progInterval);
-                            document.getElementById('bootReady').style.display = 'block';
-                        }
-                    }, 100);
+                    startProgressBar();
                 }
-            }, 500);
+            }, 500); // Vitesse d'apparition des logs
         }
+
+        // 3. Barre de progression
+        function startProgressBar() {
+            progContainer.style.display = 'block';
+            let width = 0;
+            const progInterval = setInterval(() => {
+                if (width >= 100) {
+                    clearInterval(progInterval);
+                    systemReady = true;
+                    readyBtn.style.display = 'block'; // Affiche le bouton
+                } else {
+                    width += Math.floor(Math.random() * 15) + 5; // Avance aléatoire
+                    if(width > 100) width = 100;
+                    progBar.style.width = width + '%';
+                }
+            }, 200);
+        }
+
+        // Démarre la séquence complète
         setTimeout(typeWriter, 500);
     }
-    window.onload = runBootSequence;
 
     function closeBot() {
         const bot = document.getElementById('botOverlay');
-        if (bot.style.display !== 'none') {
-            bot.style.opacity = '0';
-            setTimeout(() => {
-                bot.style.display = 'none';
-                document.getElementById('robotWidget').style.display = 'block'; // Affiche le mini robot
-                initMatrix(); // Lance matrix si activé
-            }, 500);
-        }
+        bot.style.opacity = '0';
+        setTimeout(() => bot.style.display = 'none', 500);
     }
 
-    /* =========================================
-       2. GESTION CLAVIER (LA TOUCHE ECHAP)
-       ========================================= */
+    // Lancement au chargement
+    window.onload = runBootSequence;
+
+    // Touche ÉCHAP pour passer le bot instantanément
     document.addEventListener('keydown', function(event) {
         if (event.key === 'Escape' || event.key === 'Esc') {
-            closeBot(); // Ferme le bot
-            document.querySelectorAll('.modal').forEach(m => m.style.display = 'none'); // Ferme les paramètres/aide
-            document.getElementById('notesSidebar').classList.remove('open'); // Ferme les notes
-            document.getElementById('contextMenu').style.display = 'none'; // Ferme le clic droit
+            closeBot();
         }
     });
 
-    /* =========================================
-       3. RECHERCHE LOCALE DANS LA GRILLE
-       ========================================= */
-    function filterApps() {
-        const query = document.getElementById('appSearch').value.toLowerCase();
-        const items = document.querySelectorAll('.app-item');
-        items.forEach(item => {
-            const name = item.getAttribute('data-name');
-            if (name.includes(query)) item.style.display = 'block';
-            else item.style.display = 'none';
-        });
+    // --- HORLOGE ---
+    function updateClock() {
+        const now = new Date();
+        const timeString = now.toLocaleTimeString('fr-FR');
+        document.getElementById('clock').textContent = "HEURE: " + timeString + " ";
     }
+    setInterval(updateClock, 1000);
+    updateClock();
 
-    /* =========================================
-       4. SYSTÈME DE SAUVEGARDE (LOCAL STORAGE) & NOTES
-       ========================================= */
-    const notesArea = document.getElementById('notesArea');
-    
-    // Charger données
-    if(localStorage.getItem('manoNotes')) notesArea.value = localStorage.getItem('manoNotes');
-    if(localStorage.getItem('manoColor')) changeColor(localStorage.getItem('manoColor'));
-    
-    ['matrix-active', 'theme-white', 'school-mode'].forEach(setting => {
-        if(localStorage.getItem(setting) === 'true') {
-            document.body.classList.add(setting);
-            document.getElementById(setting === 'matrix-active' ? 'setMatrix' : setting === 'theme-white' ? 'setWhite' : 'setSchool').checked = true;
-        }
-    });
-
-    // Sauvegarder Notes
-    notesArea.addEventListener('input', () => localStorage.setItem('manoNotes', notesArea.value));
-
-    function toggleSetting(className, isChecked) {
-        if(isChecked) document.body.classList.add(className);
-        else document.body.classList.remove(className);
-        localStorage.setItem(className, isChecked);
-    }
-
-    function changeColor(hex) {
-        document.documentElement.style.setProperty('--primary-color', hex);
-        document.getElementById('colorPicker').value = hex;
-        localStorage.setItem('manoColor', hex);
-    }
-
-    function toggleStyleTag(cssRule, isChecked, id) {
-        let styleEl = document.getElementById(id);
-        if(isChecked) {
-            if(!styleEl) { styleEl = document.createElement('style'); styleEl.id = id; styleEl.innerHTML = cssRule; document.head.appendChild(styleEl); }
-        } else if(styleEl) { styleEl.remove(); }
-    }
-
-    function toggleNotes() { document.getElementById('notesSidebar').classList.toggle('open'); }
+    // --- MODALES ---
     function openModal(id) { document.getElementById(id).style.display = 'flex'; }
     function closeModal(id) { document.getElementById(id).style.display = 'none'; }
-
-    /* =========================================
-       5. MENU CONTEXTUEL CLIC DROIT
-       ========================================= */
-    document.addEventListener('contextmenu', event => {
-        event.preventDefault();
-        const menu = document.getElementById('contextMenu');
-        menu.style.display = 'block';
-        menu.style.left = `${event.pageX}px`;
-        menu.style.top = `${event.pageY}px`;
-    });
-    document.addEventListener('click', () => document.getElementById('contextMenu').style.display = 'none');
-
-    /* =========================================
-       6. MONITORING SYSTEME (Heure, Uptime, Batterie)
-       ========================================= */
-    let startTime = Date.now();
-    setInterval(() => {
-        // Horloge
-        document.getElementById('clockDisplay').textContent = new Date().toLocaleTimeString('fr-FR');
-        // Uptime
-        let diff = Math.floor((Date.now() - startTime) / 1000);
-        let m = Math.floor(diff / 60); let s = diff % 60;
-        document.getElementById('uptimeDisplay').textContent = `UP: ${m}m ${s < 10 ? '0'+s : s}s`;
-        // RAM (Fausse fluctuation pour style)
-        document.getElementById('ramDisplay').textContent = `RAM: ${Math.floor(Math.random() * (60 - 30 + 1)) + 30}%`;
-    }, 1000);
-
-    // API Batterie
-    if(navigator.getBattery) {
-        navigator.getBattery().then(battery => {
-            function updateBat() { document.getElementById('batteryDisplay').textContent = `PWR: ${Math.round(battery.level * 100)}%`; }
-            updateBat(); battery.addEventListener('levelchange', updateBat);
-        });
+    window.onclick = function(event) {
+        if (event.target.className === 'modal') { event.target.style.display = "none"; }
     }
 
-    /* =========================================
-       7. PLUIE MATRIX (Canvas Background)
-       ========================================= */
-    const canvas = document.getElementById('matrixCanvas');
-    const ctx = canvas.getContext('2d');
-    let matrixInterval;
-    
-    function initMatrix() {
-        canvas.width = window.innerWidth; canvas.height = window.innerHeight;
-        const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789@#$%^&*'.split('');
-        const fontSize = 14; const columns = canvas.width / fontSize;
-        const drops = []; for(let x = 0; x < columns; x++) drops[x] = 1;
+    // --- PARAMÈTRES JS ---
+    function toggleBodyClass(className, isChecked) {
+        if (isChecked) document.body.classList.add(className);
+        else document.body.classList.remove(className);
+    }
 
-        function draw() {
-            ctx.fillStyle = 'rgba(0, 0, 0, 0.05)';
-            ctx.fillRect(0, 0, canvas.width, canvas.height);
-            ctx.fillStyle = getComputedStyle(document.documentElement).getPropertyValue('--primary-color');
-            ctx.font = fontSize + 'px monospace';
-            for(let i = 0; i < drops.length; i++) {
-                const text = chars[Math.floor(Math.random() * chars.length)];
-                ctx.fillText(text, i * fontSize, drops[i] * fontSize);
-                if(drops[i] * fontSize > canvas.height && Math.random() > 0.975) drops[i] = 0;
-                drops[i]++;
-            }
+    function toggleStyle(property, valueIfTrue, valueIfFalse, isChecked) {
+        if (property.startsWith('--')) {
+            document.documentElement.style.setProperty(property, isChecked ? valueIfTrue : valueIfFalse);
+        } else {
+            document.body.style[property] = isChecked ? valueIfTrue : valueIfFalse;
         }
-        if(matrixInterval) clearInterval(matrixInterval);
-        matrixInterval = setInterval(draw, 33);
     }
-    window.addEventListener('resize', initMatrix);
+
+    function toggleFullScreen(isChecked) {
+        if (isChecked) {
+            if (document.documentElement.requestFullscreen) document.documentElement.requestFullscreen();
+        } else {
+            if (document.exitFullscreen) document.exitFullscreen();
+        }
+    }
+
+    // --- LOGIQUE DU MODE GOOGLE ---
+    function toggleGoogleMode(isActive) {
+        if (isActive) {
+            document.body.classList.add('google-active');
+            document.getElementById('googleSearchInput').value = '';
+            document.getElementById('googleSearchInput').focus();
+            closeModal('settingsModal');
+        } else {
+            document.body.classList.remove('google-active');
+            document.getElementById('googleToggleCheckbox').checked = false;
+        }
+    }
+
+    function handleGoogleSearch(event) {
+        if (event.key === 'Enter') {
+            executeGoogleSearch();
+        }
+    }
+
+    function executeGoogleSearch() {
+        const input = document.getElementById('googleSearchInput').value.trim().toLowerCase();
+        if (input === "") return;
+
+        const appsSecretes = {
+            "genesis omega": "https://genesis-omega.base44.app/",
+            "genesis": "https://genesis-omega.base44.app/",
+            "my google": "https://my-google.base44.app/",
+            "rechercher": "https://rechercher.base44.app/",
+            "ava ia": "https://ava-ia.base44.app/",
+            "ava": "https://ava-ia.base44.app/",
+            "edu school fr": "https://edu-school-fr.base44.app/",
+            "edu school": "https://edu-school-fr.base44.app/",
+            "gg earth": "https://gg-earth.base44.app/",
+            "justiss ia": "https://justiss-ia.base44.app/",
+            "justiss": "https://justiss-ia.base44.app/"
+        };
+
+        if (appsSecretes[input]) {
+            window.open(appsSecretes[input], '_blank');
+        } else {
+            const vraieRechercheUrl = "https://www.google.com/search?q=" + encodeURIComponent(input);
+            window.open(vraieRechercheUrl, '_blank');
+        }
+        
+        document.getElementById('googleSearchInput').value = "";
+    }
 </script>
+
 </body>
 </html>
