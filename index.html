@@ -57,6 +57,11 @@
         body.school-mode .help-section h3 { color: #0056b3; }
         body.school-mode .command-tag { background: #e0e0e0; color: #333; }
 
+        /* AJOUT FILTRE SÉPIA (CONFORTE LECTURE / SCOLAIRE) */
+        body.reading-mode {
+            filter: sepia(0.4) contrast(1.1);
+        }
+
         body {
             font-family: var(--font-main);
             background-color: var(--bg-color);
@@ -73,7 +78,8 @@
 
         /* --- NOUVEAU BOT D'ACCUEIL --- */
         #botOverlay {
-            position: fixed; inset: 0;
+            position: fixed;
+            inset: 0;
             background: var(--modal-bg);
             z-index: 10000;
             display: flex; flex-direction: column; align-items: center; justify-content: center;
@@ -205,44 +211,54 @@
 
         .header-buttons { display: flex; justify-content: center; gap: 20px; }
         .action-btn {
-            background: transparent; color: var(--primary-color); border: 1px solid var(--border-color);
+            background: transparent;
+            color: var(--primary-color); border: 1px solid var(--border-color);
             padding: 10px 20px; border-radius: 10px; cursor: pointer; font-family: var(--font-main);
-            font-size: 1rem; font-weight: bold; text-transform: uppercase; transition: 0.3s;
+            font-size: 1rem; font-weight: bold;
+            text-transform: uppercase; transition: 0.3s;
         }
         .action-btn:hover { background: var(--primary-color); color: var(--bg-color); box-shadow: var(--primary-glow); }
 
         /* --- GRILLE & CARTES --- */
         .grid {
-            display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 25px;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 25px;
             max-width: 1300px; margin: auto; position: relative; z-index: 2;
         }
         .card {
-            background: var(--card-bg); border: 1px solid var(--border-color); padding: 25px;
+            background: var(--card-bg);
+            border: 1px solid var(--border-color); padding: 25px;
             border-radius: var(--radius); text-align: center; box-shadow: 0 0 15px rgba(0,0,0,0.5);
-            backdrop-filter: blur(5px); position: relative; overflow: hidden; transition: 0.3s;
+            backdrop-filter: blur(5px); position: relative;
+            overflow: hidden; transition: 0.3s;
         }
         .card::before {
-            content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 3px;
+            content: '';
+            position: absolute; top: 0; left: 0; width: 100%; height: 3px;
             background: var(--primary-color); box-shadow: var(--primary-glow);
         }
         .card:hover { transform: translateY(-5px); box-shadow: var(--primary-glow); }
 
         .app-img {
-            width: 100px; height: 100px; border-radius: var(--radius); object-fit: cover;
+            width: 100px;
+            height: 100px; border-radius: var(--radius); object-fit: cover;
             margin-bottom: 15px; background-color: #333; border: 2px solid var(--border-color);
         }
         body.school-mode .app-img { border: none; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
         body.hide-images .app-img { display: none; }
 
         .app-img:after {
-            content: "📁"; display: block; text-align: center; line-height: 100px; color: #555;
+            content: "📁";
+            display: block; text-align: center; line-height: 100px; color: #555;
         }
 
         h2 { margin-top: 0; letter-spacing: 1px; color: var(--primary-color); }
         .btn {
-            display: inline-block; padding: 12px 25px; margin-top: 15px; border-radius: 10px;
+            display: inline-block;
+            padding: 12px 25px; margin-top: 15px; border-radius: 10px;
             background: rgba(255, 255, 255, 0.05); border: 1px solid var(--border-color);
-            color: var(--primary-color); text-decoration: none; font-weight: bold; text-transform: uppercase;
+            color: var(--primary-color); text-decoration: none;
+            font-weight: bold; text-transform: uppercase;
             transition: 0.3s; width: 85%; box-sizing: border-box;
         }
         .btn:hover { background: var(--primary-color); color: var(--bg-color); box-shadow: var(--primary-glow); }
@@ -267,22 +283,13 @@
         input:checked + .slider:before { transform: translateX(20px); background-color: var(--bg-color); }
 
         .help-section {
-            background: rgba(255, 255, 255, 0.03);
-            border: 1px dashed rgba(255,255,255,0.2);
-            padding: 15px;
-            border-radius: 10px;
-            margin-bottom: 15px;
+            background: rgba(255, 255, 255, 0.03); border: 1px dashed rgba(255,255,255,0.2);
+            padding: 15px; border-radius: 10px; margin-bottom: 15px;
         }
         .help-section h3 { margin-top: 0; color: var(--primary-color); font-size: 1.1rem; text-transform: uppercase; }
         .help-section ul { padding-left: 15px; list-style-type: square; }
         .help-section li { margin-bottom: 8px; color: var(--text-color); font-size: 0.95rem; }
-        .command-tag {
-            background: rgba(255, 255, 255, 0.1);
-            padding: 2px 6px;
-            border-radius: 4px;
-            font-weight: bold;
-            color: var(--primary-color);
-        }
+        .command-tag { background: rgba(255, 255, 255, 0.1); padding: 2px 6px; border-radius: 4px; font-weight: bold; color: var(--primary-color); }
 
         /* CRT Overlay */
         .crt-overlay { display: none; position: fixed; inset: 0; background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%), linear-gradient(90deg, rgba(255, 0, 0, 0.06), rgba(0, 255, 0, 0.02), rgba(0, 0, 255, 0.06)); background-size: 100% 4px, 6px 100%; z-index: 999; pointer-events: none; }
@@ -290,19 +297,7 @@
 
         /* --- MODE CAMOUFLAGE GOOGLE --- */
         #googleModeContainer {
-            display: none;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            height: 100vh;
-            width: 100vw;
-            background-color: #ffffff;
-            position: fixed;
-            top: 0;
-            left: 0;
-            z-index: 20000;
-            font-family: Arial, sans-serif;
-            color: #202124;
+            display: none; flex-direction: column; align-items: center; justify-content: center; height: 100vh; width: 100vw; background-color: #ffffff; position: fixed; top: 0; left: 0; z-index: 20000; font-family: Arial, sans-serif; color: #202124;
         }
         body.google-active { overflow: hidden; }
         body.google-active #googleModeContainer { display: flex; }
@@ -310,38 +305,70 @@
         .google-logo { width: 272px; margin-bottom: 30px; }
         
         .search-box {
-            display: flex; align-items: center;
-            width: 90%; max-width: 584px;
-            border: 1px solid #dfe1e5; border-radius: 24px;
-            padding: 10px 20px; box-sizing: border-box;
+            display: flex; align-items: center; width: 90%; max-width: 584px; border: 1px solid #dfe1e5; border-radius: 24px; padding: 10px 20px; box-sizing: border-box;
         }
-        .search-box:hover, .search-box:focus-within {
-            box-shadow: 0 1px 6px rgba(32,33,36,.28); border-color: rgba(223,225,229,0); outline: none;
-        }
+        .search-box:hover, .search-box:focus-within { box-shadow: 0 1px 6px rgba(32,33,36,.28); border-color: rgba(223,225,229,0); outline: none; }
         .search-box svg { width: 20px; height: 20px; fill: #9aa0a6; margin-right: 15px; }
-        .search-box input {
-            flex: 1; border: none; outline: none; font-size: 16px; background: transparent;
-        }
+        .search-box input { flex: 1; border: none; outline: none; font-size: 16px; background: transparent; }
         
         .google-buttons { margin-top: 30px; display: flex; gap: 12px; }
-        .google-buttons button {
-            background-color: #f8f9fa; border: 1px solid #f8f9fa; border-radius: 4px;
-            color: #3c4043; font-size: 14px; padding: 0 16px; line-height: 27px; height: 36px; cursor: pointer;
-        }
+        .google-buttons button { background-color: #f8f9fa; border: 1px solid #f8f9fa; border-radius: 4px; color: #3c4043; font-size: 14px; padding: 0 16px; line-height: 27px; height: 36px; cursor: pointer; }
         .google-buttons button:hover { border: 1px solid #dadce0; color: #202124; box-shadow: 0 1px 1px rgba(0,0,0,.1); }
 
         .google-top-right { position: absolute; top: 20px; right: 20px; }
-        .google-top-right button {
-            background: #1a73e8; color: white; border: none; padding: 8px 24px;
-            border-radius: 4px; cursor: pointer; font-weight: bold; font-size: 14px;
-        }
+        .google-top-right button { background: #1a73e8; color: white; border: none; padding: 8px 24px; border-radius: 4px; cursor: pointer; font-weight: bold; font-size: 14px; }
         .google-top-right button:hover { background: #1557b0; box-shadow: 0 1px 2px rgba(60,64,67,0.3); }
 
+
+        /* ========================================================
+           👉 EXTRA COUCHES : LES 10 AJOUTS DEMANDÉS (SCOLAIRES)
+           ======================================================== */
+
+        /* 1. BARRE DE RECHERCHE INTERNE (FILTRAGE DE COURS/APPLIS) */
+        .local-search-wrapper { text-align: center; margin-bottom: 30px; position: relative; z-index: 10; }
+        .local-search-input {
+            width: 80%; max-width: 500px; padding: 12px 20px; font-family: var(--font-main);
+            background: var(--card-bg); border: 1px solid var(--primary-color);
+            color: var(--text-color); border-radius: var(--radius); font-size: 1rem;
+            box-shadow: 0 0 10px rgba(0,0,0,0.5); outline: none; transition: 0.3s;
+        }
+        .local-search-input:focus { box-shadow: var(--primary-glow); }
+
+        /* 2. WIDGET ROBOT PERSISTANT MINIATURISÉ */
+        #robotWidget {
+            position: fixed; bottom: 20px; right: 20px; width: 55px; height: 55px;
+            z-index: 9000; cursor: pointer; display: none; transition: 0.3s;
+        }
+        #robotWidget:hover { transform: scale(1.1); filter: drop-shadow(var(--primary-glow)); }
+
+        /* 3. BLOC-NOTES ET DEVOIRS LATÉRAL */
+        #notesSidebar {
+            position: fixed; top: 0; right: -350px; width: 310px; height: 100vh;
+            background: var(--card-bg); border-left: 2px solid var(--primary-color);
+            z-index: 9500; transition: right 0.3s ease; padding: 25px; box-sizing: border-box;
+            box-shadow: -5px 0 15px rgba(0,0,0,0.8); backdrop-filter: blur(10px);
+        }
+        #notesSidebar.open { right: 0; }
+        #notesArea {
+            width: 100%; height: calc(100% - 90px); background: rgba(0, 0, 0, 0.4); color: var(--text-color);
+            border: 1px dashed var(--primary-color); padding: 12px; font-family: var(--font-main);
+            resize: none; outline: none; box-sizing: border-box; border-radius: 8px; margin-top: 15px;
+        }
+
+        /* 4. DESIGN CALCULATRICE SCOLAIRE */
+        .calc-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; margin-top: 15px; }
+        #calcScreen { width: 100%; padding: 15px; background: rgba(0,0,0,0.5); border: 1px solid var(--border-color); color: var(--primary-color); font-size: 1.5rem; text-align: right; border-radius: 8px; box-sizing: border-box; font-family: var(--font-main); }
+        .calc-btn { padding: 12px; background: rgba(255,255,255,0.05); border: 1px solid var(--border-color); color: var(--text-color); font-family: var(--font-main); cursor: pointer; border-radius: 5px; font-weight: bold; }
+        .calc-btn:hover { background: var(--primary-color); color: var(--bg-color); }
+
+        /* En-tête Métriques */
+        .sys-details { font-size: 0.9rem; opacity: 0.8; margin-top: 5px; color: var(--primary-color); display: flex; justify-content: center; gap: 20px; font-family: var(--font-main); }
+
+        /* Citations Box */
+        .quote-box { background: rgba(0,0,0,0.4); padding: 12px; border-left: 3px solid var(--primary-color); margin-top: 10px; font-style: italic; font-size: 0.9rem; }
     </style>
 </head>
-<body>
-
-<div id="googleModeContainer">
+<body class="school-mode"> <div id="googleModeContainer">
     <div class="google-top-right">
         <button onclick="toggleGoogleMode(false)">Connexion</button> 
     </div>
@@ -361,7 +388,7 @@
 <div id="botOverlay">
     <div class="bot-container">
         <div class="robot-avatar">
-            <svg viewBox="0 0 100 100" class="bot-svg">
+            <svg viewBox="0 0 100 100" class="bot-svg" id="masterRobotSVG">
                 <rect x="15" y="20" width="70" height="60" rx="15" class="bot-stroke" />
                 <line x1="50" y1="20" x2="50" y2="5" class="bot-stroke" />
                 <circle cx="50" cy="5" r="4" class="bot-fill" />
@@ -383,7 +410,7 @@
             </div>
             
             <div class="boot-ready" id="bootReady" onclick="closeBot()">
-                [ Bienvnue dans l'espace d'application ]
+                [ Bienvenue dans l'espace d'application ]
             </div>
         </div>
     </div>
@@ -392,17 +419,39 @@
 
 <div class="crt-overlay"></div>
 
+<div id="robotWidget" onclick="openModal('helpModal')" title="Aide & Révisions"></div>
+
+<div id="notesSidebar">
+    <span class="close-btn" onclick="toggleNotesSidebar()">&times;</span>
+    <h3 style="color: var(--primary-color); margin-top:0;">> DEVOIRS & NOTES</h3>
+    <textarea id="notesArea" placeholder="Notes de cours ou devoirs à faire... (Sauvegarde automatique)"></textarea>
+</div>
+
 <header>
     <h1>Espace Applications</h1>
     <div id="clock">Chargement...</div>
+    
+    <div class="sys-details">
+        <span id="uptimeCounter">SESSION: 00m 00s</span>
+        <span id="ramCounter">RAM: 14%</span>
+        <span id="batteryCounter">BATTERIE: --%</span>
+    </div>
+    <br>
+    
     <div class="header-buttons">
-        <button class="action-btn" onclick="openModal('helpModal')">Aide</button>
-        <button class="action-btn" onclick="openModal('settingsModal')">Paramètres</button>
+        <button class="action-btn" onclick="openModal('helpModal')">Aide & Outils</button>
+        <button class="action-btn" onclick="openModal('calcModal')">Calculatrice</button>
+        <button class="action-btn" onclick="toggleNotesSidebar()">Devoirs</button>
+        <button class="action-btn" onclick="openModal('settingsModal')">Options</button>
     </div>
 </header>
 
+<div class="local-search-wrapper">
+    <input type="text" id="internalSearchInput" class="local-search-input" placeholder="Filtrer un outil ou une application scolaire..." onkeyup="filterInternalGrid()">
+</div>
+
 <div class="grid">
-    <div class="card">
+    <div class="card app-card" data-title="genesis omega">
         <img class="app-img" data-src="https://genesis-omega.base44.app/" src="https://www.google.com/s2/favicons?domain=genesis-omega.base44.app&sz=128" alt="Genesis Omega">
         <h2>Genesis Omega</h2>
         <a href="https://genesis-omega.base44.app/" target="_blank" class="btn">Accéder</a>
@@ -415,80 +464,109 @@
         </details>
     </div>
 
-    <div class="card">
+    <div class="card app-card" data-title="my google">
         <img class="app-img" src="https://www.google.com/s2/favicons?domain=my-google.base44.app&sz=128" alt="My Google">
         <h2>My Google</h2>
         <a href="https://my-google.base44.app/" target="_blank" class="btn">Accéder</a>
     </div>
 
-    <div class="card">
+    <div class="card app-card" data-title="rechercher">
         <img class="app-img" src="https://www.google.com/s2/favicons?domain=rechercher.base44.app&sz=128" alt="Recherché des gens">
         <h2>Rechercher</h2>
         <a href="https://rechercher.base44.app/" target="_blank" class="btn">Accéder</a>
     </div>
 
-    <div class="card">
+    <div class="card app-card" data-title="ava ia">
         <img class="app-img" src="https://www.google.com/s2/favicons?domain=ava-ia.base44.app&sz=128" alt="Ava IA">
         <h2>Ava IA</h2>
         <a href="https://ava-ia.base44.app/" target="_blank" class="btn">Accéder</a>
     </div>
 
-    <div class="card">
+    <div class="card app-card" data-title="edu school fr">
         <img class="app-img" src="https://www.google.com/s2/favicons?domain=edu-school-fr.base44.app&sz=128" alt="Edu School">
         <h2>Edu School FR</h2>
         <a href="https://edu-school-fr.base44.app/" target="_blank" class="btn">Accéder</a>
     </div>
 
-    <div class="card">
+    <div class="card app-card" data-title="gg earth">
         <img class="app-img" src="https://www.google.com/s2/favicons?domain=gg-earth.base44.app&sz=128" alt="Google Earth">
         <h2>GG Earth</h2>
         <a href="https://gg-earth.base44.app/" target="_blank" class="btn">Accéder</a>
     </div>
 
-    <div class="card">
+    <div class="card app-card" data-title="justiss ia">
         <img class="app-img" src="https://www.google.com/s2/favicons?domain=justiss-ia.base44.app&sz=128" alt="Justice IA">
         <h2>Justiss IA</h2>
         <a href="https://justiss-ia.base44.app/" target="_blank" class="btn">Accéder</a>
     </div>
 </div>
 
+<div id="calcModal" class="modal">
+    <div class="modal-content">
+        <span class="close-btn" onclick="closeModal('calcModal')">&times;</span>
+        <h2>> Calculatrice Scientifique</h2>
+        <input type="text" id="calcScreen" readonly value="0">
+        <div class="calc-grid">
+            <button class="calc-btn" onclick="pressCalc('sin')">sin</button>
+            <button class="calc-btn" onclick="pressCalc('cos')">cos</button>
+            <button class="calc-btn" onclick="pressCalc('tan')">tan</button>
+            <button class="calc-btn" onclick="clearCalc()" style="color:#ff4444;">C</button>
+            
+            <button class="calc-btn" onclick="pressCalc('7')">7</button>
+            <button class="calc-btn" onclick="pressCalc('8')">8</button>
+            <button class="calc-btn" onclick="pressCalc('9')">9</button>
+            <button class="calc-btn" onclick="pressCalc('/')">/</button>
+            
+            <button class="calc-btn" onclick="pressCalc('4')">4</button>
+            <button class="calc-btn" onclick="pressCalc('5')">5</button>
+            <button class="calc-btn" onclick="pressCalc('6')">6</button>
+            <button class="calc-btn" onclick="pressCalc('*')">*</button>
+            
+            <button class="calc-btn" onclick="pressCalc('1')">1</button>
+            <button class="calc-btn" onclick="pressCalc('2')">2</button>
+            <button class="calc-btn" onclick="pressCalc('3')">3</button>
+            <button class="calc-btn" onclick="pressCalc('-')">-</button>
+            
+            <button class="calc-btn" onclick="pressCalc('0')">0</button>
+            <button class="calc-btn" onclick="pressCalc('.')">.</button>
+            <button class="calc-btn" onclick="pressCalc('sqrt')">√</button>
+            <button class="calc-btn" onclick="pressCalc('+')">+</button>
+            
+            <button class="calc-btn" onclick="pressCalc('PI')">π</button>
+            <button class="calc-btn" onclick="evalCalc()" style="grid-column: span 3; background: var(--primary-color); color: var(--bg-color);">=</button>
+        </div>
+    </div>
+</div>
+
 <div id="helpModal" class="modal">
     <div class="modal-content">
         <span class="close-btn" onclick="closeModal('helpModal')">&times;</span>
-        <h2>> Terminal d'Aide & Documentation</h2>
+        <h2>> Outils & Aide de Révision</h2>
         
         <div class="help-section">
-            <h3>1. Navigation de base</h3>
+            <h3>📖 Idée de Révision / Citation du Jour</h3>
+            <div class="quote-box" id="quoteDisplay">"Le courage est de chercher la vérité et de la dire." - Jean Jaurès</div>
+            <button class="action-btn" onclick="generateNewQuote()" style="margin-top: 10px; font-size: 0.8rem; padding: 5px 10px;">Autre citation</button>
+        </div>
+
+        <div class="help-section">
+            <h3>1. Navigation scolaire</h3>
             <ul>
-                <li>Clique sur le bouton <strong>"Accéder"</strong> d'une carte pour ouvrir l'application ciblée dans un nouvel onglet.</li>
-                <li>Utilise le volet déroulant <strong>"Anciennes Versions"</strong> sous Genesis Omega pour retrouver les builds V1 et V2 historiques de ton projet.</li>
+                <li>Chaque boîte correspond à un de tes projets ou espaces d'études. Clique sur <strong>"Accéder"</strong> pour l'ouvrir.</li>
             </ul>
         </div>
 
         <div class="help-section">
-            <h3>2. Mode Camouflage Google (Secret)</h3>
+            <h3>2. Camouflage Google</h3>
             <ul>
-                <li>Active-le depuis les paramètres pour masquer l'interface derrière une réplique exacte de Google.</li>
-                <li><strong>Mots-clés directs :</strong> Entre directement <span class="command-tag">genesis</span>, <span class="command-tag">ava</span>, <span class="command-tag">edu school</span> ou <span class="command-tag">justiss</span> dans la barre pour court-circuiter le moteur et ouvrir tes applications secrètement.</li>
-                <li>Toute autre saisie lancera une vraie recherche Web transparente.</li>
-                <li>Pour sortir du mode discrétion, clique sur le bouton bleu <strong>"Connexion"</strong> en haut à droite.</li>
+                <li>Active-le pour étudier sans distractions. Saisir <span class="command-tag">edu school</span> ou <span class="command-tag">genesis</span> ouvrira tes builds secrets de travail.</li>
             </ul>
         </div>
 
         <div class="help-section">
-            <h3>3. Raccourcis Clavier</h3>
+            <h3>3. Raccourcis Clavier urgents</h3>
             <ul>
-                <li><span class="command-tag">Échap</span> : Ferme instantanément le bot d'accueil système ou quitte les modales.</li>
-                <li><span class="command-tag">Entrée</span> : Valide et exécute tes recherches depuis le champ de saisie du mode Camouflage.</li>
-            </ul>
-        </div>
-
-        <div class="help-section">
-            <h3>4. Personnalisation & Performance</h3>
-            <ul>
-                <li>Active le <strong>"Mode École"</strong> si tu es en classe pour basculer instantanément sur une police Inter épurée, sans lumières ni grilles.</li>
-                <li>Utilise le <strong>"Filtre CRT"</strong> pour simuler le rendu visuel d'un vieux moniteur des années 80.</li>
-                <li>Le <strong>"Mode Performance"</strong> supprime les transitions pour les machines plus lentes.</li>
+                <li><span class="command-tag">Échap</span> : Ferme instantanément toutes les boîtes, la calculatrice et les notes ouvertes pour revenir à l'écran épuré.</li>
             </ul>
         </div>
     </div>
@@ -497,113 +575,120 @@
 <div id="settingsModal" class="modal">
     <div class="modal-content">
         <span class="close-btn" onclick="closeModal('settingsModal')">&times;</span>
-        <h2>> Paramètres</h2>
+        <h2>> Options d'Affichage</h2>
         
+        <div class="setting-item">
+            <span><strong>👁️ Filtre Lecture Confort (Teinte Papier Sépia)</strong></span>
+            <label class="switch"><input type="checkbox" id="readingToggle" onchange="toggleBodyClass('reading-mode', this.checked); saveToggle('reading-mode', this.checked);"><span class="slider"></span></label>
+        </div>
+
         <div class="setting-item" style="border-bottom: 2px solid var(--primary-color);">
             <span><strong>0. Mode Camouflage Google</strong></span>
             <label class="switch"><input type="checkbox" id="googleToggleCheckbox" onchange="toggleGoogleMode(this.checked)"><span class="slider"></span></label>
         </div>
 
         <div class="setting-item">
-            <span><strong>1. Thème blanc (normal)</strong></span>
-            <label class="switch"><input type="checkbox" onchange="toggleBodyClass('theme-white', this.checked)"><span class="slider"></span></label>
+            <span><strong>1. Thème blanc (Épuré clair)</strong></span>
+            <label class="switch"><input type="checkbox" id="themeWhiteCheckbox" onchange="toggleBodyClass('theme-white', this.checked); saveToggle('theme-white', this.checked);"><span class="slider"></span></label>
         </div>
         <div class="setting-item">
-            <span><strong>2. MODE ÉCOLE</strong> (Interface classique)</span>
-            <label class="switch"><input type="checkbox" onchange="toggleBodyClass('school-mode', this.checked)"><span class="slider"></span></label>
+            <span><strong>2. MODE ÉCOLE Active</strong> (Sans fioritures)</span>
+            <label class="switch"><input type="checkbox" id="schoolModeCheckbox" checked onchange="toggleBodyClass('school-mode', this.checked); saveToggle('school-mode', this.checked);"><span class="slider"></span></label>
         </div>
         <div class="setting-item">
-            <span>3. Masquer les images des applis</span>
-            <label class="switch"><input type="checkbox" onchange="toggleBodyClass('hide-images', this.checked)"><span class="slider"></span></label>
+            <span>3. Masquer les icônes d'applications</span>
+            <label class="switch"><input type="checkbox" id="hideImagesCheckbox" onchange="toggleBodyClass('hide-images', this.checked); saveToggle('hide-images', this.checked);"><span class="slider"></span></label>
         </div>
         <div class="setting-item">
             <span>4. Désactiver les néons</span>
-            <label class="switch"><input type="checkbox" onchange="toggleStyle('--primary-glow', 'none', '0 0 15px rgba(255, 255, 255, 0.4)', this.checked)"><span class="slider"></span></label>
+            <label class="switch"><input type="checkbox" id="neonCheckbox" onchange="toggleStyle('--primary-glow', 'none', '0 0 15px rgba(255, 255, 255, 0.4)', this.checked); saveToggle('neon-disabled', this.checked);"><span class="slider"></span></label>
         </div>
         <div class="setting-item">
             <span>5. Activer le filtre écran CRT</span>
-            <label class="switch"><input type="checkbox" onchange="toggleBodyClass('crt-active', this.checked)"><span class="slider"></span></label>
+            <label class="switch"><input type="checkbox" id="crtCheckbox" onchange="toggleBodyClass('crt-active', this.checked); saveToggle('crt-active', this.checked);"><span class="slider"></span></label>
         </div>
         <div class="setting-item">
-            <span>6. Police plus grande</span>
-            <label class="switch"><input type="checkbox" onchange="toggleStyle('fontSize', '110%', '100%', this.checked)"><span class="slider"></span></label>
+            <span>6. Grossir les textes</span>
+            <label class="switch"><input type="checkbox" id="fontSizeCheckbox" onchange="toggleStyle('fontSize', '110%', '100%', this.checked); saveToggle('font-large', this.checked);"><span class="slider"></span></label>
         </div>
         <div class="setting-item">
             <span>7. Masquer l'horloge</span>
-            <label class="switch"><input type="checkbox" onchange="document.getElementById('clock').style.display = this.checked ? 'none' : 'block'"><span class="slider"></span></label>
+            <label class="switch"><input type="checkbox" id="hideClockCheckbox" onchange="document.getElementById('clock').style.display = this.checked ? 'none' : 'block'; saveToggle('clock-hidden', this.checked);"><span class="slider"></span></label>
         </div>
         <div class="setting-item">
             <span>8. Retirer la grille de fond</span>
-            <label class="switch"><input type="checkbox" onchange="toggleStyle('backgroundImage', 'none', '', this.checked)"><span class="slider"></span></label>
+            <label class="switch"><input type="checkbox" id="gridBgCheckbox" onchange="toggleStyle('backgroundImage', 'none', '', this.checked); saveToggle('grid-hidden', this.checked);"><span class="slider"></span></label>
         </div>
         <div class="setting-item">
             <span>9. Mode Plein Écran</span>
             <label class="switch"><input type="checkbox" onchange="toggleFullScreen(this.checked)"><span class="slider"></span></label>
         </div>
         <div class="setting-item">
-            <span>10. Bords carrés (désactiver arrondis)</span>
-            <label class="switch"><input type="checkbox" onchange="toggleStyle('--radius', '0px', '20px', this.checked)"><span class="slider"></span></label>
+            <span>10. Coins droits (sans arrondis)</span>
+            <label class="switch"><input type="checkbox" id="radiusCheckbox" onchange="toggleStyle('--radius', '0px', '20px', this.checked); saveToggle('radius-zero', this.checked);"><span class="slider"></span></label>
         </div>
         <div class="setting-item">
-            <span>11. Boutons en rouge</span>
-            <label class="switch"><input type="checkbox" onchange="toggleStyle('--primary-color', '#ff003c', '', this.checked)"><span class="slider"></span></label>
+            <span>11. Colorer l'accentuation en rouge</span>
+            <label class="switch"><input type="checkbox" id="redBtnCheckbox" onchange="toggleStyle('--primary-color', '#ff003c', '', this.checked); saveToggle('red-buttons', this.checked);"><span class="slider"></span></label>
         </div>
         <div class="setting-item">
             <span>12. Centrer les textes des cartes</span>
             <label class="switch"><input type="checkbox" checked disabled><span class="slider"></span></label>
         </div>
         <div class="setting-item">
-            <span>13. Mode Performance (Sans animations)</span>
-            <label class="switch"><input type="checkbox" onchange="toggleStyle('transition', 'none', 'all 0.3s ease', this.checked)"><span class="slider"></span></label>
+            <span>13. Mode Économie d'énergie (sans transition)</span>
+            <label class="switch"><input type="checkbox" id="perfCheckbox" onchange="toggleStyle('transition', 'none', 'all 0.3s ease', this.checked); saveToggle('perf-mode', this.checked);"><span class="slider"></span></label>
         </div>
         <div class="setting-item">
-            <span>14. Inverser l'ordre des cartes</span>
-            <label class="switch"><input type="checkbox" onchange="toggleStyle('direction', 'rtl', 'ltr', this.checked)"><span class="slider"></span></label>
+            <span>14. Inverser l'ordre horizontal</span>
+            <label class="switch"><input type="checkbox" id="reverseCheckbox" onchange="toggleStyle('direction', 'rtl', 'ltr', this.checked); saveToggle('reverse-cards', this.checked);"><span class="slider"></span></label>
         </div>
         <div class="setting-item">
-            <span>15. Activer le son (Simulation)</span>
-            <label class="switch"><input type="checkbox"><span class="slider"></span></label>
+            <span>15. Activer le bip sonore (simulation)</span>
+            <label class="switch"><input type="checkbox" id="soundCheckbox" onchange="saveToggle('sound-sim', this.checked)"><span class="slider"></span></label>
         </div>
     </div>
 </div>
 
 <script>
-    // --- NOUVELLE LOGIQUE DU BOT D'ACCUEIL ---
-    const botText = "Bonjour Utilisateur. Je suis votre assistant d'interface.Bienvenue dans votre Espace d'Applications.Toutes les créations sont connectées et prêtes à être utilisées. Tu peux modifier l'apparence dans les réglages.";
+    // --- FAUX CHARGEMENT SYSTÈME ---
+    const botText = "Initialisation de votre environnement de travail scolaire... Tous les outils de révision et vos applications d'infrastructure autonome sont opérationnels. Bonnes sessions d'études.";
     const terminalLogs = [
-        "Connexion  établie",
-        "demarage des IA [OK]",
-        "Vérification des credit",
-        "Chargement des module",
-        "Synchronisation globale terminée."
+        "Liaison serveur établie",
+        "Vérification des modules de cours [OK]",
+        "Chargement des scripts mathématiques",
+        "Espace Prêt."
     ];
 
     let systemReady = false;
 
     function runBootSequence() {
+        // Chargement autonome du SVG dans le widget persistant inférieur
+        document.getElementById('robotWidget').innerHTML = document.getElementById('masterRobotSVG').outerHTML;
+
         const speechEl = document.getElementById('botSpeech');
         const mouthEl = document.getElementById('botMouth');
         const logEl = document.getElementById('bootLog');
         const progContainer = document.getElementById('progressContainer');
         const progBar = document.getElementById('progressBar');
         const readyBtn = document.getElementById('bootReady');
+        
+        loadSavedConfig();
 
-        // 1. Animation Machine à écrire
         let i = 0;
-        mouthEl.classList.add('speaking'); // Le robot commence à parler
+        mouthEl.classList.add('speaking');
         
         function typeWriter() {
             if (i < botText.length) {
                 speechEl.innerHTML += botText.charAt(i);
                 i++;
-                setTimeout(typeWriter, 40); // Vitesse de frappe
+                setTimeout(typeWriter, 30);
             } else {
-                mouthEl.classList.remove('speaking'); // Le robot s'arrête
+                mouthEl.classList.remove('speaking');
                 startTerminal();
             }
         }
 
-        // 2. Lancement des faux logs
         function startTerminal() {
             let logIndex = 0;
             const logInterval = setInterval(() => {
@@ -616,10 +701,9 @@
                     clearInterval(logInterval);
                     startProgressBar();
                 }
-            }, 500); // Vitesse d'apparition des logs
+            }, 400);
         }
 
-        // 3. Barre de progression
         function startProgressBar() {
             progContainer.style.display = 'block';
             let width = 0;
@@ -627,52 +711,56 @@
                 if (width >= 100) {
                     clearInterval(progInterval);
                     systemReady = true;
-                    readyBtn.style.display = 'block'; // Affiche le bouton
+                    readyBtn.style.display = 'block';
                 } else {
-                    width += Math.floor(Math.random() * 15) + 5; // Avance aléatoire
+                    width += Math.floor(Math.random() * 20) + 10;
                     if(width > 100) width = 100;
                     progBar.style.width = width + '%';
                 }
-            }, 200);
+            }, 150);
         }
 
-        // Démarre la séquence complète
-        setTimeout(typeWriter, 500);
+        setTimeout(typeWriter, 400);
     }
+    window.onload = runBootSequence;
 
     function closeBot() {
         const bot = document.getElementById('botOverlay');
         bot.style.opacity = '0';
-        setTimeout(() => bot.style.display = 'none', 500);
+        setTimeout(() => {
+            bot.style.display = 'none';
+            document.getElementById('robotWidget').style.display = 'block';
+        }, 400);
     }
 
-    // Lancement au chargement
-    window.onload = runBootSequence;
-
-    // Touche ÉCHAP pour passer le bot instantanément
+    /* ========================================================
+       👉 GESTION ET COMPORTEMENT DE LA TOUCHE [ ÉCHAP ]
+       ======================================================== */
     document.addEventListener('keydown', function(event) {
         if (event.key === 'Escape' || event.key === 'Esc') {
             closeBot();
+            closeModal('settingsModal');
+            closeModal('helpModal');
+            closeModal('calcModal');
+            document.getElementById('notesSidebar').classList.remove('open');
         }
     });
 
     // --- HORLOGE ---
     function updateClock() {
         const now = new Date();
-        const timeString = now.toLocaleTimeString('fr-FR');
-        document.getElementById('clock').textContent = "HEURE: " + timeString + " ";
+        document.getElementById('clock').textContent = "HEURE: " + now.toLocaleTimeString('fr-FR') + " ";
     }
     setInterval(updateClock, 1000);
     updateClock();
 
-    // --- MODALES ---
+    // --- ENTRÉES MODALES ---
     function openModal(id) { document.getElementById(id).style.display = 'flex'; }
     function closeModal(id) { document.getElementById(id).style.display = 'none'; }
     window.onclick = function(event) {
         if (event.target.className === 'modal') { event.target.style.display = "none"; }
     }
 
-    // --- PARAMÈTRES JS ---
     function toggleBodyClass(className, isChecked) {
         if (isChecked) document.body.classList.add(className);
         else document.body.classList.remove(className);
@@ -694,7 +782,7 @@
         }
     }
 
-    // --- LOGIQUE DU MODE GOOGLE ---
+    // --- CAMOUFLAGE GOOGLE ---
     function toggleGoogleMode(isActive) {
         if (isActive) {
             document.body.classList.add('google-active');
@@ -708,9 +796,7 @@
     }
 
     function handleGoogleSearch(event) {
-        if (event.key === 'Enter') {
-            executeGoogleSearch();
-        }
+        if (event.key === 'Enter') executeGoogleSearch();
     }
 
     function executeGoogleSearch() {
@@ -730,15 +816,118 @@
             "justiss ia": "https://justiss-ia.base44.app/",
             "justiss": "https://justiss-ia.base44.app/"
         };
-
         if (appsSecretes[input]) {
             window.open(appsSecretes[input], '_blank');
         } else {
-            const vraieRechercheUrl = "https://www.google.com/search?q=" + encodeURIComponent(input);
-            window.open(vraieRechercheUrl, '_blank');
+            window.open("https://www.google.com/search?q=" + encodeURIComponent(input), '_blank');
+        }
+        document.getElementById('googleSearchInput').value = "";
+    }
+
+
+    /* ========================================================
+       👉 SCRIPT DES OPTIONS ET MODULES SCOLAIRES ADDITIONNELS
+       ======================================================== */
+
+    /* 1. FILTRAGE PAR RECHERCHE INTERNE */
+    function filterInternalGrid() {
+        const query = document.getElementById('internalSearchInput').value.toLowerCase().trim();
+        const cards = document.querySelectorAll('.app-card');
+        cards.forEach(card => {
+            const title = card.getAttribute('data-title');
+            card.style.display = title.includes(query) ? 'block' : 'none';
+        });
+    }
+
+    /* 2. VOLET CAHIER DE NOTES & DEVOIRS */
+    function toggleNotesSidebar() {
+        document.getElementById('notesSidebar').classList.toggle('open');
+    }
+    const notesAreaEl = document.getElementById('notesArea');
+    notesAreaEl.addEventListener('input', () => {
+        localStorage.setItem('school_hub_notes', notesAreaEl.value);
+    });
+
+    /* 3. LOGIQUE INTERNE DE LA CALCULATRICE SCOLAIRE */
+    const screen = document.getElementById('calcScreen');
+    function pressCalc(val) {
+        if (screen.value === '0' && val !== '.') screen.value = '';
+        if (val === 'sin') screen.value = Math.sin(eval(screen.value));
+        else if (val === 'cos') screen.value = Math.cos(eval(screen.value));
+        else if (val === 'tan') screen.value = Math.tan(eval(screen.value));
+        else if (val === 'sqrt') screen.value = Math.sqrt(eval(screen.value));
+        else if (val === 'PI') screen.value += Math.PI;
+        else screen.value += val;
+    }
+    function clearCalc() { screen.value = '0'; }
+    function evalCalc() {
+        try { screen.value = eval(screen.value); } 
+        catch(err) { screen.value = 'Erreur'; }
+    }
+
+    /* 4. DICTIONNAIRE / BANQUE DE CITATIONS LITÉRAIRES */
+    const quotes = [
+        "\"Le courage est de chercher la vérité et de la dire.\" - Jean Jaurès",
+        "\"Je pense, donc je suis.\" - René Descartes",
+        "\"Rien ne se perd, rien ne se crée, tout se transforme.\" - Antoine Lavoisier",
+        "\"L'éducation est l'arme la plus puissante pour changer le monde.\" - Nelson Mandela",
+        "\"Le savoir est la seule matière qui s'accroît quand on la partage.\" - Socrate"
+    ];
+    function generateNewQuote() {
+        const rand = quotes[Math.floor(Math.random() * quotes.length)];
+        document.getElementById('quoteDisplay').textContent = rand;
+    }
+
+    /* 5. PERSISTANCE DES RÉGLAGES */
+    function saveToggle(key, val) { localStorage.setItem(key, val); }
+    function loadSavedConfig() {
+        if (localStorage.getItem('school_hub_notes')) {
+            notesAreaEl.value = localStorage.getItem('school_hub_notes');
         }
         
-        document.getElementById('googleSearchInput').value = "";
+        const paramsMap = [
+            { key: 'reading-mode', id: 'readingToggle', action: (v) => toggleBodyClass('reading-mode', v) },
+            { key: 'theme-white', id: 'themeWhiteCheckbox', action: (v) => toggleBodyClass('theme-white', v) },
+            { key: 'school-mode', id: 'schoolModeCheckbox', action: (v) => toggleBodyClass('school-mode', v) },
+            { key: 'hide-images', id: 'hideImagesCheckbox', action: (v) => toggleBodyClass('hide-images', v) },
+            { key: 'crt-active', id: 'crtCheckbox', action: (v) => toggleBodyClass('crt-active', v) },
+            { key: 'neon-disabled', id: 'neonCheckbox', action: (v) => toggleStyle('--primary-glow', 'none', '0 0 15px rgba(255, 255, 255, 0.4)', v) },
+            { key: 'font-large', id: 'fontSizeCheckbox', action: (v) => toggleStyle('fontSize', '110%', '100%', v) },
+            { key: 'clock-hidden', id: 'hideClockCheckbox', action: (v) => document.getElementById('clock').style.display = v ? 'none' : 'block' },
+            { key: 'grid-hidden', id: 'gridBgCheckbox', action: (v) => toggleStyle('backgroundImage', 'none', '', v) },
+            { key: 'radius-zero', id: 'radiusCheckbox', action: (v) => toggleStyle('--radius', '0px', '20px', v) },
+            { key: 'red-buttons', id: 'redBtnCheckbox', action: (v) => toggleStyle('--primary-color', '#ff003c', '', v) },
+            { key: 'perf-mode', id: 'perfCheckbox', action: (v) => toggleStyle('transition', 'none', 'all 0.3s ease', v) },
+            { key: 'reverse-cards', id: 'reverseCheckbox', action: (v) => toggleStyle('direction', 'rtl', 'ltr', v) }
+        ];
+
+        paramsMap.forEach(p => {
+            const state = localStorage.getItem(p.key) === 'true';
+            const checkbox = document.getElementById(p.id);
+            if (checkbox) checkbox.checked = state;
+            if (state) p.action(true);
+        });
+    }
+
+    /* 6. COMPTEUR DE DURÉE DE TRAVAIL & SUIVI RAM */
+    const initialTime = Date.now();
+    setInterval(() => {
+        let diffSecs = Math.floor((Date.now() - initialTime) / 1000);
+        let m = Math.floor(diffSecs / 60);
+        let s = diffSecs % 60;
+        document.getElementById('uptimeCounter').textContent = `SESSION: ${m}m ${s < 10 ? '0' + s : s}s`;
+
+        let simRam = Math.floor(Math.random() * 5) + 12; // Modèle épuré et stable
+        document.getElementById('ramCounter').textContent = `RAM: ${simRam}%`;
+    }, 1000);
+
+    /* 7. NIVEAU DE BATTERIE DU PORTABLE */
+    if (navigator.getBattery) {
+        navigator.getBattery().then(b => {
+            const updateBat = () => { document.getElementById('batteryCounter').textContent = `BATTERIE: ${Math.round(b.level * 100)}%`; };
+            updateBat();
+            b.addEventListener('levelchange', updateBat);
+        });
     }
 </script>
 
