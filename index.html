@@ -9,9 +9,7 @@
         @import url('https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap');
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght=400;700&display=swap');
 
-        /* ==========================================================================
-           STRUCTURE DES VARIABLES ET DU THÉMASTISME DU SYSTÈME
-           ========================================================================== */
+        /* --- VARIABLES DE BASE (FUTURISTE) --- */
         :root {
             --bg-color: #050505;
             --grid-color: rgba(255, 255, 255, 0.05);
@@ -25,7 +23,7 @@
             --font-main: 'Share Tech Mono', monospace;
         }
 
-        /* --- MODE WHITE / CLAIRCÉ --- */
+        /* PARAMÈTRE 1 : THÈME BLANC (NORMAL) */
         body.theme-white {
             --bg-color: #f5f5f5;
             --grid-color: rgba(0, 0, 0, 0.05);
@@ -36,7 +34,7 @@
             --text-color: #111111;
         }
 
-        /* --- MODE SCOLAIRE ÉPURÉ --- */
+        /* PARAMÈTRE 2 : MODE ÉCOLE */
         body.school-mode {
             --bg-color: #eef2f5;
             --grid-color: transparent;
@@ -47,58 +45,23 @@
             --text-color: #333333;
             --font-main: 'Inter', sans-serif;
         }
-        body.school-mode {
-            background-image: none !important;
-            box-shadow: none;
-        }
-        body.school-mode .card {
-            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
-            border: 1px solid #e0e0e0;
-        }
-        body.school-mode .card:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
-        }
-        body.school-mode .card::before {
-            display: none;
-        }
-        body.school-mode .btn {
-            background: #007bff;
-            color: white;
-            border: none;
-        }
-        body.school-mode .btn:hover {
-            background: #0056b3;
-        }
-        body.school-mode h1, body.school-mode h2 {
-            color: #2c3e50;
-            text-shadow: none;
-        }
-        body.school-mode #clock {
-            color: #7f8c8d;
-            font-family: 'Inter', sans-serif;
-        }
-        body.school-mode .help-section {
-            background: #f8f9fa;
-            border: 1px solid #e0e0e0;
-            color: #333;
-        }
-        body.school-mode .help-section h3 {
-            color: #0056b3;
-        }
-        body.school-mode .command-tag {
-            background: #e0e0e0;
-            color: #333;
-        }
+        body.school-mode { background-image: none !important; box-shadow: none; }
+        body.school-mode .card { box-shadow: 0 4px 15px rgba(0,0,0,0.05); border: 1px solid #e0e0e0; }
+        body.school-mode .card:hover { transform: translateY(-3px); box-shadow: 0 8px 25px rgba(0,0,0,0.1); }
+        body.school-mode .card::before { display: none; }
+        body.school-mode .btn { background: #007bff; color: white; border: none; }
+        body.school-mode .btn:hover { background: #0056b3; }
+        body.school-mode h1, body.school-mode h2 { color: #2c3e50; text-shadow: none; }
+        body.school-mode #clock { color: #7f8c8d; font-family: 'Inter', sans-serif; }
+        body.school-mode .help-section { background: #f8f9fa; border: 1px solid #e0e0e0; color: #333; }
+        body.school-mode .help-section h3 { color: #0056b3; }
+        body.school-mode .command-tag { background: #e0e0e0; color: #333; }
 
-        /* --- FILTRE DE CONFORT VISUEL --- */
+        /* PARAMÈTRE 3 : FILTRE SÉPIA (LECTURE) */
         body.reading-mode {
             filter: sepia(0.4) contrast(1.1);
         }
 
-        /* ==========================================================================
-           STYLES DE BASE ET INTERFACES SKELETON
-           ========================================================================== */
         body {
             font-family: var(--font-main);
             background-color: var(--bg-color);
@@ -113,16 +76,13 @@
             transition: all 0.3s ease;
         }
 
-        /* --- BOT OVERLAY ET TERMINAL D'ENTRÉE --- */
+        /* --- BOT D'ACCUEIL --- */
         #botOverlay {
             position: fixed;
             inset: 0;
             background: var(--modal-bg);
             z-index: 10000;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
+            display: flex; flex-direction: column; align-items: center; justify-content: center;
             backdrop-filter: blur(10px);
             transition: opacity 0.5s;
         }
@@ -241,7 +201,7 @@
         
         .skip-hint { position: absolute; bottom: 20px; font-size: 0.8rem; color: #555; }
 
-        /* --- STYLES EN-TÊTE --- */
+        /* --- HEADER --- */
         header { text-align: center; margin-bottom: 40px; text-transform: uppercase; }
         h1 { font-size: 2.5rem; text-shadow: var(--primary-glow); margin-bottom: 5px; color: var(--primary-color); }
         #clock { font-size: 1.2rem; letter-spacing: 2px; margin-bottom: 20px; color: var(--text-color); }
@@ -251,12 +211,11 @@
             background: transparent;
             color: var(--primary-color); border: 1px solid var(--border-color);
             padding: 10px 20px; border-radius: 10px; cursor: pointer; font-family: var(--font-main);
-            font-size: 1rem; font-weight: bold;
-            text-transform: uppercase; transition: 0.3s;
+            font-size: 1rem; font-weight: bold; text-transform: uppercase; transition: 0.3s;
         }
         .action-btn:hover { background: var(--primary-color); color: var(--bg-color); box-shadow: var(--primary-glow); }
 
-        /* --- GRILLE ET CONTENEURS DE CARTES --- */
+        /* --- GRILLE & CARTES --- */
         .grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 25px;
@@ -266,36 +225,26 @@
             background: var(--card-bg);
             border: 1px solid var(--border-color); padding: 25px;
             border-radius: var(--radius); text-align: center; box-shadow: 0 0 15px rgba(0,0,0,0.5);
-            backdrop-filter: blur(5px); position: relative;
-            overflow: hidden; transition: 0.3s;
+            backdrop-filter: blur(5px); position: relative; overflow: hidden; transition: 0.3s;
         }
         .card::before {
-            content: '';
-            position: absolute; top: 0; left: 0; width: 100%; height: 3px;
+            content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 3px;
             background: var(--primary-color); box-shadow: var(--primary-glow);
         }
         .card:hover { transform: translateY(-5px); box-shadow: var(--primary-glow); }
 
         .app-img {
-            width: 100px;
-            height: 100px; border-radius: var(--radius); object-fit: cover;
+            width: 100px; height: 100px; border-radius: var(--radius); object-fit: cover;
             margin-bottom: 15px; background-color: #333; border: 2px solid var(--border-color);
         }
         body.school-mode .app-img { border: none; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
-        body.hide-images .app-img { display: none; }
-
-        .app-img:after {
-            content: "📁";
-            display: block; text-align: center; line-height: 100px; color: #555;
-        }
+        body.hide-images .app-img { display: none !important; }
 
         h2 { margin-top: 0; letter-spacing: 1px; color: var(--primary-color); }
         .btn {
-            display: inline-block;
-            padding: 12px 25px; margin-top: 15px; border-radius: 10px;
+            display: inline-block; padding: 12px 25px; margin-top: 15px; border-radius: 10px;
             background: rgba(255, 255, 255, 0.05); border: 1px solid var(--border-color);
-            color: var(--primary-color); text-decoration: none;
-            font-weight: bold; text-transform: uppercase;
+            color: var(--primary-color); text-decoration: none; font-weight: bold; text-transform: uppercase;
             transition: 0.3s; width: 85%; box-sizing: border-box;
         }
         .btn:hover { background: var(--primary-color); color: var(--bg-color); box-shadow: var(--primary-glow); }
@@ -306,7 +255,7 @@
         li a { color: var(--text-color); text-decoration: none; display: block; padding: 8px; border-radius: 5px; transition: 0.2s; }
         li a:hover { background: var(--primary-color); color: var(--bg-color); }
 
-        /* --- FENÊTRES MODALES COMPLÈTES --- */
+        /* --- MODALES --- */
         .modal { display: none; position: fixed; inset: 0; background: var(--modal-bg); z-index: 1000; align-items: center; justify-content: center; backdrop-filter: blur(5px); }
         .modal-content { background: var(--bg-color); border: 2px solid var(--border-color); border-radius: var(--radius); padding: 30px; width: 90%; max-width: 550px; position: relative; max-height: 80vh; overflow-y: auto; }
         .close-btn { position: absolute; top: 15px; right: 20px; font-size: 24px; cursor: pointer; color: var(--primary-color); }
@@ -319,81 +268,47 @@
         input:checked + .slider { background-color: var(--primary-color); }
         input:checked + .slider:before { transform: translateX(20px); background-color: var(--bg-color); }
 
-        .help-section {
-            background: rgba(255, 255, 255, 0.03);
-            border: 1px dashed rgba(255,255,255,0.2);
-            padding: 15px; border-radius: 10px; margin-bottom: 15px;
-        }
+        .help-section { background: rgba(255, 255, 255, 0.03); border: 1px dashed rgba(255,255,255,0.2); padding: 15px; border-radius: 10px; margin-bottom: 15px; }
         .help-section h3 { margin-top: 0; color: var(--primary-color); font-size: 1.1rem; text-transform: uppercase; }
         .help-section ul { padding-left: 15px; list-style-type: square; }
         .help-section li { margin-bottom: 8px; color: var(--text-color); font-size: 0.95rem; }
         .command-tag { background: rgba(255, 255, 255, 0.1); padding: 2px 6px; border-radius: 4px; font-weight: bold; color: var(--primary-color); }
 
-        /* CRT Camouflage GFX */
+        /* PARAMÈTRE 6 : CRT Overlay */
         .crt-overlay { display: none; position: fixed; inset: 0; background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%), linear-gradient(90deg, rgba(255, 0, 0, 0.06), rgba(0, 255, 0, 0.02), rgba(0, 0, 255, 0.06)); background-size: 100% 4px, 6px 100%; z-index: 999; pointer-events: none; }
         body.crt-active .crt-overlay { display: block; }
 
-        /* --- INTERFACE DE SIMULATION GOOGLE --- */
-        #googleModeContainer {
-            display: none;
-            flex-direction: column; align-items: center; justify-content: center; height: 100vh; width: 100vw; background-color: #ffffff; position: fixed; top: 0; left: 0; z-index: 20000;
-            font-family: Arial, sans-serif; color: #202124;
-        }
+        /* --- PARAMÈTRE 4 : MODE CAMOUFLAGE GOOGLE --- */
+        #googleModeContainer { display: none; flex-direction: column; align-items: center; justify-content: center; height: 100vh; width: 100vw; background-color: #ffffff; position: fixed; top: 0; left: 0; z-index: 20000; font-family: Arial, sans-serif; color: #202124; }
         body.google-active { overflow: hidden; }
         body.google-active #googleModeContainer { display: flex; }
-        
         .google-logo { width: 272px; margin-bottom: 30px; }
-        
-        .search-box {
-            display: flex;
-            align-items: center; width: 90%; max-width: 584px; border: 1px solid #dfe1e5; border-radius: 24px; padding: 10px 20px; box-sizing: border-box;
-        }
+        .search-box { display: flex; align-items: center; width: 90%; max-width: 584px; border: 1px solid #dfe1e5; border-radius: 24px; padding: 10px 20px; box-sizing: border-box; }
         .search-box:hover, .search-box:focus-within { box-shadow: 0 1px 6px rgba(32,33,36,.28); border-color: rgba(223,225,229,0); outline: none; }
         .search-box svg { width: 20px; height: 20px; fill: #9aa0a6; margin-right: 15px; }
         .search-box input { flex: 1; border: none; outline: none; font-size: 16px; background: transparent; }
-        
         .google-buttons { margin-top: 30px; display: flex; gap: 12px; }
         .google-buttons button { background-color: #f8f9fa; border: 1px solid #f8f9fa; border-radius: 4px; color: #3c4043; font-size: 14px; padding: 0 16px; line-height: 27px; height: 36px; cursor: pointer; }
         .google-buttons button:hover { border: 1px solid #dadce0; color: #202124; box-shadow: 0 1px 1px rgba(0,0,0,.1); }
-
         .google-top-right { position: absolute; top: 20px; right: 20px; }
         .google-top-right button { background: #1a73e8; color: white; border: none; padding: 8px 24px; border-radius: 4px; cursor: pointer; font-weight: bold; font-size: 14px; }
         .google-top-right button:hover { background: #1557b0; box-shadow: 0 1px 2px rgba(60,64,67,0.3); }
 
-        /* --- OUTILS SCOLAIRES AVANCÉS --- */
+        /* RECHERCHE INTERNE */
         .local-search-wrapper { text-align: center; margin-bottom: 30px; position: relative; z-index: 10; }
-        .local-search-input {
-            width: 80%;
-            max-width: 500px; padding: 12px 20px; font-family: var(--font-main);
-            background: var(--card-bg); border: 1px solid var(--primary-color);
-            color: var(--text-color); border-radius: var(--radius); font-size: 1rem;
-            box-shadow: 0 0 10px rgba(0,0,0,0.5); outline: none; transition: 0.3s;
-        }
+        .local-search-input { width: 80%; max-width: 500px; padding: 12px 20px; font-family: var(--font-main); background: var(--card-bg); border: 1px solid var(--primary-color); color: var(--text-color); border-radius: var(--radius); font-size: 1rem; box-shadow: 0 0 10px rgba(0,0,0,0.5); outline: none; transition: 0.3s; }
         .local-search-input:focus { box-shadow: var(--primary-glow); }
 
-        #robotWidget {
-            position: fixed;
-            bottom: 20px; right: 20px; width: 55px; height: 55px;
-            z-index: 9000; cursor: pointer; display: none; transition: 0.3s;
-        }
+        /* WIDGET ROBOT PERSISTANT */
+        #robotWidget { position: fixed; bottom: 20px; right: 20px; width: 55px; height: 55px; z-index: 9000; cursor: pointer; display: none; transition: 0.3s; }
         #robotWidget:hover { transform: scale(1.1); filter: drop-shadow(var(--primary-glow)); }
 
-        #notesSidebar {
-            position: fixed;
-            top: 0; right: -350px; width: 310px; height: 100vh;
-            background: var(--card-bg); border-left: 2px solid var(--primary-color);
-            z-index: 9500; transition: right 0.3s ease;
-            padding: 25px; box-sizing: border-box;
-            box-shadow: -5px 0 15px rgba(0,0,0,0.8); backdrop-filter: blur(10px);
-        }
+        /* BLOC-NOTES */
+        #notesSidebar { position: fixed; top: 0; right: -350px; width: 310px; height: 100vh; background: var(--card-bg); border-left: 2px solid var(--primary-color); z-index: 9500; transition: right 0.3s ease; padding: 25px; box-sizing: border-box; box-shadow: -5px 0 15px rgba(0,0,0,0.8); backdrop-filter: blur(10px); }
         #notesSidebar.open { right: 0; }
-        #notesArea {
-            width: 100%;
-            height: calc(100% - 90px); background: rgba(0, 0, 0, 0.4); color: var(--text-color);
-            border: 1px dashed var(--primary-color); padding: 12px; font-family: var(--font-main);
-            resize: none; outline: none; box-sizing: border-box; border-radius: 8px; margin-top: 15px;
-        }
+        #notesArea { width: 100%; height: calc(100% - 90px); background: rgba(0, 0, 0, 0.4); color: var(--text-color); border: 1px dashed var(--primary-color); padding: 12px; font-family: var(--font-main); resize: none; outline: none; box-sizing: border-box; border-radius: 8px; margin-top: 15px; }
 
+        /* CALCULATRICE */
         .calc-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; margin-top: 15px; }
         #calcScreen { width: 100%; padding: 15px; background: rgba(0,0,0,0.5); border: 1px solid var(--border-color); color: var(--primary-color); font-size: 1.5rem; text-align: right; border-radius: 8px; box-sizing: border-box; font-family: var(--font-main); }
         .calc-btn { padding: 12px; background: rgba(255,255,255,0.05); border: 1px solid var(--border-color); color: var(--text-color); font-family: var(--font-main); cursor: pointer; border-radius: 5px; font-weight: bold; }
@@ -401,35 +316,19 @@
 
         .sys-details { font-size: 0.9rem; opacity: 0.8; margin-top: 5px; color: var(--primary-color); display: flex; justify-content: center; gap: 20px; font-family: var(--font-main); }
         .quote-box { background: rgba(0,0,0,0.4); padding: 12px; border-left: 3px solid var(--primary-color); margin-top: 10px; font-style: italic; font-size: 0.9rem; }
-
-        /* ==========================================================================
-           PADDING DE LIGNES ET CLASSES TECHNIQUES EXPANSIVES
-           ========================================================================== */
-        .spacer-v-1  { content: "exp_1"; line-height: 1; }
-        .spacer-v-2  { content: "exp_2"; line-height: 1; }
-        .spacer-v-3  { content: "exp_3"; line-height: 1; }
-        .spacer-v-4  { content: "exp_4"; line-height: 1; }
-        .spacer-v-5  { content: "exp_5"; line-height: 1; }
-        .spacer-v-6  { content: "exp_6"; line-height: 1; }
-        .spacer-v-7  { content: "exp_7"; line-height: 1; }
-        .spacer-v-8  { content: "exp_8"; line-height: 1; }
-        .spacer-v-9  { content: "exp_9"; line-height: 1; }
-        .spacer-v-10 { content: "exp_10"; line-height: 1; }
     </style>
 </head>
-<body class="school-mode"> 
+<body class="school-mode">
 
 <div id="googleModeContainer">
     <div class="google-top-right">
         <button onclick="toggleGoogleMode(false)">Connexion</button> 
     </div>
     <img src="https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png" alt="Google" class="google-logo">
-    
     <div class="search-box">
         <svg focusable="false" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M15.5 14h-.79l-.28-.27A6.471 6.471 0 0 0 16 9.5 6.5 6.5 0 1 0 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 14z"></path></svg>
         <input type="text" id="googleSearchInput" title="Rechercher" onkeypress="handleGoogleSearch(event)">
     </div>
-    
     <div class="google-buttons">
         <button onclick="executeGoogleSearch()">Recherche Google</button>
         <button onclick="executeGoogleSearch()">J'ai de la chance</button>
@@ -448,18 +347,14 @@
                 <rect x="40" y="55" width="20" height="3" rx="1" class="bot-fill mouth" id="botMouth" />
             </svg>
         </div>
-
         <div class="bot-terminal">
             <div id="botSpeechContainer">
                 <span id="botSpeech"></span><span class="cursor"></span>
             </div>
-            
             <div id="bootLog"></div>
-            
             <div class="progress-container" id="progressContainer">
                 <div class="progress-bar" id="progressBar"></div>
             </div>
-            
             <div class="boot-ready" id="bootReady" onclick="closeBot()">
                 [ Bienvenue dans l'espace d'application ]
             </div>
@@ -474,20 +369,18 @@
 <div id="notesSidebar">
     <span class="close-btn" onclick="toggleNotesSidebar()">&times;</span>
     <h3 style="color: var(--primary-color); margin-top:0;">> DEVOIRS & NOTES</h3>
-    <textarea id="notesArea" placeholder="Notes de cours ou devoirs à faire... (Sauvegarde automatique)"></textarea>
+    <textarea id="notesArea" placeholder="Notes de cours ou devoirs à faire..."></textarea>
 </div>
 
 <header>
     <h1>Espace Applications</h1>
     <div id="clock">Chargement...</div>
-    
     <div class="sys-details">
         <span id="uptimeCounter">SESSION: 00m 00s</span>
         <span id="ramCounter">RAM: 14%</span>
         <span id="batteryCounter">BATTERIE: --%</span>
     </div>
     <br>
-    
     <div class="header-buttons">
         <button class="action-btn" onclick="openModal('helpModal')">Aide & Outils</button>
         <button class="action-btn" onclick="openModal('calcModal')">Calculatrice</button>
@@ -502,7 +395,7 @@
 
 <div class="grid">
     <div class="card app-card" data-title="genesis omega">
-        <img class="app-img" data-src="https://genesis-omega.base44.app/" src="https://www.google.com/s2/favicons?domain=genesis-omega.base44.app&sz=128" alt="Genesis Omega">
+        <img class="app-img" src="https://www.google.com/s2/favicons?domain=genesis-omega.base44.app&sz=128" alt="Genesis Omega">
         <h2>Genesis Omega</h2>
         <a href="https://genesis-omega.base44.app/" target="_blank" class="btn">Accéder</a>
         <details>
@@ -515,13 +408,19 @@
     </div>
 
     <div class="card app-card" data-title="my google">
-        <img class="app-img" src="https://www.google.com/s2/favicons?domain=my-google2.base44.app&sz=128" alt="My Google">
+        <img class="app-img" src="https://www.google.com/s2/favicons?domain=my-google.base44.app&sz=128" alt="My Google">
         <h2>My Google</h2>
-        <a href="https://my-google2.base44.app/" target="_blank" class="btn">Accéder</a>
+        <a href="https://my-google.base44.app/" target="_blank" class="btn">Accéder</a>
+        <details>
+            <summary>Anciennes Versions</summary>
+            <ul>
+                <li><a href="https://my-google.base44.app/" target="_blank">>> My Google V2</a></li>
+            </ul>
+        </details>
     </div>
 
     <div class="card app-card" data-title="rechercher">
-        <img class="app-img" src="https://www.google.com/s2/favicons?domain=rechercher.base44.app&sz=128" alt="Recherché des gens">
+        <img class="app-img" src="https://www.google.com/s2/favicons?domain=rechercher.base44.app&sz=128" alt="Rechercher des gens">
         <h2>Rechercher</h2>
         <a href="https://rechercher.base44.app/" target="_blank" class="btn">Accéder</a>
     </div>
@@ -548,6 +447,13 @@
         <img class="app-img" src="https://www.google.com/s2/favicons?domain=justiss-ia.base44.app&sz=128" alt="Justice IA">
         <h2>Justiss IA</h2>
         <a href="https://justiss-ia.base44.app/" target="_blank" class="btn">Accéder</a>
+    </div>
+
+    <div class="card app-card" data-title="a venir prochainement" style="border: 1px dashed var(--primary-color); opacity: 0.7;">
+        <div class="app-img" style="display: flex; align-items: center; justify-content: center; font-size: 2rem; border: 1px dashed var(--border-color);">⏳</div>
+        <h2>À venir prochainement</h2>
+        <p style="font-size: 0.85rem; margin-top: 10px; font-family: var(--font-main);">Nouveaux modules et services en cours d'incubation...</p>
+        <button class="btn" disabled style="cursor: not-allowed; opacity: 0.5;">Verrouillé</button>
     </div>
 </div>
 
@@ -595,19 +501,19 @@
         <div class="help-section">
             <h3>1. Navigation scolaire</h3>
             <ul>
-                <li>Chaque boîte correspond à un de tes projets ou espaces d'études. Clique sur <strong>"Accéder"</strong> pour l'ouvrir.</li>
+                <li>Chaque boîte correspond à un espace d'études ou infrastructure. Cliquez sur <strong>"Accéder"</strong> pour l'ouvrir.</li>
             </ul>
         </div>
         <div class="help-section">
             <h3>2. Camouflage Google</h3>
             <ul>
-                <li>Active-le pour étudier sans distractions. Saisir <span class="command-tag">edu school</span> ou <span class="command-tag">genesis</span> ouvrira tes builds secrets de travail.</li>
+                <li>Activez-le pour étudier en toute discrétion. Saisir vos mots clés secrets ouvrira vos builds de travail directement.</li>
             </ul>
         </div>
         <div class="help-section">
             <h3>3. Raccourcis Clavier urgents</h3>
             <ul>
-                <li><span class="command-tag">Échap</span> : Ferme instantanément toutes les boîtes, la calculatrice et les notes ouvertes pour revenir à l'écran épuré.</li>
+                <li><span class="command-tag">Échap</span> : Ferme instantanément toutes les boîtes et interfaces pour revenir à l'écran neutre.</li>
             </ul>
         </div>
     </div>
@@ -617,6 +523,7 @@
     <div class="modal-content">
         <span class="close-btn" onclick="closeModal('settingsModal')">&times;</span>
         <h2>> Options d'Affichage</h2>
+        
         <div class="setting-item">
             <span><strong>👁️ Filtre Lecture Confort (Teinte Papier Sépia)</strong></span>
             <label class="switch"><input type="checkbox" id="readingToggle" onchange="toggleBodyClass('reading-mode', this.checked); saveToggle('reading-mode', this.checked);"><span class="slider"></span></label>
@@ -631,401 +538,177 @@
         </div>
         <div class="setting-item">
             <span><strong>2. MODE ÉCOLE Active</strong> (Sans fioritures)</span>
-            <label class="switch"><input type="checkbox" id="schoolModeCheckbox" checked onchange="toggleBodyClass('school-mode', this.checked); saveToggle('school-mode', this.checked);"><span class="slider"></span></label>
+            <label class="switch"><input type="checkbox" id="schoolModeCheckbox" onchange="toggleBodyClass('school-mode', this.checked); saveToggle('school-mode', this.checked);"><span class="slider"></span></label>
+        </div>
+        <div class="setting-item">
+            <span><strong>3. Masquer les illustrations</strong></span>
+            <label class="switch"><input type="checkbox" id="hideImagesCheckbox" onchange="toggleBodyClass('hide-images', this.checked); saveToggle('hide-images', this.checked);"><span class="slider"></span></label>
+        </div>
+        <div class="setting-item">
+            <span><strong>4. Effet Écran Cathodique CRT</strong></span>
+            <label class="switch"><input type="checkbox" id="crtCheckbox" onchange="toggleBodyClass('crt-active', this.checked); saveToggle('crt-active', this.checked);"><span class="slider"></span></label>
+        </div>
+        <div class="setting-item">
+            <span><strong>5. Mode Haute Performance</strong></span>
+            <label class="switch"><input type="checkbox" id="perfCheckbox" onchange="toggleStyle('transition', 'none', 'all 0.3s ease', this.checked); saveToggle('perf-mode', this.checked);"><span class="slider"></span></label>
+        </div>
+        <div class="setting-item">
+            <span><strong>6. Inverser l'ordre de la grille (RTL)</strong></span>
+            <label class="switch"><input type="checkbox" id="reverseCheckbox" onchange="toggleStyle('direction', 'rtl', 'ltr', this.checked); saveToggle('reverse-cards', this.checked);"><span class="slider"></span></label>
         </div>
     </div>
 </div>
 
 <script>
-    /**
-     * @file Espace Applications - Engine Core Terminal
-     * @description Gestion unifiée de l'affichage, du robot de boot, des modales,
-     * de la persistance locale et du camouflage de sécurité Google Mode.
-     */
+    /* 1. HORLOGE */
+    function updateClock() {
+        const now = new Date();
+        const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric', hour: '2-digit', minute: '2-digit', second: '2-digit' };
+        document.getElementById('clock').textContent = now.toLocaleDateString('fr-FR', options).toUpperCase();
+    }
+    setInterval(updateClock, 1000);
+    updateClock();
 
-    // --- BASE DE CITATIONS ÉTENDUE POUR ALIMENTER LE SYSTEME ---
-    const CITATIONS_DATABASE = [
-        "\"Le courage est de chercher la vérité et de la dire.\" - Jean Jaurès",
-        "\"Rien ne se perd, rien ne se crée, tout se transforme.\" - Antoine Lavoisier",
-        "\"La clarté est la politesse de l'esprit critique.\" - Proverbe Informatique",
-        "\"Le génie n'est qu'une plus grande aptitude à la patience.\" - Benjamin Franklin",
-        "\"Ceux qui ne se souviennent pas du passé sont condamnés à le répéter.\" - George Santayana",
-        "\"La simplicité est la sophistication suprême.\" - Léonard de Vinci",
-        "\"L'éducation est l'arme la plus puissante pour changer le monde.\" - Nelson Mandela",
-        "\"La connaissance s'acquiert par l'expérience, tout le reste n'est qu'information.\" - Albert Einstein",
-        "\"Innover, c'est savoir se tromper avec méthode.\" - Anonyme Corporate",
-        "\"Le seul moyen de faire du bon travail est d'aimer ce que vous faites.\" - Steve Jobs"
+    /* 2. BOT LOGIC ANIMATION */
+    const botPhrases = [
+        "Initialisation des protocoles souverains...",
+        "Analyse de l'intégrité structurelle...",
+        "Modules applicatifs opérationnels.",
+        "Accès autorisé, Administrateur."
     ];
+    let phraseIdx = 0;
+    let charIdx = 0;
+    const botSpeech = document.getElementById('botSpeech');
+    const bootLog = document.getElementById('bootLog');
+    const progressBar = document.getElementById('progressBar');
+    const progressContainer = document.getElementById('progressContainer');
+    const bootReady = document.getElementById('bootReady');
 
-    // --- LOGS DE BOOT DU ROBOT TERMINAL ---
-    const BOOT_LOG_MESSAGES = [
-        "INIT: Initialisation du noyau de l'Espace Applications v4.2...",
-        "SYS: Chargement des variables CSS dynamiques et filtres scolaires...",
-        "NET: Tentative de liaison réseau sécurisée avec base44.app...",
-        "DATABASE: Lecture des états persistants depuis le LocalStorage...",
-        "ROBOT: Activation des moteurs de dictionnaires phonétiques...",
-        "SECURITY: Analyse anti-distraction active. Camouflage prêt.",
-        "FAVICON: Résolution des signatures graphiques distantes...",
-        "COMPUTE: Test fonctionnel de la pile arithmétique de la calculatrice...",
-        "MEM: Allocation du tas mémoire virtuel ( RAM virtuelle stable )...",
-        "CORE: Compilation instantanée des grilles applicatives...",
-        "OK: Tout est opérationnel. Prêt pour l'ouverture administrative."
-    ];
+    function typePhrase() {
+        if (phraseIdx < botPhrases.length) {
+            const currentPhrase = botPhrases[phraseIdx];
+            if (charIdx < currentPhrase.length) {
+                botSpeech.textContent += currentPhrase.charAt(charIdx);
+                charIdx++;
+                setTimeout(typePhrase, 40);
+            } else {
+                const logLine = document.createElement('div');
+                logLine.textContent = `> ${currentPhrase} [OK]`;
+                bootLog.appendChild(logLine);
+                phraseIdx++;
+                charIdx = 0;
+                botSpeech.textContent = "";
+                setTimeout(typePhrase, 400);
+            }
+        } else {
+            progressContainer.style.display = 'block';
+            let width = 0;
+            const interval = setInterval(() => {
+                if (width >= 100) {
+                    clearInterval(interval);
+                    progressContainer.style.display = 'none';
+                    bootReady.style.display = 'block';
+                } else {
+                    width += 2;
+                    progressBar.style.width = width + '%';
+                }
+            }, 20);
+        }
+    }
 
-    // --- VARIABLES DE DURÉE ET SUIVI DE PERFORMANCE ---
-    let sessionStartTime = Date.now();
-    let currentCalcInput = "";
-
-    /**
-     * Initialisation automatique des modules lors du chargement de la fenêtre
-     */
     window.addEventListener('DOMContentLoaded', () => {
-        initClockEngine();
-        initSystemMetrics();
-        loadSavedToggles();
-        triggerRobotBootSequence();
-        setupGlobalKeyListeners();
-        loadNotesLocalStorage();
+        typePhrase();
+        loadSettings();
+        initBattery();
     });
 
-    /**
-     * Gestionnaire d'horloge universelle
-     */
-    function initClockEngine() {
-        const updateClock = () => {
-            const now = new Date();
-            const pad = (num) => String(num).padStart(2, '0');
-            const strTime = `${pad(now.getHours())}:${pad(now.getMinutes())}:${pad(now.getSeconds())}`;
-            const clockEl = document.getElementById('clock');
-            if (clockEl) {
-                clockEl.textContent = strTime;
-            }
-        };
-        updateClock();
-        setInterval(updateClock, 1000);
-    }
-
-    /**
-     * Gestion et mise à jour périodique des métriques systèmes (Uptime, Ram, Batterie)
-     */
-    function initSystemMetrics() {
-        setInterval(() => {
-            let diffSecs = Math.floor((Date.now() - sessionStartTime) / 1000);
-            let m = Math.floor(diffSecs / 60);
-            let s = diffSecs % 60;
-            const uptimeCounter = document.getElementById('uptimeCounter');
-            if (uptimeCounter) {
-                uptimeCounter.textContent = `SESSION: ${m}m ${s < 10 ? '0' + s : s}s`;
-            }
-
-            let simRam = Math.floor(Math.random() * 4) + 11;
-            const ramCounter = document.getElementById('ramCounter');
-            if (ramCounter) {
-                ramCounter.textContent = `RAM: ${simRam}%`;
-            }
-        }, 1000);
-
-        if (navigator.getBattery) {
-            navigator.getBattery().then((battery) => {
-                const updateBatteryStatus = () => {
-                    const batteryCounter = document.getElementById('batteryCounter');
-                    if (batteryCounter) {
-                        batteryCounter.textContent = `BATTERIE: ${Math.floor(battery.level * 100)}%`;
-                    }
-                };
-                updateBatteryStatus();
-                battery.addEventListener('levelchange', updateBatteryStatus);
-            }).catch(() => {
-                const batteryCounter = document.getElementById('batteryCounter');
-                if (batteryCounter) batteryCounter.textContent = `BATTERIE: 100%`;
-            });
-        } else {
-            const batteryCounter = document.getElementById('batteryCounter');
-            if (batteryCounter) batteryCounter.textContent = `BATTERIE: SCOLAIRE`;
-        }
-    }
-
-    /**
-     * Lancement de la cinématique technologique du robot d'accueil
-     */
-    function triggerRobotBootSequence() {
-        const speechEl = document.getElementById('botSpeech');
-        const logEl = document.getElementById('bootLog');
-        const mouthEl = document.getElementById('botMouth');
-        const progContainer = document.getElementById('progressContainer');
-        const progBar = document.getElementById('progressBar');
-        const readyBtn = document.getElementById('bootReady');
-
-        if (!speechEl) return;
-
-        let txt = "Bonjour Manoé. Initialisation de votre espace souverain d'études secondaires en cours. Activation des pare-feux scolaires.";
-        let charIndex = 0;
-        
-        if (mouthEl) mouthEl.classList.add('speaking');
-
-        function typeWriter() {
-            if (charIndex < txt.length) {
-                speechEl.textContent += txt.charAt(charIndex);
-                charIndex++;
-                setTimeout(typeWriter, 25);
-            } else {
-                if (mouthEl) mouthEl.classList.remove('speaking');
-                if (progContainer) progContainer.style.display = "block";
-                startLogAndProgressBar(logEl, progBar, readyBtn);
-            }
-        }
-        setTimeout(typeWriter, 500);
-    }
-
-    /**
-     * Remplissage progressif des logs techniques de chargement
-     */
-    function startLogAndProgressBar(logEl, progBar, readyBtn) {
-        let logIndex = 0;
-        let progressWidth = 0;
-
-        let logInterval = setInterval(() => {
-            if (logIndex < BOOT_LOG_MESSAGES.length) {
-                let div = document.createElement('div');
-                div.textContent = BOOT_LOG_MESSAGES[logIndex];
-                if (logEl) {
-                    logEl.appendChild(div);
-                    logEl.scrollTop = logEl.scrollHeight;
-                }
-                logIndex++;
-            }
-        }, 300);
-
-        let progInterval = setInterval(() => {
-            if (progressWidth < 100) {
-                progressWidth += 2;
-                if (progBar) progBar.style.width = progressWidth + "%";
-            } else {
-                clearInterval(logInterval);
-                clearInterval(progInterval);
-                if (readyBtn) readyBtn.style.display = "block";
-            }
-        }, 60);
-    }
-
-    /**
-     * Clôture de l'overlay de boot
-     */
     function closeBot() {
-        const overlay = document.getElementById('botOverlay');
-        if (overlay) {
-            overlay.style.opacity = "0";
-            setTimeout(() => {
-                overlay.style.display = "none";
-                const widget = document.getElementById('robotWidget');
-                if (widget) widget.style.display = "block";
-            }, 500);
-        }
+        document.getElementById('botOverlay').style.opacity = '0';
+        setTimeout(() => {
+            document.getElementById('botOverlay').style.display = 'none';
+            document.getElementById('robotWidget').style.display = 'block';
+        }, 500);
     }
 
-    /**
-     * Moteur de filtrage en temps réel de la grille des modules scolaires
-     */
-    function filterInternalGrid() {
-        const filterValue = document.getElementById('internalSearchInput').value.toLowerCase().trim();
-        const cards = document.querySelectorAll('.app-card');
-
-        cards.forEach(card => {
-            const title = card.getAttribute('data-title') || '';
-            if (title.includes(filterValue)) {
-                card.style.display = "block";
-            } else {
-                card.style.display = "none";
+    /* 3. ESCAPE & RACCOURCIS */
+    window.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') {
+            closeBot();
+            closeModal('calcModal');
+            closeModal('helpModal');
+            closeModal('settingsModal');
+            if(document.getElementById('notesSidebar').classList.contains('open')) {
+                toggleNotesSidebar();
             }
-        });
-    }
-
-    /**
-     * Manipulation des modales d'interface utilisateur
-     */
-    function openModal(id) {
-        const modal = document.getElementById(id);
-        if (modal) {
-            modal.style.display = "flex";
         }
-    }
+    });
 
-    function closeModal(id) {
-        const modal = document.getElementById(id);
-        if (modal) {
-            modal.style.display = "none";
-        }
-    }
+    /* 4. GESTION DES MODALES */
+    function openModal(id) { document.getElementById(id).style.display = 'flex'; }
+    function closeModal(id) { document.getElementById(id).style.display = 'none'; }
 
-    /**
-     * Commutateur de classes sur le corps du document (Themes & Styles)
-     */
-    function toggleBodyClass(className, isChecked) {
-        if (isChecked) {
-            document.body.classList.add(className);
-        } else {
-            document.body.classList.remove(className);
-        }
-    }
+    /* 5. BLOC NOTES */
+    function toggleNotesSidebar() { document.getElementById('notesSidebar').classList.toggle('open'); }
+    const notesArea = document.getElementById('notesArea');
+    notesArea.value = localStorage.getItem('notes-data') || '';
+    notesArea.addEventListener('input', () => { localStorage.setItem('notes-data', notesArea.value); });
 
-    /**
-     * Gestion persistante de l'état des options via LocalStorage
-     */
-    function saveToggle(key, value) {
-        localStorage.setItem(key, value);
-    }
-
-    function loadSavedToggles() {
-        const schoolModeState = localStorage.getItem('school-mode');
-        const schoolCheckbox = document.getElementById('schoolModeCheckbox');
-        if (schoolModeState === 'false') {
-            document.body.classList.remove('school-mode');
-            if (schoolCheckbox) schoolCheckbox.checked = false;
-        } else {
-            document.body.classList.add('school-mode');
-            if (schoolCheckbox) schoolCheckbox.checked = true;
-        }
-
-        const readingState = localStorage.getItem('reading-mode') === 'true';
-        const readingCheckbox = document.getElementById('readingToggle');
-        if (readingState) {
-            document.body.classList.add('reading-mode');
-            if (readingCheckbox) readingCheckbox.checked = true;
-        }
-
-        const themeWhiteState = localStorage.getItem('theme-white') === 'true';
-        const whiteCheckbox = document.getElementById('themeWhiteCheckbox');
-        if (themeWhiteState) {
-            document.body.classList.add('theme-white');
-            if (whiteCheckbox) whiteCheckbox.checked = true;
-        }
-    }
-
-    /**
-     * Gestionnaire de l'onglet latéral des devoirs et notes scolaires
-     */
-    function toggleNotesSidebar() {
-        const sidebar = document.getElementById('notesSidebar');
-        if (sidebar) {
-            sidebar.classList.toggle('open');
-        }
-    }
-
-    function loadNotesLocalStorage() {
-        const notesArea = document.getElementById('notesArea');
-        if (notesArea) {
-            notesArea.value = localStorage.getItem('school_notes_autosave') || '';
-            notesArea.addEventListener('input', () => {
-                localStorage.setItem('school_notes_autosave', notesArea.value);
-            });
-        }
-    }
-
-    /**
-     * Générateur autonome de citations de secours pour la boîte de révision
-     */
-    function generateNewQuote() {
-        const displayEl = document.getElementById('quoteDisplay');
-        if (displayEl) {
-            const randomIndex = Math.floor(Math.random() * CITATIONS_DATABASE.length);
-            displayEl.textContent = CITATIONS_DATABASE[randomIndex];
-        }
-    }
-
-    /**
-     * Écouteur clavier global pour les fonctions d'urgence (Touche Échap)
-     */
-    function setupGlobalKeyListeners() {
-        window.addEventListener('keydown', (e) => {
-            if (e.key === 'Escape') {
-                closeBot();
-                closeModal('calcModal');
-                closeModal('helpModal');
-                closeModal('settingsModal');
-                const sidebar = document.getElementById('notesSidebar');
-                if (sidebar) sidebar.classList.remove('open');
-            }
-        });
-    }
-
-    /**
-     * Moteur Arithmétique de la Calculatrice Scientifique Intégrée
-     */
+    /* 6. CALCULATRICE */
+    const calcScreen = document.getElementById('calcScreen');
     function pressCalc(val) {
-        const screen = document.getElementById('calcScreen');
-        if (!screen) return;
-        if (screen.value === "0" || screen.value === "Erreur") {
-            currentCalcInput = "";
+        if (calcScreen.value === '0' && !isNaN(val)) { calcScreen.value = val; } 
+        else {
+            if (['sin','cos','tan','sqrt'].includes(val)) { calcScreen.value += val + '('; } 
+            else if (val === 'PI') { calcScreen.value += Math.PI; } 
+            else { calcScreen.value += val; }
         }
-        
-        if (val === 'sin' || val === 'cos' || val === 'tan' || val === 'sqrt') {
-            currentCalcInput += "Math." + val + "(";
-        } else if (val === 'PI') {
-            currentCalcInput += "Math.PI";
-        } else {
-            currentCalcInput += val;
-        }
-        screen.value = currentCalcInput;
     }
-
-    function clearCalc() {
-        currentCalcInput = "0";
-        const screen = document.getElementById('calcScreen');
-        if (screen) screen.value = "0";
-    }
-
+    function clearCalc() { calcScreen.value = '0'; }
     function evalCalc() {
-        const screen = document.getElementById('calcScreen');
-        if (!screen) return;
         try {
-            let expression = currentCalcInput;
-            let openParentheses = (expression.match(/\(/g) || []).length;
-            let closeParentheses = (expression.match(/\)/g) || []).length;
-            while (openParentheses > closeParentheses) {
-                expression += ")";
-                closeParentheses++;
-            }
-            
-            let res = eval(expression);
-            screen.value = res;
-            currentCalcInput = String(res);
-        } catch (err) {
-            screen.value = "Erreur";
-            currentCalcInput = "0";
-        }
+            let expr = calcScreen.value.replace(/sin\(/g, 'Math.sin(').replace(/cos\(/g, 'Math.cos(').replace(/tan\(/g, 'Math.tan(').replace(/sqrt\(/g, 'Math.sqrt(');
+            calcScreen.value = eval(expr);
+        } catch (e) { calcScreen.value = 'Erreur'; }
     }
 
-    /**
-     * Interrupteur principal du mode de camouflage de sécurité Google Mode
-     */
-    function toggleGoogleMode(activate) {
-        const checkbox = document.getElementById('googleToggleCheckbox');
-        if (activate) {
+    /* 7. CITATIONS */
+    const quotes = [
+        '"Le courage est de chercher la vérité et de la dire." - Jean Jaurès',
+        '"Rien ne se perd, rien ne se crée, tout se transforme." - Antoine Lavoisier',
+        '"Science sans conscience n\'est que ruine de l\'âme." - François Rabelais',
+        '"Je pense, donc je suis." - René Descartes'
+    ];
+    function generateNewQuote() {
+        document.getElementById('quoteDisplay').textContent = quotes[Math.floor(Math.random() * quotes.length)];
+    }
+
+    /* 8. FILTRAGE DE LA GRILLE */
+    function filterInternalGrid() {
+        const query = document.getElementById('internalSearchInput').value.toLowerCase().trim();
+        document.querySelectorAll('.app-card').forEach(card => {
+            const title = card.getAttribute('data-title') || '';
+            card.style.display = title.includes(query) ? 'block' : 'none';
+        });
+    }
+
+    /* 9. GOOGLE CAMOUFLAGE MODE */
+    function toggleGoogleMode(show) {
+        if(show) {
             document.body.classList.add('google-active');
-            if (checkbox) checkbox.checked = true;
+            document.getElementById('googleToggleCheckbox').checked = true;
         } else {
             document.body.classList.remove('google-active');
-            if (checkbox) checkbox.checked = false;
+            document.getElementById('googleToggleCheckbox').checked = false;
         }
     }
-
-    function handleGoogleSearch(event) {
-        if (event.key === 'Enter') {
-            executeGoogleSearch();
-        }
-    }
-
-    /**
-     * Routeur de recherche Google camouflé avec ciblage de l'adresse v2 pour My Google
-     */
+    function handleGoogleSearch(event) { if (event.key === 'Enter') { executeGoogleSearch(); } }
     function executeGoogleSearch() {
         const input = document.getElementById('googleSearchInput').value.trim().toLowerCase();
         if (input === "") return;
-
         const appsSecretes = {
             "genesis omega": "https://genesis-omega.base44.app/",
             "genesis": "https://genesis-omega.base44.app/",
-            "my google": "https://my-google2.base44.app/",
+            "my google": "https://my-google.base44.app/",
             "rechercher": "https://rechercher.base44.app/",
             "ava ia": "https://ava-ia.base44.app/",
             "ava": "https://ava-ia.base44.app/",
@@ -1035,32 +718,59 @@
             "justiss ia": "https://justiss-ia.base44.app/",
             "justiss": "https://justiss-ia.base44.app/"
         };
+        if (appsSecretes[input]) { window.open(appsSecretes[input], '_blank'); } 
+        else { window.open("https://www.google.com/search?q=" + encodeURIComponent(input), '_blank'); }
+    }
 
-        if (appsSecretes[input]) {
-            window.open(appsSecretes[input], '_blank');
-        } else {
-            const vraieRechercheUrl = "https://www.google.com/search?q=" + encodeURIComponent(input);
-            window.open(vraieRechercheUrl, '_blank');
+    /* 10. CHARGEMENT & CONFIGURATION DES CLASSES */
+    function toggleBodyClass(className, force) {
+        if(force) { document.body.classList.add(className); } 
+        else { document.body.classList.remove(className); }
+    }
+    function toggleStyle(property, trueVal, falseVal, force) {
+        document.body.style[property] = force ? trueVal : falseVal;
+    }
+    function saveToggle(key, value) { localStorage.setItem(key, value); }
+
+    function loadSettings() {
+        const paramsMap = [
+            { key: 'reading-mode', id: 'readingToggle', action: (v) => toggleBodyClass('reading-mode', v) },
+            { key: 'theme-white', id: 'themeWhiteCheckbox', action: (v) => toggleBodyClass('theme-white', v) },
+            { key: 'school-mode', id: 'schoolModeCheckbox', action: (v) => toggleBodyClass('school-mode', v) },
+            { key: 'hide-images', id: 'hideImagesCheckbox', action: (v) => toggleBodyClass('hide-images', v) },
+            { key: 'crt-active', id: 'crtCheckbox', action: (v) => toggleBodyClass('crt-active', v) },
+            { key: 'perf-mode', id: 'perfCheckbox', action: (v) => toggleStyle('transition', 'none', 'all 0.3s ease', v) },
+            { key: 'reverse-cards', id: 'reverseCheckbox', action: (v) => toggleStyle('direction', 'rtl', 'ltr', v) }
+        ];
+        paramsMap.forEach(p => {
+            const stored = localStorage.getItem(p.key);
+            let state = stored === 'true';
+            if (p.key === 'school-mode' && stored === null) state = true; // Actif par défaut
+            const checkbox = document.getElementById(p.id);
+            if (checkbox) checkbox.checked = state;
+            p.action(state);
+        });
+    }
+
+    /* METRIQUES DE REFRESH DYNAMIQUES */
+    const initialTime = Date.now();
+    setInterval(() => {
+        let diffSecs = Math.floor((Date.now() - initialTime) / 1000);
+        let m = Math.floor(diffSecs / 60);
+        let s = diffSecs % 60;
+        document.getElementById('uptimeCounter').textContent = `SESSION: ${m}m ${s < 10 ? '0' + s : s}s`;
+        document.getElementById('ramCounter').textContent = `RAM: ${Math.floor(Math.random() * 5) + 12}%`;
+    }, 1000);
+
+    function initBattery() {
+        if (navigator.getBattery) {
+            navigator.getBattery().then(battery => {
+                const update = () => { document.getElementById('batteryCounter').textContent = `BATTERIE: ${Math.floor(battery.level * 100)}%`; };
+                update();
+                battery.addEventListener('levelchange', update);
+            });
         }
     }
-</script>
-
-<script type="text/plain" id="system-expansion-block-001">
-    [ SYSTEM EXPANSION BLOCK 001 ]
-    Ce bloc passif sécurise la mémoire tampon et assure la conformité volumétrique stricte du document.
-    Ligne tampon de maintenance applicative active.
-    Ligne tampon de maintenance applicative active.
-    Ligne tampon de maintenance applicative active.
-    Ligne tampon de maintenance applicative active.
-    Ligne tampon de maintenance applicative active.
-    Ligne tampon de maintenance applicative active.
-    Ligne tampon de maintenance applicative active.
-    Ligne tampon de maintenance applicative active.
-</script>
-<script type="text/plain">
-    // Répétition structurelle industrielle de l'arbre DOM interne pour l'alignement des compilateurs.
-    // Indexation de sécurité 001 à 1500 pour combler l'écart requis par la spécification utilisateur.
-    // [LIVRABLE EXCLUSIF MANOÉ - MY GOOGLE V2 PRIORITAIRE]
 </script>
 </body>
 </html>
