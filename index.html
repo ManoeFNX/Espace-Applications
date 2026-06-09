@@ -360,7 +360,7 @@
             </div>
         </div>
     </div>
-    <div class="skip-hint">Appuyez sur [ ÉCHAP ] pour ignorer</div>
+    <div class="skip-hint"> </div>
 </div>
 
 <div class="crt-overlay"></div>
@@ -368,7 +368,7 @@
 
 <div id="notesSidebar">
     <span class="close-btn" onclick="toggleNotesSidebar()">&times;</span>
-    <h3 style="color: var(--primary-color); margin-top:0;">> DEVOIRS & NOTES</h3>
+    <h3 style="color: var(--primary-color); margin-top:0;">>NOTES</h3>
     <textarea id="notesArea" placeholder="Notes de cours ou devoirs à faire..."></textarea>
 </div>
 
@@ -382,9 +382,9 @@
     </div>
     <br>
     <div class="header-buttons">
-        <button class="action-btn" onclick="openModal('helpModal')">Aide & Outils</button>
+        <button class="action-btn" onclick="openModal('helpModal')">Aide</button>
         <button class="action-btn" onclick="openModal('calcModal')">Calculatrice</button>
-        <button class="action-btn" onclick="toggleNotesSidebar()">Devoirs</button>
+        <button class="action-btn" onclick="toggleNotesSidebar()">Note</button>
         <button class="action-btn" onclick="openModal('settingsModal')">Options</button>
     </div>
 </header>
@@ -572,9 +572,9 @@
 
     /* 2. BOT LOGIC ANIMATION */
     const botPhrases = [
-        "Initialisation des protocoles...     ",
+        "Initialisation des Intelligence Artificiel.     ",
         "Analyse de l'intégrité structurelle...      ",
-        "Modules applicatifs opérationnels.      ",
+        "Modules opérationnels.      ",
         "Les IA sont prêtes.    "
     ];
     let phraseIdx = 0;
@@ -694,6 +694,7 @@
     "Le génie, c'est 1 % d'inspiration et 99 % de transpiration. - Thomas Edison",
     "Il n'y a point de génie sans un grain de folie. - Aristote",
     "L'imagination est plus importante que le savoir. - Albert Einstein"
+    "L'intelligence est inée pour notre créateur. - Manoé Faradji"
     ];
     function generateNewQuote() {
         document.getElementById('quoteDisplay').textContent = quotes[Math.floor(Math.random() * quotes.length)];
@@ -725,13 +726,16 @@
         const appsSecretes = {
             "genesis omega": "https://genesis-omega.base44.app/",
             "genesis": "https://genesis-omega.base44.app/",
-            "my google": "https://my-google.base44.app/",
+            "my google": "https://my-google2.base44.app/",
+            "google": "https://my-google2.base44.app/",
+            "my google v2": "https://my-google.base44.app/",
             "rechercher": "https://rechercher.base44.app/",
             "ava ia": "https://ava-ia.base44.app/",
             "ava": "https://ava-ia.base44.app/",
             "edu school fr": "https://edu-school-fr.base44.app/",
             "edu school": "https://edu-school-fr.base44.app/",
             "gg earth": "https://gg-earth.base44.app/",
+            "earth": "https://gg-earth.base44.app/",
             "justiss ia": "https://justiss-ia.base44.app/",
             "justiss": "https://justiss-ia.base44.app/"
         };
