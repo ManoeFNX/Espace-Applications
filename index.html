@@ -7,7 +7,7 @@
     <title>Espace Applications</title>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap');
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght=400;700&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap');
 
         /* --- VARIABLES DE BASE (FUTURISTE) --- */
         :root {
@@ -211,7 +211,8 @@
             background: transparent;
             color: var(--primary-color); border: 1px solid var(--border-color);
             padding: 10px 20px; border-radius: 10px; cursor: pointer; font-family: var(--font-main);
-            font-size: 1rem; font-weight: bold; text-transform: uppercase; transition: 0.3s;
+            font-size: 1rem; font-weight: bold;
+            text-transform: uppercase; transition: 0.3s;
         }
         .action-btn:hover { background: var(--primary-color); color: var(--bg-color); box-shadow: var(--primary-glow); }
 
@@ -225,16 +226,19 @@
             background: var(--card-bg);
             border: 1px solid var(--border-color); padding: 25px;
             border-radius: var(--radius); text-align: center; box-shadow: 0 0 15px rgba(0,0,0,0.5);
-            backdrop-filter: blur(5px); position: relative; overflow: hidden; transition: 0.3s;
+            backdrop-filter: blur(5px); position: relative;
+            overflow: hidden; transition: 0.3s;
         }
         .card::before {
-            content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 3px;
+            content: '';
+            position: absolute; top: 0; left: 0; width: 100%; height: 3px;
             background: var(--primary-color); box-shadow: var(--primary-glow);
         }
         .card:hover { transform: translateY(-5px); box-shadow: var(--primary-glow); }
 
         .app-img {
-            width: 100px; height: 100px; border-radius: var(--radius); object-fit: cover;
+            width: 100px;
+            height: 100px; border-radius: var(--radius); object-fit: cover;
             margin-bottom: 15px; background-color: #333; border: 2px solid var(--border-color);
         }
         body.school-mode .app-img { border: none; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
@@ -242,9 +246,11 @@
 
         h2 { margin-top: 0; letter-spacing: 1px; color: var(--primary-color); }
         .btn {
-            display: inline-block; padding: 12px 25px; margin-top: 15px; border-radius: 10px;
+            display: inline-block;
+            padding: 12px 25px; margin-top: 15px; border-radius: 10px;
             background: rgba(255, 255, 255, 0.05); border: 1px solid var(--border-color);
-            color: var(--primary-color); text-decoration: none; font-weight: bold; text-transform: uppercase;
+            color: var(--primary-color); text-decoration: none;
+            font-weight: bold; text-transform: uppercase;
             transition: 0.3s; width: 85%; box-sizing: border-box;
         }
         .btn:hover { background: var(--primary-color); color: var(--bg-color); box-shadow: var(--primary-glow); }
@@ -572,10 +578,10 @@
 
     /* 2. BOT LOGIC ANIMATION */
     const botPhrases = [
-        "Initialisation des Intelligence Artificiel.     ",
+        "Initialisation des Intelligences Articielles.\n",
         "Analyse de l'intégrité structurelle...      ",
-        "Modules opérationnels.      ",
-        "Les IA sont prêtes.    "
+        "Modules opérationnels.\n",
+        "Les IA sont prêtes.\n"
     ];
     let phraseIdx = 0;
     let charIdx = 0;
@@ -622,7 +628,6 @@
         loadSettings();
         initBattery();
     });
-
     function closeBot() {
         document.getElementById('botOverlay').style.opacity = '0';
         setTimeout(() => {
@@ -673,28 +678,28 @@
     }
 
     /* 7. CITATIONS */
-   const quotes = [
-    "Je pense, donc je suis. - René Descartes",
-    "La connaissance s'acquiert par l'expérience, tout le reste n'est que de l'information. - Albert Einstein",
-    "Le seul véritable voyage ne serait pas d'aller vers de nouveaux paysages, mais d'avoir d'autres yeux. - Marcel Proust",
-    "La vie est ce qui arrive quand on est occupé à faire d'autres projets. - John Lennon",
-    "Tout ce que je sais, c'est que je ne sais rien. - Socrate",
-    "Le succès, c'est tomber sept fois, se relever huit. - Proverbe japonais",
-    "La liberté commence où l'ignorance finit. - Victor Hugo",
-    "Il n'y a qu'une façon d'échouer, c'est d'abandonner avant d'avoir réussi. - Georges Clemenceau",
-    "Le courage est de chercher la vérité et de la dire. - Jean Jaurès",
-    "Soyez le changement que vous voulez voir dans le monde. - Mahatma Gandhi",
-    "On ne voit bien qu'avec le cœur. L'essentiel est invisible pour les yeux. - Antoine de Saint-Exupéry",
-    "La parole est d'argent, mais le silence est d'or. - Proverbe oriental",
-    "L'homme est un loup pour l'homme. - Thomas Hobbes",
-    "Mieux vaut allumer une bougie que maudire l'obscurité. - Confucius",
-    "Le bonheur est la seule chose qui se double si on le partage. - Albert Schweitzer",
-    "Rien ne se perd, rien ne se crée, tout se transforme. - Antoine Lavoisier",
-    "La beauté sauvera le monde. - Fiodor Dostoïevski",
-    "Le génie, c'est 1 % d'inspiration et 99 % de transpiration. - Thomas Edison",
-    "Il n'y a point de génie sans un grain de folie. - Aristote",
-    "L'imagination est plus importante que le savoir. - Albert Einstein"
-    "L'intelligence est inée pour notre créateur. - Manoé Faradji"
+    const quotes = [
+        "Je pense, donc je suis. - René Descartes",
+        "La connaissance s'acquiert par l'expérience, tout le reste n'est que de l'information. - Albert Einstein",
+        "Le seul véritable voyage ne serait pas d'aller vers de nouveaux paysages, mais d'avoir d'autres yeux. - Marcel Proust",
+        "La vie est ce qui arrive quand on est occupé à faire d'autres projets. - John Lennon",
+        "Tout ce que je sais, c'est que je ne sais rien. - Socrate",
+        "Le succès, c'est tomber sept fois, se relever huit. - Proverbe japonais",
+        "La liberté commence où l'ignorance finit. - Victor Hugo",
+        "Il n'y a qu'une façon d'échouer, c'est d'abandonner avant d'avoir réussi. - Georges Clemenceau",
+        "Le courage est de chercher la vérité et de la dire. - Jean Jaurès",
+        "Soyez le changement que vous voulez voir dans le monde. - Mahatma Gandhi",
+        "On ne voit bien qu'avec le cœur. L'essentiel est invisible pour les yeux. - Antoine de Saint-Exupéry",
+        "La parole est d'argent, mais le silence est d'or. - Proverbe oriental",
+        "L'homme est un loup pour l'homme. - Thomas Hobbes",
+        "Mieux vaut allumer une bougie que maudire l'obscurité. - Confucius",
+        "Le bonheur est la seule chose qui se double si on le partage. - Albert Schweitzer",
+        "Rien ne se perd, rien ne se crée, tout se transforme. - Antoine Lavoisier",
+        "La beauté sauvera le monde. - Fiodor Dostoïevski",
+        "Le génie, c'est 1 % d'inspiration et 99 % de transpiration. - Thomas Edison",
+        "Il n'y a point de génie sans un grain de folie. - Aristote",
+        "L'imagination est plus importante que le savoir. - Albert Einstein",
+        "L'intelligence est innée pour notre créateur. - Manoé Faradji"
     ];
     function generateNewQuote() {
         document.getElementById('quoteDisplay').textContent = quotes[Math.floor(Math.random() * quotes.length)];
@@ -782,7 +787,6 @@
         document.getElementById('uptimeCounter').textContent = `SESSION: ${m}m ${s < 10 ? '0' + s : s}s`;
         document.getElementById('ramCounter').textContent = `RAM: ${Math.floor(Math.random() * 5) + 12}%`;
     }, 1000);
-
     function initBattery() {
         if (navigator.getBattery) {
             navigator.getBattery().then(battery => {
