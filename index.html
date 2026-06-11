@@ -77,6 +77,25 @@
         }
 
         /* --- BOT D'ACCUEIL --- */
+        .skip-boot-btn {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid var(--primary-color);
+            color: var(--primary-color);
+            padding: 8px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-family: var(--font-main);
+            font-weight: bold;
+            z-index: 10001;
+            transition: 0.3s;
+        }
+        .skip-boot-btn:hover {
+            background: var(--primary-color);
+            color: var(--bg-color);
+        }
         #botOverlay {
             position: fixed;
             inset: 0;
@@ -342,6 +361,8 @@
 </div>
 
 <div id="botOverlay">
+    <button onclick="closeBot()" class="skip-boot-btn">Passer l'intro ⏭️</button>
+    
     <div class="bot-container">
         <div class="robot-avatar">
             <svg viewBox="0 0 100 100" class="bot-svg" id="masterRobotSVG">
@@ -526,6 +547,10 @@
 </div>
 
 <div id="settingsModal" class="modal">
+    <div class="setting-item">
+            <span><strong>Désactiver l'intro au démarrage</strong></span>
+            <label class="switch"><input type="checkbox" id="skipIntroCheckbox" onchange="saveToggle('skip-intro', this.checked)"><span class="slider"></span></label>
+        </div>
     <div class="modal-content">
         <span class="close-btn" onclick="closeModal('settingsModal')">&times;</span>
         <h2>> Options d'Affichage</h2>
@@ -623,9 +648,16 @@
     }
 
     window.addEventListener('DOMContentLoaded', () => {
-        typePhrase();
-        loadSettings();
+        loadSettings(); // Charger les paramètres en premier
         initBattery();
+        
+        // Vérifie si l'utilisateur a coché "Désactiver l'intro"
+        if (localStorage.getItem('skip-intro') === 'true') {
+            document.getElementById('botOverlay').style.display = 'none';
+            document.getElementById('robotWidget').style.display = 'block';
+        } else {
+            typePhrase(); // Lance l'intro normalement
+        }
     });
     function closeBot() {
         document.getElementById('botOverlay').style.opacity = '0';
@@ -766,6 +798,9 @@
             { key: 'crt-active', id: 'crtCheckbox', action: (v) => toggleBodyClass('crt-active', v) },
             { key: 'perf-mode', id: 'perfCheckbox', action: (v) => toggleStyle('transition', 'none', 'all 0.3s ease', v) },
             { key: 'reverse-cards', id: 'reverseCheckbox', action: (v) => toggleStyle('direction', 'rtl', 'ltr', v) }
+            { key: 'reading-mode', id: 'readingToggle', action: (v) => toggleBodyClass('reading-mode', v) },
+            { key: 'skip-intro', id: 'skipIntroCheckbox', action: () => {} }, /* NOUVELLE LIGNE ICI */
+            { key: 'theme-white', id: 'themeWhiteCheckbox', action: (v) => toggleBodyClass('theme-white', v) },
         ];
         paramsMap.forEach(p => {
             const stored = localStorage.getItem(p.key);
