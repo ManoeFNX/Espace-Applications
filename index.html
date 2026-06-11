@@ -797,11 +797,10 @@
             { key: 'hide-images', id: 'hideImagesCheckbox', action: (v) => toggleBodyClass('hide-images', v) },
             { key: 'crt-active', id: 'crtCheckbox', action: (v) => toggleBodyClass('crt-active', v) },
             { key: 'perf-mode', id: 'perfCheckbox', action: (v) => toggleStyle('transition', 'none', 'all 0.3s ease', v) },
-            { key: 'reverse-cards', id: 'reverseCheckbox', action: (v) => toggleStyle('direction', 'rtl', 'ltr', v) }
-            { key: 'reading-mode', id: 'readingToggle', action: (v) => toggleBodyClass('reading-mode', v) },
-            { key: 'skip-intro', id: 'skipIntroCheckbox', action: () => {} }, /* NOUVELLE LIGNE ICI */
-            { key: 'theme-white', id: 'themeWhiteCheckbox', action: (v) => toggleBodyClass('theme-white', v) },
+            { key: 'reverse-cards', id: 'reverseCheckbox', action: (v) => toggleStyle('direction', 'rtl', 'ltr', v) },
+            { key: 'skip-intro', id: 'skipIntroCheckbox', action: () => {} }
         ];
+
         paramsMap.forEach(p => {
             const stored = localStorage.getItem(p.key);
             let state = stored === 'true';
@@ -811,7 +810,6 @@
             p.action(state);
         });
     }
-
     /* METRIQUES DE REFRESH DYNAMIQUES */
     const initialTime = Date.now();
     setInterval(() => {
