@@ -9,7 +9,7 @@
         @import url('https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap');
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap');
 
-        /* --- VARIABLES DE BASE (FUTURISTE) --- */
+        /* --- VARIABLES DE BASE --- */
         :root {
             --bg-color: #050505;
             --grid-color: rgba(255, 255, 255, 0.05);
@@ -23,7 +23,7 @@
             --font-main: 'Share Tech Mono', monospace;
         }
 
-        /* PARAMÈTRE 1 : THÈME BLANC (NORMAL) */
+        /* PARAMÈTRE 1 : THÈME BLANC */
         body.theme-white {
             --bg-color: #f5f5f5;
             --grid-color: rgba(0, 0, 0, 0.05);
@@ -57,10 +57,8 @@
         body.school-mode .help-section h3 { color: #0056b3; }
         body.school-mode .command-tag { background: #e0e0e0; color: #333; }
 
-        /* PARAMÈTRE 3 : FILTRE SÉPIA (LECTURE) */
-        body.reading-mode {
-            filter: sepia(0.4) contrast(1.1);
-        }
+        /* PARAMÈTRE 3 : FILTRE SÉPIA */
+        body.reading-mode { filter: sepia(0.4) contrast(1.1); }
 
         body {
             font-family: var(--font-main);
@@ -78,146 +76,40 @@
 
         /* --- BOT D'ACCUEIL --- */
         .skip-boot-btn {
-            position: absolute;
-            top: 20px;
-            right: 20px;
-            background: rgba(255, 255, 255, 0.1);
-            border: 1px solid var(--primary-color);
-            color: var(--primary-color);
-            padding: 8px 15px;
-            border-radius: 5px;
-            cursor: pointer;
-            font-family: var(--font-main);
-            font-weight: bold;
-            z-index: 10001;
-            transition: 0.3s;
+            position: absolute; top: 20px; right: 20px; background: rgba(255, 255, 255, 0.1); border: 1px solid var(--primary-color);
+            color: var(--primary-color); padding: 8px 15px; border-radius: 5px; cursor: pointer; font-family: var(--font-main);
+            font-weight: bold; z-index: 10001; transition: 0.3s;
         }
-        .skip-boot-btn:hover {
-            background: var(--primary-color);
-            color: var(--bg-color);
-        }
+        .skip-boot-btn:hover { background: var(--primary-color); color: var(--bg-color); }
         #botOverlay {
-            position: fixed;
-            inset: 0;
-            background: var(--modal-bg);
-            z-index: 10000;
-            display: flex; flex-direction: column; align-items: center; justify-content: center;
-            backdrop-filter: blur(10px);
-            transition: opacity 0.5s;
+            position: fixed; inset: 0; background: var(--modal-bg); z-index: 10000;
+            display: flex; flex-direction: column; align-items: center; justify-content: center; backdrop-filter: blur(10px); transition: opacity 0.5s;
         }
-        
         .bot-container {
-            display: flex;
-            align-items: flex-start;
-            background: var(--card-bg);
-            border: 2px solid var(--primary-color);
-            border-radius: var(--radius);
-            padding: 30px;
-            max-width: 750px;
-            width: 90%;
-            box-shadow: var(--primary-glow);
-            gap: 30px;
+            display: flex; align-items: flex-start; background: var(--card-bg); border: 2px solid var(--primary-color);
+            border-radius: var(--radius); padding: 30px; max-width: 750px; width: 90%; box-shadow: var(--primary-glow); gap: 30px;
         }
-
-        .robot-avatar {
-            width: 120px;
-            height: 120px;
-            flex-shrink: 0;
-            animation: float 3s ease-in-out infinite;
-        }
+        .robot-avatar { width: 120px; height: 120px; flex-shrink: 0; animation: float 3s ease-in-out infinite; }
         .bot-svg .bot-stroke { stroke: var(--primary-color); fill: none; stroke-width: 4; }
         .bot-svg .bot-fill { fill: var(--primary-color); }
         .bot-svg .eye { animation: blink 4s infinite; transform-origin: center; }
         .bot-svg .mouth.speaking { animation: speak 0.2s infinite alternate; }
 
-        @keyframes float {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-10px); }
-        }
-        @keyframes blink {
-            0%, 96%, 98%, 100% { transform: scaleY(1); }
-            97%, 99% { transform: scaleY(0.1); }
-        }
-        @keyframes speak {
-            0% { transform: scaleY(1); }
-            100% { transform: scaleY(3); }
-        }
+        @keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
+        @keyframes blink { 0%, 96%, 98%, 100% { transform: scaleY(1); } 97%, 99% { transform: scaleY(0.1); } }
+        @keyframes speak { 0% { transform: scaleY(1); } 100% { transform: scaleY(3); } }
 
-        .bot-terminal {
-            flex-grow: 1;
-            display: flex;
-            flex-direction: column;
-            gap: 15px;
-            color: var(--text-color);
-            text-align: left;
-        }
-        
-        #botSpeech {
-            font-size: 1.2rem;
-            min-height: 3rem;
-            color: var(--primary-color);
-            text-shadow: var(--primary-glow);
-        }
-        .cursor {
-            display: inline-block;
-            width: 10px; height: 1.2rem;
-            background: var(--primary-color);
-            animation: pulseCursor 0.8s infinite;
-            vertical-align: bottom;
-        }
+        .bot-terminal { flex-grow: 1; display: flex; flex-direction: column; gap: 15px; color: var(--text-color); text-align: left; }
+        #botSpeech { font-size: 1.2rem; min-height: 3rem; color: var(--primary-color); text-shadow: var(--primary-glow); }
+        .cursor { display: inline-block; width: 10px; height: 1.2rem; background: var(--primary-color); animation: pulseCursor 0.8s infinite; vertical-align: bottom; }
         @keyframes pulseCursor { 0%, 100% { opacity: 1; } 50% { opacity: 0; } }
 
-        #bootLog {
-            font-size: 0.85rem;
-            color: #888;
-            height: 80px;
-            overflow: hidden;
-            border-left: 2px solid #333;
-            padding-left: 10px;
-            display: flex;
-            flex-direction: column;
-            justify-content: flex-end;
-        }
-
-        .progress-container {
-            width: 100%;
-            height: 10px;
-            background: rgba(255,255,255,0.1);
-            border: 1px solid var(--border-color);
-            border-radius: 5px;
-            overflow: hidden;
-            display: none;
-        }
-        .progress-bar {
-            height: 100%;
-            width: 0%;
-            background: var(--primary-color);
-            box-shadow: var(--primary-glow);
-            transition: width 0.1s linear;
-        }
-
-        #bootReady {
-            display: none;
-            background: rgba(255,255,255,0.1);
-            border: 1px solid var(--primary-color);
-            padding: 10px;
-            text-align: center;
-            border-radius: 5px;
-            cursor: pointer;
-            font-weight: bold;
-            color: var(--primary-color);
-            transition: 0.3s;
-            animation: pulseBox 2s infinite;
-        }
-        #bootReady:hover {
-            background: var(--primary-color);
-            color: var(--bg-color);
-        }
-        @keyframes pulseBox {
-            0%, 100% { box-shadow: 0 0 5px rgba(255,255,255,0.1); }
-            50% { box-shadow: var(--primary-glow); }
-        }
-        
+        #bootLog { font-size: 0.85rem; color: #888; height: 80px; overflow: hidden; border-left: 2px solid #333; padding-left: 10px; display: flex; flex-direction: column; justify-content: flex-end; }
+        .progress-container { width: 100%; height: 10px; background: rgba(255,255,255,0.1); border: 1px solid var(--border-color); border-radius: 5px; overflow: hidden; display: none; }
+        .progress-bar { height: 100%; width: 0%; background: var(--primary-color); box-shadow: var(--primary-glow); transition: width 0.1s linear; }
+        #bootReady { display: none; background: rgba(255,255,255,0.1); border: 1px solid var(--primary-color); padding: 10px; text-align: center; border-radius: 5px; cursor: pointer; font-weight: bold; color: var(--primary-color); transition: 0.3s; animation: pulseBox 2s infinite; }
+        #bootReady:hover { background: var(--primary-color); color: var(--bg-color); }
+        @keyframes pulseBox { 0%, 100% { box-shadow: 0 0 5px rgba(255,255,255,0.1); } 50% { box-shadow: var(--primary-glow); } }
         .skip-hint { position: absolute; bottom: 20px; font-size: 0.8rem; color: #555; }
 
         /* --- HEADER --- */
@@ -226,52 +118,19 @@
         #clock { font-size: 1.2rem; letter-spacing: 2px; margin-bottom: 20px; color: var(--text-color); }
 
         .header-buttons { display: flex; justify-content: center; gap: 20px; }
-        .action-btn {
-            background: transparent;
-            color: var(--primary-color); border: 1px solid var(--border-color);
-            padding: 10px 20px; border-radius: 10px; cursor: pointer; font-family: var(--font-main);
-            font-size: 1rem; font-weight: bold;
-            text-transform: uppercase; transition: 0.3s;
-        }
+        .action-btn { background: transparent; color: var(--primary-color); border: 1px solid var(--border-color); padding: 10px 20px; border-radius: 10px; cursor: pointer; font-family: var(--font-main); font-size: 1rem; font-weight: bold; text-transform: uppercase; transition: 0.3s; }
         .action-btn:hover { background: var(--primary-color); color: var(--bg-color); box-shadow: var(--primary-glow); }
 
         /* --- GRILLE & CARTES --- */
-        .grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 25px;
-            max-width: 1300px; margin: auto; position: relative; z-index: 2;
-        }
-        .card {
-            background: var(--card-bg);
-            border: 1px solid var(--border-color); padding: 25px;
-            border-radius: var(--radius); text-align: center; box-shadow: 0 0 15px rgba(0,0,0,0.5);
-            backdrop-filter: blur(5px); position: relative;
-            overflow: hidden; transition: 0.3s;
-        }
-        .card::before {
-            content: '';
-            position: absolute; top: 0; left: 0; width: 100%; height: 3px;
-            background: var(--primary-color); box-shadow: var(--primary-glow);
-        }
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 25px; max-width: 1300px; margin: auto; position: relative; z-index: 2; }
+        .card { background: var(--card-bg); border: 1px solid var(--border-color); padding: 25px; border-radius: var(--radius); text-align: center; box-shadow: 0 0 15px rgba(0,0,0,0.5); backdrop-filter: blur(5px); position: relative; overflow: hidden; transition: 0.3s; }
+        .card::before { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 3px; background: var(--primary-color); box-shadow: var(--primary-glow); }
         .card:hover { transform: translateY(-5px); box-shadow: var(--primary-glow); }
-
-        .app-img {
-            width: 100px;
-            height: 100px; border-radius: var(--radius); object-fit: cover;
-            margin-bottom: 15px; background-color: #333; border: 2px solid var(--border-color);
-        }
+        .app-img { width: 100px; height: 100px; border-radius: var(--radius); object-fit: cover; margin-bottom: 15px; background-color: #333; border: 2px solid var(--border-color); }
         body.school-mode .app-img { border: none; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
         body.hide-images .app-img { display: none !important; }
-
         h2 { margin-top: 0; letter-spacing: 1px; color: var(--primary-color); }
-        .btn {
-            display: inline-block;
-            padding: 12px 25px; margin-top: 15px; border-radius: 10px;
-            background: rgba(255, 255, 255, 0.05); border: 1px solid var(--border-color);
-            color: var(--primary-color); text-decoration: none;
-            font-weight: bold; text-transform: uppercase;
-            transition: 0.3s; width: 85%; box-sizing: border-box;
-        }
+        .btn { display: inline-block; padding: 12px 25px; margin-top: 15px; border-radius: 10px; background: rgba(255, 255, 255, 0.05); border: 1px solid var(--border-color); color: var(--primary-color); text-decoration: none; font-weight: bold; text-transform: uppercase; transition: 0.3s; width: 85%; box-sizing: border-box; }
         .btn:hover { background: var(--primary-color); color: var(--bg-color); box-shadow: var(--primary-glow); }
 
         details { margin-top: 15px; text-align: left; background: rgba(0,0,0,0.3); padding: 10px; border-radius: 10px; border: 1px solid var(--border-color); }
@@ -303,7 +162,7 @@
         .crt-overlay { display: none; position: fixed; inset: 0; background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%), linear-gradient(90deg, rgba(255, 0, 0, 0.06), rgba(0, 255, 0, 0.02), rgba(0, 0, 255, 0.06)); background-size: 100% 4px, 6px 100%; z-index: 999; pointer-events: none; }
         body.crt-active .crt-overlay { display: block; }
 
-        /* --- PARAMÈTRE 4 : MODE CAMOUFLAGE GOOGLE --- */
+        /* --- MODE CAMOUFLAGE GOOGLE --- */
         #googleModeContainer { display: none; flex-direction: column; align-items: center; justify-content: center; height: 100vh; width: 100vw; background-color: #ffffff; position: fixed; top: 0; left: 0; z-index: 20000; font-family: Arial, sans-serif; color: #202124; }
         body.google-active { overflow: hidden; }
         body.google-active #googleModeContainer { display: flex; }
@@ -324,11 +183,9 @@
         .local-search-input { width: 80%; max-width: 500px; padding: 12px 20px; font-family: var(--font-main); background: var(--card-bg); border: 1px solid var(--primary-color); color: var(--text-color); border-radius: var(--radius); font-size: 1rem; box-shadow: 0 0 10px rgba(0,0,0,0.5); outline: none; transition: 0.3s; }
         .local-search-input:focus { box-shadow: var(--primary-glow); }
 
-        /* WIDGET ROBOT PERSISTANT */
+        /* WIDGET ROBOT & BLOC-NOTES */
         #robotWidget { position: fixed; bottom: 20px; right: 20px; width: 55px; height: 55px; z-index: 9000; cursor: pointer; display: none; transition: 0.3s; }
         #robotWidget:hover { transform: scale(1.1); filter: drop-shadow(var(--primary-glow)); }
-
-        /* BLOC-NOTES */
         #notesSidebar { position: fixed; top: 0; right: -350px; width: 310px; height: 100vh; background: var(--card-bg); border-left: 2px solid var(--primary-color); z-index: 9500; transition: right 0.3s ease; padding: 25px; box-sizing: border-box; box-shadow: -5px 0 15px rgba(0,0,0,0.8); backdrop-filter: blur(10px); }
         #notesSidebar.open { right: 0; }
         #notesArea { width: 100%; height: calc(100% - 90px); background: rgba(0, 0, 0, 0.4); color: var(--text-color); border: 1px dashed var(--primary-color); padding: 12px; font-family: var(--font-main); resize: none; outline: none; box-sizing: border-box; border-radius: 8px; margin-top: 15px; }
@@ -341,6 +198,50 @@
 
         .sys-details { font-size: 0.9rem; opacity: 0.8; margin-top: 5px; color: var(--primary-color); display: flex; justify-content: center; gap: 20px; font-family: var(--font-main); }
         .quote-box { background: rgba(0,0,0,0.4); padding: 12px; border-left: 3px solid var(--primary-color); margin-top: 10px; font-style: italic; font-size: 0.9rem; }
+
+
+        /* =========================================
+           🔐 STYLES DU HUB SECRET NOVA 
+           ========================================= */
+        #novaAuthModal {
+            display: none; position: fixed; inset: 0; background: rgba(0, 0, 0, 0.95); z-index: 40000;
+            align-items: center; justify-content: center; backdrop-filter: blur(10px);
+        }
+        .nova-auth-box {
+            background: #050505; border: 2px solid #ff003c; padding: 40px; text-align: center;
+            border-radius: 10px; box-shadow: 0 0 30px rgba(255,0,60,0.4); width: 80%; max-width: 400px;
+        }
+        .nova-auth-box h2 { color: #ff003c; text-shadow: 0 0 10px #ff003c; margin-top: 0; }
+        #novaPwdInput {
+            width: 100%; background: rgba(255,0,60,0.1); border: 1px solid #ff003c; color: #ff003c;
+            padding: 15px; margin-top: 20px; font-size: 1.2rem; text-align: center; outline: none;
+            font-family: 'Share Tech Mono', monospace; border-radius: 5px; box-sizing: border-box;
+        }
+        
+        #novaSecretHub {
+            display: none; position: fixed; inset: 0; background: #020208; z-index: 50000;
+            color: #00ffff; font-family: 'Share Tech Mono', monospace; overflow-y: auto; padding: 40px;
+            background-image: radial-gradient(circle, rgba(0,255,255,0.05) 1px, transparent 1px); background-size: 20px 20px;
+        }
+        .nova-header { text-align: center; margin-bottom: 40px; border-bottom: 2px dashed #00ffff; padding-bottom: 20px; position: relative; }
+        .nova-header h1 { font-size: 3rem; text-shadow: 0 0 20px #00ffff; margin: 0; letter-spacing: 5px; }
+        .nova-close-btn { position: absolute; top: 0; right: 0; background: #ff003c; color: white; border: none; padding: 10px 20px; font-weight: bold; cursor: pointer; border-radius: 5px; }
+        
+        .nova-category { margin-bottom: 40px; }
+        .nova-category h3 { color: #fff; background: rgba(0,255,255,0.2); display: inline-block; padding: 5px 15px; border-left: 4px solid #00ffff; }
+        .nova-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 15px; }
+        
+        .nova-card {
+            background: rgba(0, 0, 0, 0.6); border: 1px solid #00ffff; padding: 15px;
+            border-radius: 8px; text-align: center; cursor: pointer; transition: 0.3s;
+            color: #fff; text-decoration: none; display: flex; flex-direction: column; align-items: center; justify-content: center;
+        }
+        .nova-card:hover { background: #00ffff; color: #000; box-shadow: 0 0 15px #00ffff; transform: translateY(-3px); }
+        .nova-card strong { font-size: 1.1rem; margin-bottom: 5px; }
+        .nova-card span { font-size: 0.8rem; opacity: 0.8; }
+        
+        .nova-card.vip-card { border-color: #ff00ff; background: rgba(255,0,255,0.1); }
+        .nova-card.vip-card:hover { background: #ff00ff; color: #fff; box-shadow: 0 0 20px #ff00ff; }
     </style>
 </head>
 <body class="school-mode">
@@ -362,7 +263,6 @@
 
 <div id="botOverlay">
     <button onclick="closeBot()" class="skip-boot-btn">Passer l'intro</button>
-    
     <div class="bot-container">
         <div class="robot-avatar">
             <svg viewBox="0 0 100 100" class="bot-svg" id="masterRobotSVG">
@@ -375,19 +275,12 @@
             </svg>
         </div>
         <div class="bot-terminal">
-            <div id="botSpeechContainer">
-                <span id="botSpeech"></span><span class="cursor"></span>
-            </div>
+            <div id="botSpeechContainer"><span id="botSpeech"></span><span class="cursor"></span></div>
             <div id="bootLog"></div>
-            <div class="progress-container" id="progressContainer">
-                <div class="progress-bar" id="progressBar"></div>
-            </div>
-            <div class="boot-ready" id="bootReady" onclick="closeBot()">
-                [ Bienvenue dans l'espace d'application ]
-            </div>
+            <div class="progress-container" id="progressContainer"><div class="progress-bar" id="progressBar"></div></div>
+            <div class="boot-ready" id="bootReady" onclick="closeBot()">[ Bienvenue dans l'espace d'application ]</div>
         </div>
     </div>
-    <div class="skip-hint"> </div>
 </div>
 
 <div class="crt-overlay"></div>
@@ -541,6 +434,7 @@
             <h3>3. Raccourcis Clavier urgents</h3>
             <ul>
                 <li><span class="command-tag">Échap</span> : Ferme instantanément toutes les boîtes et interfaces pour revenir à l'écran neutre.</li>
+                <li><span class="command-tag">Ctrl + Alt + N</span> : [ACCÈS RÉSÉRVÉ ADMIN].</li>
             </ul>
         </div>
     </div>
@@ -548,15 +442,13 @@
 
 <div id="settingsModal" class="modal">
     <div class="modal-content">
-
+        <span class="close-btn" onclick="closeModal('settingsModal')">&times;</span>
+        <h2>> Options d'Affichage</h2>
+        
         <div class="setting-item">
             <span><strong>Désactiver l'intro au démarrage</strong></span>
             <label class="switch"><input type="checkbox" id="skipIntroCheckbox" onchange="saveToggle('skip-intro', this.checked)"><span class="slider"></span></label>
         </div>
-    <div class="modal-content">
-        <span class="close-btn" onclick="closeModal('settingsModal')">&times;</span>
-        <h2>> Options d'Affichage</h2>
-        
         <div class="setting-item">
             <span><strong>👁️ Filtre Lecture Confort (Teinte Papier Sépia)</strong></span>
             <label class="switch"><input type="checkbox" id="readingToggle" onchange="toggleBodyClass('reading-mode', this.checked); saveToggle('reading-mode', this.checked);"><span class="slider"></span></label>
@@ -592,6 +484,119 @@
     </div>
 </div>
 
+<div id="novaAuthModal">
+    <div class="nova-auth-box">
+        <h2>[ ALERTE SYSTÈME ]</h2>
+        <p>ACCÈS RESTREINT AU DÉVELOPPEUR.</p>
+        <input type="password" id="novaPwdInput" placeholder="ENTREZ LE MOT DE PASSE" onkeypress="if(event.key === 'Enter') checkNovaPwd()">
+    </div>
+</div>
+
+<div id="novaSecretHub">
+    <button class="nova-close-btn" onclick="closeNovaHub()">FERMER LE HUB</button>
+    <div class="nova-header">
+        <h1>NOVA HUB // ACCÈS ADMIN</h1>
+        <p>Bienvenue Manoé. Interface VIP connectée.</p>
+    </div>
+
+    <div class="nova-category">
+        <h3>⭐ PROJETS SPÉCIAUX</h3>
+        <div class="nova-grid">
+            <a href="https://matteo.lamaisondesgnomes.fr/" target="_blank" class="nova-card vip-card">
+                <strong>NOVA SCHOOL</strong>
+                <span>Le projet d'IA de Matteo</span>
+            </a>
+            <a href="https://genesis-omega.base44.app/" target="_blank" class="nova-card vip-card">
+                <strong>GENESIS OMEGA</strong>
+                <span>Ton interface principale</span>
+            </a>
+        </div>
+    </div>
+
+    <div class="nova-category">
+        <h3>🧠 IA GÉNÉRALISTES & LLM</h3>
+        <div class="nova-grid">
+            <a href="https://chatgpt.com/" target="_blank" class="nova-card"><strong>ChatGPT</strong><span>OpenAI</span></a>
+            <a href="https://gemini.google.com/" target="_blank" class="nova-card"><strong>Gemini</strong><span>Google</span></a>
+            <a href="https://claude.ai/" target="_blank" class="nova-card"><strong>Claude</strong><span>Anthropic</span></a>
+            <a href="https://www.perplexity.ai/" target="_blank" class="nova-card"><strong>Perplexity</strong><span>Recherche IA</span></a>
+            <a href="https://chat.mistral.ai/" target="_blank" class="nova-card"><strong>Le Chat</strong><span>Mistral AI</span></a>
+            <a href="https://pi.ai/" target="_blank" class="nova-card"><strong>Pi</strong><span>Inflection</span></a>
+            <a href="https://huggingface.co/chat/" target="_blank" class="nova-card"><strong>HuggingChat</strong><span>Open Source</span></a>
+            <a href="https://copilot.microsoft.com/" target="_blank" class="nova-card"><strong>Copilot</strong><span>Microsoft</span></a>
+            <a href="https://poe.com/" target="_blank" class="nova-card"><strong>Poe</strong><span>Agrégateur d'IA</span></a>
+        </div>
+    </div>
+
+    <div class="nova-category">
+        <h3>🎭 HUMANISATEURS & REFORMULATEURS</h3>
+        <div class="nova-grid">
+            <a href="https://stealthwriter.ai/" target="_blank" class="nova-card"><strong>StealthWriter</strong><span>Contournement IA</span></a>
+            <a href="https://undetectable.ai/" target="_blank" class="nova-card"><strong>Undetectable</strong><span>Texte humain</span></a>
+            <a href="https://quillbot.com/" target="_blank" class="nova-card"><strong>QuillBot</strong><span>Reformulateur</span></a>
+            <a href="https://humbot.ai/" target="_blank" class="nova-card"><strong>Humbot</strong><span>Anti-détection</span></a>
+            <a href="https://phrasly.ai/" target="_blank" class="nova-card"><strong>Phrasly</strong><span>Humaniseur devoirs</span></a>
+            <a href="https://bypassgpt.ai/" target="_blank" class="nova-card"><strong>BypassGPT</strong><span>Écriture furtive</span></a>
+            <a href="https://www.wordtune.com/" target="_blank" class="nova-card"><strong>Wordtune</strong><span>Amélioration texte</span></a>
+            <a href="https://languagetool.org/fr" target="_blank" class="nova-card"><strong>LanguageTool</strong><span>Correction avancée</span></a>
+        </div>
+    </div>
+
+    <div class="nova-category">
+        <h3>🕵️ DÉTECTEURS D'IA</h3>
+        <div class="nova-grid">
+            <a href="https://zerogpt.com/" target="_blank" class="nova-card"><strong>ZeroGPT</strong><span>Le plus connu</span></a>
+            <a href="https://gptzero.me/" target="_blank" class="nova-card"><strong>GPTZero</strong><span>Standard académique</span></a>
+            <a href="https://gowinston.ai/" target="_blank" class="nova-card"><strong>Winston AI</strong><span>Détection pro</span></a>
+            <a href="https://copyleaks.com/ai-content-detector" target="_blank" class="nova-card"><strong>Copyleaks</strong><span>Anti-plagiat & IA</span></a>
+            <a href="https://sapling.ai/ai-content-detector" target="_blank" class="nova-card"><strong>Sapling</strong><span>Analyse phrase</span></a>
+            <a href="https://crossplag.com/ai-content-detector/" target="_blank" class="nova-card"><strong>Crossplag</strong><span>Vérification rapide</span></a>
+            <a href="https://www.scribbr.fr/detecteur-ia/" target="_blank" class="nova-card"><strong>Scribbr</strong><span>Outil Étudiant</span></a>
+        </div>
+    </div>
+
+    <div class="nova-category">
+        <h3>📚 RÉVISIONS & COLLÈGE (BREVET)</h3>
+        <div class="nova-grid">
+            <a href="https://www.lumni.fr/college/troisieme" target="_blank" class="nova-card"><strong>Lumni 3ème</strong><span>Vidéos Brevet</span></a>
+            <a href="https://www.mathway.com/fr/Algebra" target="_blank" class="nova-card"><strong>Mathway</strong><span>Solveur Math</span></a>
+            <a href="https://www.geogebra.org/" target="_blank" class="nova-card"><strong>GeoGebra</strong><span>Géométrie</span></a>
+            <a href="https://www.deepl.com/translator" target="_blank" class="nova-card"><strong>DeepL</strong><span>Meilleur Traducteur</span></a>
+            <a href="https://quizlet.com/fr-fr" target="_blank" class="nova-card"><strong>Quizlet</strong><span>Flashcards</span></a>
+            <a href="https://www.kartable.fr/" target="_blank" class="nova-card"><strong>Kartable</strong><span>Fiches de cours</span></a>
+            <a href="https://www.projet-voltaire.fr/" target="_blank" class="nova-card"><strong>Voltaire</strong><span>Orthographe</span></a>
+            <a href="https://www.schoolmouv.fr/" target="_blank" class="nova-card"><strong>SchoolMouv</strong><span>Vidéos de cours</span></a>
+        </div>
+    </div>
+
+    <div class="nova-category">
+        <h3>💻 OUTILS DE DÉVELOPPEMENT</h3>
+        <div class="nova-grid">
+            <a href="https://github.com/" target="_blank" class="nova-card"><strong>GitHub</strong><span>Hébergement Code</span></a>
+            <a href="https://vercel.com/" target="_blank" class="nova-card"><strong>Vercel</strong><span>Déploiement</span></a>
+            <a href="https://codepen.io/" target="_blank" class="nova-card"><strong>CodePen</strong><span>Test HTML/CSS/JS</span></a>
+            <a href="https://replit.com/" target="_blank" class="nova-card"><strong>Replit</strong><span>IDE en ligne</span></a>
+            <a href="https://stackoverflow.com/" target="_blank" class="nova-card"><strong>StackOverflow</strong><span>Forum dev</span></a>
+            <a href="https://fontawesome.com/" target="_blank" class="nova-card"><strong>FontAwesome</strong><span>Icônes gratuites</span></a>
+            <a href="https://fonts.google.com/" target="_blank" class="nova-card"><strong>Google Fonts</strong><span>Polices web</span></a>
+            <a href="https://colorhunt.co/" target="_blank" class="nova-card"><strong>Color Hunt</strong><span>Palettes CSS</span></a>
+        </div>
+    </div>
+
+    <div class="nova-category">
+        <h3>🎨 CRÉATION & DESIGN IA</h3>
+        <div class="nova-grid">
+            <a href="https://www.midjourney.com/" target="_blank" class="nova-card"><strong>Midjourney</strong><span>Génération Images</span></a>
+            <a href="https://www.canva.com/" target="_blank" class="nova-card"><strong>Canva</strong><span>Design rapide</span></a>
+            <a href="https://leonardo.ai/" target="_blank" class="nova-card"><strong>Leonardo.ai</strong><span>Création 3D/Art</span></a>
+            <a href="https://runwayml.com/" target="_blank" class="nova-card"><strong>Runway</strong><span>Génération Vidéo</span></a>
+            <a href="https://elevenlabs.io/" target="_blank" class="nova-card"><strong>ElevenLabs</strong><span>Voix IA hyper-réalistes</span></a>
+            <a href="https://suno.com/" target="_blank" class="nova-card"><strong>Suno</strong><span>Génération Musique</span></a>
+        </div>
+    </div>
+</div>
+
+
 <script>
     /* 1. HORLOGE */
     function updateClock() {
@@ -609,8 +614,7 @@
         "Modules opérationnels.\n",
         "Les IA sont prêtes.\n"
     ];
-    let phraseIdx = 0;
-    let charIdx = 0;
+    let phraseIdx = 0; let charIdx = 0;
     const botSpeech = document.getElementById('botSpeech');
     const bootLog = document.getElementById('bootLog');
     const progressBar = document.getElementById('progressBar');
@@ -622,15 +626,12 @@
             const currentPhrase = botPhrases[phraseIdx];
             if (charIdx < currentPhrase.length) {
                 botSpeech.textContent += currentPhrase.charAt(charIdx);
-                charIdx++;
-                setTimeout(typePhrase, 40);
+                charIdx++; setTimeout(typePhrase, 40);
             } else {
                 const logLine = document.createElement('div');
                 logLine.textContent = `> ${currentPhrase} [OK]`;
                 bootLog.appendChild(logLine);
-                phraseIdx++;
-                charIdx = 0;
-                botSpeech.textContent = "";
+                phraseIdx++; charIdx = 0; botSpeech.textContent = "";
                 setTimeout(typePhrase, 400);
             }
         } else {
@@ -641,26 +642,20 @@
                     clearInterval(interval);
                     progressContainer.style.display = 'none';
                     bootReady.style.display = 'block';
-                } else {
-                    width += 2;
-                    progressBar.style.width = width + '%';
-                }
+                } else { width += 2; progressBar.style.width = width + '%'; }
             }, 20);
         }
     }
 
     window.addEventListener('DOMContentLoaded', () => {
-        loadSettings(); // Charger les paramètres en premier
+        loadSettings(); 
         initBattery();
-        
-        // Vérifie si l'utilisateur a coché "Désactiver l'intro"
         if (localStorage.getItem('skip-intro') === 'true') {
             document.getElementById('botOverlay').style.display = 'none';
             document.getElementById('robotWidget').style.display = 'block';
-        } else {
-            typePhrase(); // Lance l'intro normalement
-        }
+        } else { typePhrase(); }
     });
+
     function closeBot() {
         document.getElementById('botOverlay').style.opacity = '0';
         setTimeout(() => {
@@ -669,18 +664,42 @@
         }, 500);
     }
 
-    /* 3. ESCAPE & RACCOURCIS */
+    /* 3. ESCAPE & RACCOURCIS ADMIN (NOVA) */
     window.addEventListener('keydown', (e) => {
+        // Raccourci Echap classique
         if (e.key === 'Escape') {
-            closeBot();
-            closeModal('calcModal');
-            closeModal('helpModal');
-            closeModal('settingsModal');
-            if(document.getElementById('notesSidebar').classList.contains('open')) {
-                toggleNotesSidebar();
-            }
+            closeBot(); closeModal('calcModal'); closeModal('helpModal'); closeModal('settingsModal');
+            if(document.getElementById('notesSidebar').classList.contains('open')) { toggleNotesSidebar(); }
+            closeNovaHub();
+        }
+        
+        // RACCOURCI SECRET ADMIN : CTRL + ALT + N
+        if (e.ctrlKey && e.altKey && e.key.toLowerCase() === 'n') {
+            e.preventDefault(); // Empêche le navigateur de faire autre chose
+            document.getElementById('novaAuthModal').style.display = 'flex';
+            document.getElementById('novaPwdInput').focus();
         }
     });
+
+    /* --- FONCTIONS DU HUB SECRET NOVA --- */
+    function checkNovaPwd() {
+        const input = document.getElementById('novaPwdInput').value;
+        // MOT DE PASSE SECRET ICI
+        if (input === 'manoe2026') {
+            document.getElementById('novaAuthModal').style.display = 'none';
+            document.getElementById('novaSecretHub').style.display = 'block';
+            document.getElementById('novaPwdInput').value = ''; // Vide le champ
+        } else {
+            alert('ACCÈS REFUSÉ : MOT DE PASSE INCORRECT.');
+            document.getElementById('novaPwdInput').value = '';
+        }
+    }
+
+    function closeNovaHub() {
+        document.getElementById('novaSecretHub').style.display = 'none';
+        document.getElementById('novaAuthModal').style.display = 'none';
+    }
+    /* ------------------------------------ */
 
     /* 4. GESTION DES MODALES */
     function openModal(id) { document.getElementById(id).style.display = 'flex'; }
@@ -734,9 +753,7 @@
         "L'imagination est plus importante que le savoir. - Albert Einstein",
         "L'intelligence est innée pour notre créateur. - Manoé Faradji"
     ];
-    function generateNewQuote() {
-        document.getElementById('quoteDisplay').textContent = quotes[Math.floor(Math.random() * quotes.length)];
-    }
+    function generateNewQuote() { document.getElementById('quoteDisplay').textContent = quotes[Math.floor(Math.random() * quotes.length)]; }
 
     /* 8. FILTRAGE DE LA GRILLE */
     function filterInternalGrid() {
@@ -749,34 +766,21 @@
 
     /* 9. GOOGLE CAMOUFLAGE MODE */
     function toggleGoogleMode(show) {
-        if(show) {
-            document.body.classList.add('google-active');
-            document.getElementById('googleToggleCheckbox').checked = true;
-        } else {
-            document.body.classList.remove('google-active');
-            document.getElementById('googleToggleCheckbox').checked = false;
-        }
+        if(show) { document.body.classList.add('google-active'); document.getElementById('googleToggleCheckbox').checked = true; } 
+        else { document.body.classList.remove('google-active'); document.getElementById('googleToggleCheckbox').checked = false; }
     }
     function handleGoogleSearch(event) { if (event.key === 'Enter') { executeGoogleSearch(); } }
     function executeGoogleSearch() {
         const input = document.getElementById('googleSearchInput').value.trim().toLowerCase();
         if (input === "") return;
         const appsSecretes = {
-            "genesis omega": "https://genesis-omega.base44.app/",
-            "genesis": "https://genesis-omega.base44.app/",
-            "my google": "https://my-google2.base44.app/",
-            "google": "https://my-google2.base44.app/",
-            "my google v2": "https://my-google.base44.app/",
-            "rechercher": "https://rechercher.base44.app/",
-            "ava ia": "https://ava-ia.base44.app/",
-            "ava": "https://ava-ia.base44.app/",
-            "edu school fr": "https://edu-school-fr.base44.app/",
-            "edu school": "https://edu-school-fr.base44.app/",
-            "gg earth": "https://gg-earth.base44.app/",
-            "earth": "https://gg-earth.base44.app/",
-            "justiss ia": "https://justiss-ia.base44.app/",
-            "justiss": "https://justiss-ia.base44.app/",
-            "Vibehub": "https://vibehub-fr.base44.app/",
+            "genesis omega": "https://genesis-omega.base44.app/", "genesis": "https://genesis-omega.base44.app/",
+            "my google": "https://my-google2.base44.app/", "google": "https://my-google2.base44.app/",
+            "my google v2": "https://my-google.base44.app/", "rechercher": "https://rechercher.base44.app/",
+            "ava ia": "https://ava-ia.base44.app/", "ava": "https://ava-ia.base44.app/",
+            "edu school fr": "https://edu-school-fr.base44.app/", "edu school": "https://edu-school-fr.base44.app/",
+            "gg earth": "https://gg-earth.base44.app/", "earth": "https://gg-earth.base44.app/",
+            "justiss ia": "https://justiss-ia.base44.app/", "justiss": "https://justiss-ia.base44.app/",
             "vibehub": "https://vibehub-fr.base44.app/"
         };
         if (appsSecretes[input]) { window.open(appsSecretes[input], '_blank'); } 
@@ -784,13 +788,8 @@
     }
 
     /* 10. CHARGEMENT & CONFIGURATION DES CLASSES */
-    function toggleBodyClass(className, force) {
-        if(force) { document.body.classList.add(className); } 
-        else { document.body.classList.remove(className); }
-    }
-    function toggleStyle(property, trueVal, falseVal, force) {
-        document.body.style[property] = force ? trueVal : falseVal;
-    }
+    function toggleBodyClass(className, force) { if(force) { document.body.classList.add(className); } else { document.body.classList.remove(className); } }
+    function toggleStyle(property, trueVal, falseVal, force) { document.body.style[property] = force ? trueVal : falseVal; }
     function saveToggle(key, value) { localStorage.setItem(key, value); }
 
     function loadSettings() {
@@ -814,6 +813,7 @@
             p.action(state);
         });
     }
+
     /* METRIQUES DE REFRESH DYNAMIQUES */
     const initialTime = Date.now();
     setInterval(() => {
@@ -823,6 +823,7 @@
         document.getElementById('uptimeCounter').textContent = `SESSION: ${m}m ${s < 10 ? '0' + s : s}s`;
         document.getElementById('ramCounter').textContent = `RAM: ${Math.floor(Math.random() * 5) + 12}%`;
     }, 1000);
+
     function initBattery() {
         if (navigator.getBattery) {
             navigator.getBattery().then(battery => {
