@@ -1763,7 +1763,7 @@
         if (e.key === 'F12' || e.key === 'F4') {
             e.preventDefault(); 
             // Remplacement instantané de l'URL pour cacher le jeu/l'outil
-            window.location.replace("https://fr.wikipedia.org/wiki/Histoire"); 
+            window.open("https://fr.wikipedia.org/wiki/Histoire", "_self"); 
         }
         
         // [2] FERMETURE UNIVERSELLE (Touche Echap)
@@ -1877,7 +1877,7 @@
                 .replace(/tan\(/g, 'Math.tan(')
                 .replace(/sqrt\(/g, 'Math.sqrt('); 
                 
-            let result = eval(expr);
+            let result = Function('"use strict"; return (' + expr + ')')();
             // Arrondir pour éviter les bugs JS comme 0.1 + 0.2 = 0.300000004
             calcScreen.value = Math.round(result * 1000000) / 1000000;
         } 
@@ -1956,7 +1956,7 @@
         cards.forEach(card => {
             const title = card.getAttribute('data-title') || '';
             // Condition ternaire simple pour afficher ou masquer
-            card.style.display = title.includes(query) ? 'block' : 'none';
+            card.style.display = title.includes(query) ? '' : 'none';
         });
     }
 
@@ -2159,7 +2159,6 @@
             return false;
         }
     });
-</script>
 </script>
 </body>
 </html>
