@@ -2131,23 +2131,23 @@
             document.getElementById('robotWidget').style.display = 'block';
         } else { 
             // Sinon on lance l'animation Matrix
-            typePhrase(); 
+            typePhrase();
         }
         
     });
-    <script>
+
+    // --- CORRECTION : La balise <script> en trop a été supprimée ici ---
+
     // 1. Empêcher le menu contextuel (clic droit)
     document.addEventListener('contextmenu', function(e) {
         e.preventDefault();
     }, false);
 
-    // 2. Empêcher les raccourcis clavier (F12, Ctrl+U, Ctrl+Shift+I, etc.)
+    // 2. Empêcher les raccourcis clavier (Ctrl+U, Ctrl+Shift+I, etc.)
     document.addEventListener('keydown', function(e) {
-        // Désactiver F12
-        if (e.keyCode == 123) {
-            e.preventDefault();
-            return false;
-        }
+        // Le blocage du F12 (keyCode 123) a été retiré ici pour laisser 
+        // fonctionner le Bouton Panique codé plus haut.
+        
         // Désactiver Ctrl + U (Code source)
         if (e.ctrlKey && e.keyCode == 85) {
             e.preventDefault();
@@ -2159,6 +2159,7 @@
             return false;
         }
     });
+
 </script>
 </body>
 </html>
