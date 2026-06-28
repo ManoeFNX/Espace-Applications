@@ -1486,7 +1486,7 @@
      */
     function updateBrevetCountdown() {
         // Date cible du brevet (exemple : 25 Juin 2026 à 08:00)
-        const brevetDate = new Date("2026-06-26T09:00:00").getTime();
+        const brevetDate = new Date("2026-06-30T11:00:00").getTime();
         const now = new Date().getTime();
         const difference = brevetDate - now;
         
@@ -1503,7 +1503,7 @@
         const days = Math.floor(difference / (1000 * 60 * 60 * 24));
         const hours = Math.floor((difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
         
-        counterElement.textContent = `BREVET: J-${days} et ${hours}h`;
+        counterElement.textContent = ` FIN DU BREVET: J-${days} et ${hours}h`;
     }
     
     // On met à jour le compteur toutes les heures
